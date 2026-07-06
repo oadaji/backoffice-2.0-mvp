@@ -164,6 +164,27 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
 .remove-link{color:var(--error);font-size:13px;cursor:pointer;background:none;border:none;font-family:var(--f-body)}
 .hint{background:var(--cream);border:.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--muted-2);margin-bottom:18px}
 .hint b{color:var(--green)}
+.account-header{padding:22px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px}
+.account-ava{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:24px;font-family:var(--f-head);flex-shrink:0}
+.account-info h3{font-size:20px;color:var(--green);margin-bottom:2px}
+.account-info .role{font-size:14px;color:var(--muted);margin-bottom:4px}
+.account-info .email{font-size:13px;color:var(--muted-2)}
+.account-section{padding:22px;border-bottom:1px solid var(--line)}
+.account-section:last-child{border-bottom:none}
+.account-section h4{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;font-weight:600}
+.account-detail{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.account-detail .label{font-size:14px;color:var(--muted-2)}
+.account-detail .value{font-size:14px;font-weight:600;color:var(--ink)}
+.permission-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.permission-badge.super-admin{background:var(--lime);color:var(--green)}
+.permission-badge.user{background:var(--sage);color:var(--green)}
+.team-badge{display:inline-flex;align-items:center;padding:6px 12px;border-radius:8px;font-size:13px;font-weight:600;background:var(--cream);color:var(--green);border:1px solid var(--line)}
+.team-members{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.team-member{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;background:var(--page)}
+.team-member-ava{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px;font-family:var(--f-head);flex-shrink:0}
+.team-member-info{flex:1;min-width:0}
+.team-member-name{font-size:14px;font-weight:600;color:var(--ink)}
+.team-member-role{font-size:12px;color:var(--muted)}
 @media(max-width:760px){.kpis{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -173,7 +194,7 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
     <div class="nav-ico active" data-tooltip="CRM"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
     <div class="spacer-v"></div>
     <div class="nav-ico"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1112 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21h4"/></svg><span class="dot"></span></div>
-    <div class="ava">TA</div>
+    <div class="ava" onclick="showAccountDetails()" style="cursor:pointer" data-tooltip="Account" id="user-avatar">JM</div>
   </div>
   <div class="main">
     <div class="topbar">
@@ -200,15 +221,19 @@ const STAGES = ['Prospect','Contacted','Qualified','Quote Issued','Closed'];
 const PRODUCTS = ['Ocean Freight','Air Freight','Auto Imports','Haulage'];
 const CLASSES = ['Spot / SME','Mid-Tier','Enterprise'];
 
+const TEAMS = ['HQ','Tech','Operations','Finance','Sales','Commercial'];
+
 const users = [
-  {id:'u1',name:'James Mitchell',ini:'JM',role:'Sales Lead',email:'james@oneport365.com',color:'#023819',tx:'#BFFB4F',access:true},
-  {id:'u2',name:'Sarah Thompson',ini:'ST',role:'Sales Executive',email:'sarah@oneport365.com',color:'#2F7A3F',tx:'#fff',access:true},
-  {id:'u3',name:'Michael Roberts',ini:'MR',role:'Quotes Manager',email:'michael@oneport365.com',color:'#7FAE2E',tx:'#173404',access:true},
-  {id:'u4',name:'Emily Anderson',ini:'EA',role:'Account Manager',email:'emily@oneport365.com',color:'#BFFB4F',tx:'#173404',access:true},
-  {id:'u5',name:'David Patterson',ini:'DP',role:'Sales Executive',email:'david@oneport365.com',color:'#FFCC1A',tx:'#023819',access:true},
-  {id:'u6',name:'Ngozi Eze',ini:'NE',role:'Operations Lead',email:'ngozi@oneport365.com',color:'#2F7A3F',tx:'#fff',access:false},
-  {id:'u7',name:'Tunde Bello',ini:'TB',role:'Finance Analyst',email:'tunde@oneport365.com',color:'#7FAE2E',tx:'#173404',access:false},
+  {id:'u1',name:'James Mitchell',ini:'JM',role:'Sales Lead',email:'james@oneport365.com',color:'#023819',tx:'#BFFB4F',access:true,team:'Sales',permissionLevel:'Super Admin'},
+  {id:'u2',name:'Sarah Thompson',ini:'ST',role:'Sales Executive',email:'sarah@oneport365.com',color:'#2F7A3F',tx:'#fff',access:true,team:'Sales',permissionLevel:'User'},
+  {id:'u3',name:'Michael Roberts',ini:'MR',role:'Quotes Manager',email:'michael@oneport365.com',color:'#7FAE2E',tx:'#173404',access:true,team:'Commercial',permissionLevel:'User'},
+  {id:'u4',name:'Emily Anderson',ini:'EA',role:'Account Manager',email:'emily@oneport365.com',color:'#BFFB4F',tx:'#173404',access:true,team:'Sales',permissionLevel:'User'},
+  {id:'u5',name:'David Patterson',ini:'DP',role:'Sales Executive',email:'david@oneport365.com',color:'#FFCC1A',tx:'#023819',access:true,team:'Sales',permissionLevel:'User'},
+  {id:'u6',name:'Ngozi Eze',ini:'NE',role:'Operations Lead',email:'ngozi@oneport365.com',color:'#2F7A3F',tx:'#fff',access:false,team:'Operations',permissionLevel:'User'},
+  {id:'u7',name:'Tunde Bello',ini:'TB',role:'Finance Analyst',email:'tunde@oneport365.com',color:'#7FAE2E',tx:'#173404',access:false,team:'Finance',permissionLevel:'User'},
 ];
+
+let currentUser = users[0];
 const companies = [
   {id:'c1',name:'BUA Foods Plc',domain:'buafoods.com',cls:'Enterprise',owner:'u1',industry:'FMCG'},
   {id:'c2',name:'Dangote Industries',domain:'dangote.com',cls:'Enterprise',owner:'u1',industry:'Manufacturing'},
@@ -517,6 +542,54 @@ function toggleGrant(id,row){
   $('#grant-btn').textContent=`Grant access (${n})`;
 }
 function grant(){Object.keys(grantSel).forEach(id=>{if(grantSel[id])user(id).access=true;});closeModal();render();}
+
+function showAccountDetails(){
+  const teamMembers = users.filter(u=>u.team===currentUser.team && u.id!==currentUser.id);
+  const permClass = currentUser.permissionLevel==='Super Admin'?'super-admin':'user';
+
+  const membersHtml = teamMembers.length>0 ? teamMembers.map(m=>`
+    <div class="team-member">
+      <div class="team-member-ava" style="background:${m.color};color:${m.tx}">${m.ini}</div>
+      <div class="team-member-info">
+        <div class="team-member-name">${m.name}</div>
+        <div class="team-member-role">${m.role}</div>
+      </div>
+    </div>
+  `).join('') : '<div class="combo-empty">No other members in your team</div>';
+
+  modal(`<div class="modal" style="max-width:520px">
+    <div class="account-header">
+      <div class="account-ava" style="background:${currentUser.color};color:${currentUser.tx}">${currentUser.ini}</div>
+      <div class="account-info">
+        <h3>${currentUser.name}</h3>
+        <div class="role">${currentUser.role}</div>
+        <div class="email">${currentUser.email}</div>
+      </div>
+    </div>
+    <div class="account-section">
+      <h4>Account Details</h4>
+      <div class="account-detail">
+        <div class="label">Permission Level</div>
+        <div class="value"><span class="permission-badge ${permClass}">${currentUser.permissionLevel}</span></div>
+      </div>
+      <div class="account-detail">
+        <div class="label">Team</div>
+        <div class="value"><span class="team-badge">${currentUser.team}</span></div>
+      </div>
+      <div class="account-detail">
+        <div class="label">CRM Access</div>
+        <div class="value">${currentUser.access?'Enabled':'Disabled'}</div>
+      </div>
+    </div>
+    <div class="account-section">
+      <h4>Team Members (${currentUser.team})</h4>
+      <div class="team-members">${membersHtml}</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+    </div>
+  </div>`);
+}
 
 document.getElementById('tabs').addEventListener('click',e=>{
   const t=e.target.closest('.tab');if(!t)return;activeTab=t.dataset.tab;render();
