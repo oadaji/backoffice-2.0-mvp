@@ -254,7 +254,7 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
 
 <script>
 const STAGES = ['Prospect','Contacted','Qualified','Quote Issued','Closed'];
-const PRODUCTS = ['Ocean Freight','Air Freight','Auto Imports','Haulage'];
+const PRODUCTS = ['Ocean Freight / FreightSaver 365','ONEXPORT 365 (OFAP Export)','Auto Imports','VAAS / Spot Accounts','LAAP - Enterprise Accounts'];
 const CLASSES = ['Spot / SME','Mid-Tier','Enterprise'];
 
 const TEAMS = ['HQ','Tech','Operations','Finance','Sales','Commercial'];
@@ -287,13 +287,13 @@ const contacts = [
   {id:'ct5',name:'Femi Adeyemi',company:'c6',title:'Owner',email:'femi@tinkerbell.ng',phone:'+234 809 789 0123'},
 ];
 let deals = [
-  {id:'d1',company:'c6',contact:'Femi Adeyemi',owner:'u1',amount:8000,stage:'Prospect',cls:'Spot / SME',product:'Ocean Freight',status:'open'},
-  {id:'d2',company:'c5',contact:'Adaora Nwosu',owner:'u2',amount:28000,stage:'Contacted',cls:'Mid-Tier',product:'Ocean Freight',status:'open'},
+  {id:'d1',company:'c6',contact:'Femi Adeyemi',owner:'u1',amount:8000,stage:'Prospect',cls:'Spot / SME',product:'Ocean Freight / FreightSaver 365',status:'open'},
+  {id:'d2',company:'c5',contact:'Adaora Nwosu',owner:'u2',amount:28000,stage:'Contacted',cls:'Mid-Tier',product:'Ocean Freight / FreightSaver 365',status:'open'},
   {id:'d3',company:'c7',contact:'',owner:'u5',amount:35000,stage:'Contacted',cls:'Mid-Tier',product:'Auto Imports',status:'open'},
-  {id:'d4',company:'c2',contact:'Chidi Okonkwo',owner:'u3',amount:120000,stage:'Qualified',cls:'Enterprise',product:'Ocean Freight',status:'open'},
-  {id:'d5',company:'c1',contact:'Aliyu Bashir',owner:'u1',amount:45000,stage:'Quote Issued',cls:'Enterprise',product:'Ocean Freight',status:'open'},
-  {id:'d6',company:'c3',contact:'Fatima Abdullahi',owner:'u2',amount:62000,stage:'Closed',cls:'Enterprise',product:'Air Freight',status:'won'},
-  {id:'d7',company:'c4',contact:'',owner:'u4',amount:40000,stage:'Closed',cls:'Enterprise',product:'Ocean Freight',status:'lost',lostReason:'Chose competitor'},
+  {id:'d4',company:'c2',contact:'Chidi Okonkwo',owner:'u3',amount:120000,stage:'Qualified',cls:'Enterprise',product:'Ocean Freight / FreightSaver 365',status:'open'},
+  {id:'d5',company:'c1',contact:'Aliyu Bashir',owner:'u1',amount:45000,stage:'Quote Issued',cls:'Enterprise',product:'Ocean Freight / FreightSaver 365',status:'open'},
+  {id:'d6',company:'c3',contact:'Fatima Abdullahi',owner:'u2',amount:62000,stage:'Closed',cls:'Enterprise',product:'ONEXPORT 365 (OFAP Export)',status:'won'},
+  {id:'d7',company:'c4',contact:'',owner:'u4',amount:40000,stage:'Closed',cls:'Enterprise',product:'Ocean Freight / FreightSaver 365',status:'lost',lostReason:'Chose competitor'},
 ];
 
 let activeTab='pipeline', pipeView='board', seq=100;
