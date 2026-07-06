@@ -595,6 +595,12 @@ document.getElementById('tabs').addEventListener('click',e=>{
   const t=e.target.closest('.tab');if(!t)return;activeTab=t.dataset.tab;render();
 });
 render();
+
+// Update avatar with current user
+const avatarEl = document.getElementById('user-avatar');
+avatarEl.textContent = currentUser.ini;
+avatarEl.style.background = currentUser.color;
+avatarEl.style.color = currentUser.tx;
 </script>
 </body>
 </html>
