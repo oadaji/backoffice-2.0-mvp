@@ -1,0 +1,13 @@
+{
+  "name": "oneport365-crm-mvp",
+  "version": "1.0.0",
+  "description": "OnePort 365 CRM MVP - Next generation backoffice",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx http-server -p 8080 -o"
+  },
+  "keywords": ["crm", "oneport365", "freight", "logistics"],
+  "author": "OnePort 365",
+  "license": "MIT"
+}
