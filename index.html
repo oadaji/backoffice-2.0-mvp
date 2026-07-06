@@ -597,18 +597,7 @@ function handleLogout(){
 }
 
 function showAccountDetails(){
-  const teamMembers = users.filter(u=>u.team===currentUser.team && u.id!==currentUser.id);
   const permClass = currentUser.permissionLevel==='Super Admin'?'super-admin':'user';
-
-  const membersHtml = teamMembers.length>0 ? teamMembers.map(m=>`
-    <div class="team-member">
-      <div class="team-member-ava" style="background:${m.color};color:${m.tx}">${m.ini}</div>
-      <div class="team-member-info">
-        <div class="team-member-name">${m.name}</div>
-        <div class="team-member-role">${m.role}</div>
-      </div>
-    </div>
-  `).join('') : '<div class="combo-empty">No other members in your team</div>';
 
   modal(`<div class="modal" style="max-width:520px">
     <div class="account-header">
@@ -629,10 +618,6 @@ function showAccountDetails(){
         <div class="label">Team</div>
         <div class="value"><span class="team-badge">${currentUser.team}</span></div>
       </div>
-    </div>
-    <div class="account-section">
-      <h4>Team Members (${currentUser.team})</h4>
-      <div class="team-members">${membersHtml}</div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" onclick="closeModal()">Close</button>
