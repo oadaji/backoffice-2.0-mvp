@@ -185,6 +185,21 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
 .team-member-info{flex:1;min-width:0}
 .team-member-name{font-size:14px;font-weight:600;color:var(--ink)}
 .team-member-role{font-size:12px;color:var(--muted)}
+.account-dropdown{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line-2);border-radius:10px;box-shadow:var(--sh-raise);min-width:200px;z-index:1000;display:none}
+.account-dropdown.open{display:block}
+.account-dropdown::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#fff}
+.account-dropdown::before{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:9px solid transparent;border-top-color:var(--line-2);z-index:-1}
+.dropdown-header{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dropdown-ava{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:var(--f-head);flex-shrink:0}
+.dropdown-user-info{flex:1;min-width:0}
+.dropdown-user-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dropdown-user-role{font-size:12px;color:var(--muted)}
+.dropdown-menu{padding:6px}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--ink);cursor:pointer;transition:background .15s}
+.dropdown-item:hover{background:var(--page)}
+.dropdown-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;color:var(--muted-2)}
+.dropdown-item.logout{color:var(--error)}
+.dropdown-item.logout svg{color:var(--error)}
 @media(max-width:760px){.kpis{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -194,7 +209,28 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
     <div class="nav-ico active" data-tooltip="CRM"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
     <div class="spacer-v"></div>
     <div class="nav-ico"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1112 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 21h4"/></svg><span class="dot"></span></div>
-    <div class="ava" onclick="showAccountDetails()" style="cursor:pointer" data-tooltip="Account" id="user-avatar">JM</div>
+    <div style="position:relative">
+      <div class="ava" onclick="toggleAccountDropdown()" style="cursor:pointer" data-tooltip="Account" id="user-avatar">JM</div>
+      <div class="account-dropdown" id="account-dropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-ava" id="dropdown-ava">JM</div>
+          <div class="dropdown-user-info">
+            <div class="dropdown-user-name" id="dropdown-name">James Mitchell</div>
+            <div class="dropdown-user-role" id="dropdown-role">Sales Lead</div>
+          </div>
+        </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-item" onclick="openProfileSettings()">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M1 12h6m6 0h10"/></svg>
+            Profile Settings
+          </div>
+          <div class="dropdown-item logout" onclick="handleLogout()">
+            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4m7 14l5-5-5-5m5 5H9"/></svg>
+            Logout
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="main">
     <div class="topbar">
@@ -543,6 +579,23 @@ function toggleGrant(id,row){
 }
 function grant(){Object.keys(grantSel).forEach(id=>{if(grantSel[id])user(id).access=true;});closeModal();render();}
 
+function toggleAccountDropdown(){
+  const dropdown = document.getElementById('account-dropdown');
+  dropdown.classList.toggle('open');
+}
+
+function openProfileSettings(){
+  toggleAccountDropdown();
+  showAccountDetails();
+}
+
+function handleLogout(){
+  if(confirm('Are you sure you want to logout?')){
+    alert('Logout functionality will be connected to authentication system.');
+    // Future: window.location.href = '/logout';
+  }
+}
+
 function showAccountDetails(){
   const teamMembers = users.filter(u=>u.team===currentUser.team && u.id!==currentUser.id);
   const permClass = currentUser.permissionLevel==='Super Admin'?'super-admin':'user';
@@ -597,6 +650,23 @@ const avatarEl = document.getElementById('user-avatar');
 avatarEl.textContent = currentUser.ini;
 avatarEl.style.background = currentUser.color;
 avatarEl.style.color = currentUser.tx;
+
+// Update dropdown with current user
+const dropdownAva = document.getElementById('dropdown-ava');
+dropdownAva.textContent = currentUser.ini;
+dropdownAva.style.background = currentUser.color;
+dropdownAva.style.color = currentUser.tx;
+document.getElementById('dropdown-name').textContent = currentUser.name;
+document.getElementById('dropdown-role').textContent = currentUser.role;
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const dropdown = document.getElementById('account-dropdown');
+  const avatar = document.getElementById('user-avatar');
+  if (!dropdown.contains(e.target) && !avatar.contains(e.target)) {
+    dropdown.classList.remove('open');
+  }
+});
 </script>
 </body>
 </html>
