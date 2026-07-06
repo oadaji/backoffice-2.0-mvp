@@ -323,7 +323,7 @@ function renderPipeline(){
   let html=`
   <div class="kpis">
     <div class="kpi"><div class="lbl">Active pipeline (USD)</div><div class="kpi-mid"><div class="val">${fmt(active)}</div><span class="kpi-ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span></div><div class="note">${open.length} deals in progress</div></div>
-    <div class="kpi"><div class="lbl">Won this month (USD)</div><div class="kpi-mid"><div class="val gold">${fmt(wonSum)}</div><span class="kpi-ico"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M6 4h12v5a6 6 0 01-12 0zM6 6H3v2a3 3 0 003 3M18 6h3v2a3 3 0 01-3 3"/></svg></span></div><div class="note">${won.length} deals closed</div></div>
+    <div class="kpi"><div class="lbl">Total won (USD)</div><div class="kpi-mid"><div class="val gold">${fmt(wonSum)}</div><span class="kpi-ico"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M6 4h12v5a6 6 0 01-12 0zM6 6H3v2a3 3 0 003 3M18 6h3v2a3 3 0 01-3 3"/></svg></span></div><div class="note">${won.length} deals closed</div></div>
     <div class="kpi"><div class="lbl">Total deals</div><div class="kpi-mid"><div class="val green">${deals.length}</div><span class="kpi-ico"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4"/></svg></span></div><div class="note">All-time deals</div></div>
   </div>
   <div class="toolbar">
