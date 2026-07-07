@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login · OnePort 365</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Nohemi';font-style:normal;font-weight:400 500;src:url('https://db.onlinewebfonts.com/t/29ddb4605533a38e086b48fa105e0d12.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Nohemi';font-style:normal;font-weight:600 800;src:url('https://db.onlinewebfonts.com/t/2acd1ac6664b7b1a1545cc36d0680783.woff2') format('woff2');font-display:swap}
+:root{
+  --green:#023819; --green-2:#2f6b1e; --green-3:#7fae2e; --lime:#BFFB4F; --lime-soft:#EDF4E1;
+  --gold:#FFCC1A; --gold-deep:#B8860B; --success:#008751; --error:#FF1A1A;
+  --cream:#FDFBF1; --panel:#FFFFFF; --page:#faf9f5; --sage:#D1DBBD;
+  --line:rgba(2,56,25,.09); --line-2:rgba(2,56,25,.16);
+  --ink:#383838; --muted:#808080; --muted-2:#5F5E5A;
+  --sh-card:0 1px 2px rgba(2,56,25,.05);
+  --sh-raise:0 2px 4px rgba(2,56,25,.05),0 10px 24px -10px rgba(2,56,25,.16);
+  --sh-modal:0 4px 8px rgba(2,56,25,.06),0 18px 40px -16px rgba(2,56,25,.22);
+  --f-head:'Nohemi','Poppins',sans-serif; --f-body:'Poppins',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--f-body);
+  color:var(--ink);
+  background:linear-gradient(135deg, var(--green) 0%, var(--green-2) 100%);
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+h1,h2,h3,.head{font-family:var(--f-head)}
+
+.login-container{
+  width:100%;
+  max-width:440px;
+  animation:slideUp 0.4s ease-out;
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.login-logo{
+  text-align:center;
+  margin-bottom:32px;
+}
+.login-logo-img{
+  height:60px;
+  width:auto;
+  object-fit:contain;
+  max-width:100%;
+  filter:brightness(0) invert(1);
+}
+.login-logo-subtitle{
+  font-family:var(--f-head);
+  font-size:24px;
+  font-weight:600;
+  color:#fff;
+  margin-top:16px;
+  letter-spacing:0.5px;
+}
+
+.login-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:var(--sh-modal);
+  padding:40px 36px;
+}
+
+.login-head{
+  text-align:center;
+  margin-bottom:32px;
+}
+.login-head h2{
+  font-family:var(--f-head);
+  font-size:24px;
+  color:var(--green);
+  font-weight:600;
+  margin-bottom:6px;
+}
+.login-head .sub{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.field{
+  margin-bottom:20px;
+}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.field input{
+  width:100%;
+  border:1px solid var(--line-2);
+  border-radius:12px;
+  padding:14px 16px;
+  font-family:var(--f-body);
+  font-size:15px;
+  color:var(--ink);
+  background:#fff;
+  transition:all .2s;
+}
+.field input:focus{
+  outline:none;
+  border-color:var(--green);
+  box-shadow:0 0 0 4px rgba(2,56,25,.12);
+}
+.field input::placeholder{
+  color:var(--muted);
+}
+
+.field-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:24px;
+}
+
+.checkbox-wrapper{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.checkbox{
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  border:2px solid var(--line-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.checkbox.checked{
+  background:var(--green);
+  border-color:var(--green);
+}
+.checkbox svg{
+  width:14px;
+  height:14px;
+  stroke:#fff;
+  fill:none;
+  stroke-width:2.5;
+  display:none;
+}
+.checkbox.checked svg{
+  display:block;
+}
+.checkbox-label{
+  font-size:14px;
+  color:var(--ink);
+  user-select:none;
+}
+
+.forgot-link{
+  font-size:14px;
+  color:var(--green-2);
+  text-decoration:none;
+  font-weight:600;
+}
+.forgot-link:hover{
+  color:var(--green);
+}
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:12px;
+  padding:15px 24px;
+  font-family:var(--f-body);
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.btn-primary{
+  background:var(--lime);
+  color:var(--green);
+  box-shadow:var(--sh-card);
+}
+.btn-primary:hover{
+  filter:brightness(.97);
+  box-shadow:var(--sh-raise);
+  transform:translateY(-1px);
+}
+.btn-primary:active{
+  transform:translateY(0);
+}
+.btn-primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.btn-ghost{
+  background:transparent;
+  color:var(--muted-2);
+  border:1px solid var(--line-2);
+}
+.btn-ghost:hover{
+  background:var(--page);
+}
+
+.divider{
+  text-align:center;
+  margin:24px 0;
+  position:relative;
+}
+.divider::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  height:1px;
+  background:var(--line);
+}
+.divider span{
+  position:relative;
+  background:#fff;
+  padding:0 16px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.code-inputs{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin:32px 0;
+}
+.code-input{
+  width:56px;
+  height:64px;
+  border:2px solid var(--line-2);
+  border-radius:12px;
+  font-family:var(--f-head);
+  font-size:24px;
+  font-weight:600;
+  text-align:center;
+  color:var(--green);
+  background:#fff;
+  transition:all .2s;
+}
+.code-input:focus{
+  outline:none;
+  border-color:var(--green);
+  box-shadow:0 0 0 4px rgba(2,56,25,.12);
+}
+
+.resend-text{
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:24px;
+}
+.resend-link{
+  color:var(--green-2);
+  font-weight:600;
+  text-decoration:none;
+  cursor:pointer;
+}
+.resend-link:hover{
+  color:var(--green);
+  text-decoration:underline;
+}
+
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--green-2);
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+  margin-bottom:20px;
+  cursor:pointer;
+}
+.back-link:hover{
+  color:var(--green);
+}
+.back-link svg{
+  width:16px;
+  height:16px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+}
+
+.error-msg{
+  background:#FCEBEB;
+  color:#A32D2D;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:14px;
+  margin-bottom:20px;
+  display:none;
+}
+.error-msg.show{
+  display:block;
+}
+
+.success-msg{
+  background:#EAF3DE;
+  color:#173404;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:14px;
+  margin-bottom:20px;
+  display:none;
+}
+.success-msg.show{
+  display:block;
+}
+
+.hidden{
+  display:none;
+}
+
+.checkbox-row{
+  margin-top:24px;
+}
+
+@media(max-width:480px){
+  .login-card{
+    padding:32px 24px;
+  }
+  .code-input{
+    width:48px;
+    height:56px;
+    font-size:20px;
+  }
+  .code-inputs{
+    gap:8px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+  <div class="login-logo">
+    <img src="oneport365-logo.svg" alt="OnePort 365" class="login-logo-img">
+    <div class="login-logo-subtitle">Backoffice</div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="login-card" id="login-form">
+    <div class="login-head">
+      <h2>Welcome back</h2>
+      <div class="sub">Sign in to your account</div>
+    </div>
+
+    <div class="error-msg" id="login-error"></div>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="name@company.com" required autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+      </div>
+
+      <div class="field-row">
+        <div class="checkbox-wrapper" onclick="toggleRememberDetails()">
+          <div class="checkbox" id="remember-details-check">
+            <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <span class="checkbox-label">Remember details</span>
+        </div>
+        <a href="#" class="forgot-link" onclick="showForgotPassword(event)">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="login-btn">
+        Sign in
+      </button>
+    </form>
+  </div>
+
+  <!-- Forgot Password Form -->
+  <div class="login-card hidden" id="forgot-password-form">
+    <a class="back-link" onclick="backToLogin()">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+
+    <div class="login-head">
+      <h2>Reset your password</h2>
+      <div class="sub">Enter your email to receive a password reset link</div>
+    </div>
+
+    <div class="error-msg" id="forgot-error"></div>
+    <div class="success-msg" id="forgot-success"></div>
+
+    <form onsubmit="handleForgotPassword(event)">
+      <div class="field">
+        <label for="forgot-email">Email address</label>
+        <input type="email" id="forgot-email" placeholder="name@company.com" required autocomplete="email">
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="forgot-btn">
+        Send reset link
+      </button>
+
+      <div class="resend-text" style="margin-top:20px">
+        Remember your password? <a class="resend-link" onclick="backToLogin()">Sign in</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- 2FA Verification Form -->
+  <div class="login-card hidden" id="twofa-form">
+    <a class="back-link" onclick="backToLogin()">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+
+    <div class="login-head">
+      <h2>Two-factor authentication</h2>
+      <div class="sub">Enter the 6-digit code from your authenticator app</div>
+    </div>
+
+    <div class="error-msg" id="twofa-error"></div>
+    <div class="success-msg" id="twofa-success"></div>
+
+    <form onsubmit="handleVerify2FA(event)">
+      <div class="code-inputs">
+        <input type="text" class="code-input" maxlength="1" id="code-1" oninput="handleCodeInput(event, 1)" onkeydown="handleCodeKeydown(event, 1)" autocomplete="off">
+        <input type="text" class="code-input" maxlength="1" id="code-2" oninput="handleCodeInput(event, 2)" onkeydown="handleCodeKeydown(event, 2)" autocomplete="off">
+        <input type="text" class="code-input" maxlength="1" id="code-3" oninput="handleCodeInput(event, 3)" onkeydown="handleCodeKeydown(event, 3)" autocomplete="off">
+        <input type="text" class="code-input" maxlength="1" id="code-4" oninput="handleCodeInput(event, 4)" onkeydown="handleCodeKeydown(event, 4)" autocomplete="off">
+        <input type="text" class="code-input" maxlength="1" id="code-5" oninput="handleCodeInput(event, 5)" onkeydown="handleCodeKeydown(event, 5)" autocomplete="off">
+        <input type="text" class="code-input" maxlength="1" id="code-6" oninput="handleCodeInput(event, 6)" onkeydown="handleCodeKeydown(event, 6)" autocomplete="off">
+      </div>
+
+      <div class="checkbox-row">
+        <div class="checkbox-wrapper" onclick="toggleSkip2FA()">
+          <div class="checkbox" id="skip-2fa-check">
+            <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <span class="checkbox-label">Don't ask again for 30 days</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="verify-btn" style="margin-top:24px">
+        Verify and continue
+      </button>
+
+      <div class="resend-text">
+        Didn't receive a code? <a class="resend-link" onclick="resendCode()">Resend code</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+
+let rememberDetails = false;
+let skip2FAFor30Days = false;
+let loginEmail = '';
+let loginPassword = '';
+
+// Toggle remember details checkbox
+function toggleRememberDetails() {
+  rememberDetails = !rememberDetails;
+  $('#remember-details-check').classList.toggle('checked', rememberDetails);
+}
+
+// Toggle skip 2FA checkbox
+function toggleSkip2FA() {
+  skip2FAFor30Days = !skip2FAFor30Days;
+  $('#skip-2fa-check').classList.toggle('checked', skip2FAFor30Days);
+}
+
+// Check if user should skip 2FA
+function shouldSkip2FA(email) {
+  const skip2FAData = localStorage.getItem('skip2FA');
+  if (!skip2FAData) return false;
+
+  try {
+    const data = JSON.parse(skip2FAData);
+    const expiry = new Date(data.expiry);
+    const now = new Date();
+
+    // Check if token is still valid and for same user
+    if (expiry > now && data.email === email) {
+      return true;
+    } else {
+      // Remove expired token
+      localStorage.removeItem('skip2FA');
+      return false;
+    }
+  } catch (e) {
+    localStorage.removeItem('skip2FA');
+    return false;
+  }
+}
+
+// Handle login form submission
+function handleLogin(e) {
+  e.preventDefault();
+
+  const email = $('#email').value.trim();
+  const password = $('#password').value;
+
+  // Clear any previous errors
+  $('#login-error').classList.remove('show');
+
+  // Basic validation
+  if (!email || !password) {
+    showError('login-error', 'Please enter both email and password');
+    return;
+  }
+
+  // Store credentials for later use
+  loginEmail = email;
+  loginPassword = password;
+
+  // Store remember details if checked
+  if (rememberDetails) {
+    localStorage.setItem('savedCredentials', JSON.stringify({
+      email: email,
+      // In production, never store password in localStorage!
+      // This is just for demo purposes
+      password: password
+    }));
+  }
+
+  // Simulate login (replace with actual API call)
+  $('#login-btn').disabled = true;
+  $('#login-btn').textContent = 'Signing in...';
+
+  setTimeout(() => {
+    // Check if user should skip 2FA
+    if (shouldSkip2FA(email)) {
+      // Skip 2FA and go directly to dashboard
+      sessionStorage.setItem('authToken', 'demo-token-' + Date.now());
+      window.location.href = 'index-with-auth.html';
+      return;
+    }
+
+    // Show 2FA form
+    $('#login-form').classList.add('hidden');
+    $('#twofa-form').classList.remove('hidden');
+
+    // Focus first code input
+    setTimeout(() => $('#code-1').focus(), 100);
+
+    $('#login-btn').disabled = false;
+    $('#login-btn').textContent = 'Sign in';
+  }, 1000);
+}
+
+// Handle 2FA code input
+function handleCodeInput(e, position) {
+  const value = e.target.value;
+
+  // Only allow numbers
+  if (!/^\d*$/.test(value)) {
+    e.target.value = '';
+    return;
+  }
+
+  // Move to next input if value entered
+  if (value && position < 6) {
+    $(`#code-${position + 1}`).focus();
+  }
+
+  // Auto-submit if all 6 digits entered
+  if (position === 6 && value) {
+    const code = getFullCode();
+    if (code.length === 6) {
+      // Small delay for better UX
+      setTimeout(() => {
+        const form = e.target.closest('form');
+        if (form) form.requestSubmit();
+      }, 100);
+    }
+  }
+}
+
+// Handle backspace in code inputs
+function handleCodeKeydown(e, position) {
+  if (e.key === 'Backspace' && !e.target.value && position > 1) {
+    $(`#code-${position - 1}`).focus();
+  }
+}
+
+// Get full 6-digit code
+function getFullCode() {
+  let code = '';
+  for (let i = 1; i <= 6; i++) {
+    code += $(`#code-${i}`).value;
+  }
+  return code;
+}
+
+// Clear all code inputs
+function clearCodeInputs() {
+  for (let i = 1; i <= 6; i++) {
+    $(`#code-${i}`).value = '';
+  }
+  $('#code-1').focus();
+}
+
+// Handle 2FA verification
+function handleVerify2FA(e) {
+  e.preventDefault();
+
+  const code = getFullCode();
+
+  // Clear any previous messages
+  $('#twofa-error').classList.remove('show');
+  $('#twofa-success').classList.remove('show');
+
+  if (code.length !== 6) {
+    showError('twofa-error', 'Please enter the complete 6-digit code');
+    return;
+  }
+
+  // Disable button and show loading
+  $('#verify-btn').disabled = true;
+  $('#verify-btn').textContent = 'Verifying...';
+
+  // Simulate verification (replace with actual API call)
+  setTimeout(() => {
+    // Simulate verification result
+    const isValid = code === '123456'; // In production, verify with backend
+
+    if (isValid) {
+      // Show success message
+      showSuccess('twofa-success', 'Verification successful! Redirecting...');
+
+      // Store skip 2FA preference if checked
+      if (skip2FAFor30Days) {
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 30);
+        localStorage.setItem('skip2FA', JSON.stringify({
+          email: loginEmail,
+          expiry: expiryDate.toISOString()
+        }));
+      }
+
+      // Store auth token
+      sessionStorage.setItem('authToken', 'demo-token-' + Date.now());
+
+      // Redirect to dashboard after short delay
+      setTimeout(() => {
+        window.location.href = 'index-with-auth.html';
+      }, 1000);
+    } else {
+      // Show error and clear inputs
+      showError('twofa-error', 'Invalid code. Please try again.');
+      clearCodeInputs();
+      $('#verify-btn').disabled = false;
+      $('#verify-btn').textContent = 'Verify and continue';
+    }
+  }, 1000);
+}
+
+// Back to login
+function backToLogin() {
+  $('#twofa-form').classList.add('hidden');
+  $('#forgot-password-form').classList.add('hidden');
+  $('#login-form').classList.remove('hidden');
+
+  // Clear 2FA inputs and messages
+  clearCodeInputs();
+  $('#twofa-error').classList.remove('show');
+  $('#twofa-success').classList.remove('show');
+
+  // Clear forgot password messages
+  $('#forgot-error').classList.remove('show');
+  $('#forgot-success').classList.remove('show');
+  const forgotEmailInput = $('#forgot-email');
+  if (forgotEmailInput) forgotEmailInput.value = '';
+
+  // Reset skip 2FA checkbox
+  skip2FAFor30Days = false;
+  $('#skip-2fa-check').classList.remove('checked');
+}
+
+// Show forgot password form
+function showForgotPassword(e) {
+  e.preventDefault();
+  $('#login-form').classList.add('hidden');
+  $('#forgot-password-form').classList.remove('hidden');
+
+  // Pre-fill email if available
+  const loginEmail = $('#email').value.trim();
+  if (loginEmail) {
+    $('#forgot-email').value = loginEmail;
+  }
+
+  setTimeout(() => $('#forgot-email').focus(), 100);
+}
+
+// Handle forgot password submission
+function handleForgotPassword(e) {
+  e.preventDefault();
+
+  const email = $('#forgot-email').value.trim();
+
+  // Clear any previous messages
+  $('#forgot-error').classList.remove('show');
+  $('#forgot-success').classList.remove('show');
+
+  // Basic validation
+  if (!email) {
+    showError('forgot-error', 'Please enter your email address');
+    return;
+  }
+
+  // Disable button and show loading
+  $('#forgot-btn').disabled = true;
+  $('#forgot-btn').textContent = 'Sending...';
+
+  // Simulate sending reset email (replace with actual API call)
+  setTimeout(() => {
+    // Show success message
+    showSuccess('forgot-success', 'Password reset link sent! Check your email for instructions.');
+
+    // Re-enable button
+    $('#forgot-btn').disabled = false;
+    $('#forgot-btn').textContent = 'Send reset link';
+
+    // Optionally redirect back to login after a delay
+    setTimeout(() => {
+      backToLogin();
+    }, 3000);
+  }, 1500);
+}
+
+// Resend code
+function resendCode() {
+  showSuccess('twofa-success', 'A new code has been sent to your authenticator app');
+  setTimeout(() => {
+    $('#twofa-success').classList.remove('show');
+  }, 3000);
+}
+
+// Helper functions
+function showError(id, message) {
+  const el = $(`#${id}`);
+  el.textContent = message;
+  el.classList.add('show');
+}
+
+function showSuccess(id, message) {
+  const el = $(`#${id}`);
+  el.textContent = message;
+  el.classList.add('show');
+}
+
+// Check for saved credentials on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const savedCreds = localStorage.getItem('savedCredentials');
+
+  if (savedCreds) {
+    try {
+      const data = JSON.parse(savedCreds);
+      // Pre-fill credentials
+      $('#email').value = data.email;
+      $('#password').value = data.password;
+      // Auto-check remember details
+      rememberDetails = true;
+      $('#remember-details-check').classList.add('checked');
+    } catch (e) {
+      // Invalid data format
+      localStorage.removeItem('savedCredentials');
+    }
+  }
+});
+</script>
+
+</body>
+</html>

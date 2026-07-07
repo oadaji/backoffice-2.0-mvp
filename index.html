@@ -7,6 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+// Authentication check - runs before page loads
+(function() {
+  const authToken = sessionStorage.getItem('authToken');
+
+  // If not authenticated, redirect to login
+  if (!authToken) {
+    window.location.href = 'login.html';
+    return;
+  }
+})();
+</script>
 <style>
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:400 500;src:url('https://db.onlinewebfonts.com/t/29ddb4605533a38e086b48fa105e0d12.woff2') format('woff2');font-display:swap}
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:600 800;src:url('https://db.onlinewebfonts.com/t/2acd1ac6664b7b1a1545cc36d0680783.woff2') format('woff2');font-display:swap}
@@ -44,8 +56,8 @@ h1,h2,h3,.head{font-family:var(--f-head)}
 .topbar .spacer{flex:1}
 .topbar .ico{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted-2);background:#fff;position:relative;cursor:pointer}
 .topbar .ico .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--error);border:1.5px solid #fff}
-.topbar .logo{height:64px;display:flex;align-items:center;gap:8px}
-.topbar .logo-img{height:64px;width:auto;object-fit:contain}
+.topbar .logo{height:48px;display:flex;align-items:center;gap:8px}
+.topbar .logo-img{height:48px;width:auto;object-fit:contain}
 .sidebar .ava{width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--f-head);font-size:14px}
 .tabs{display:flex;gap:6px;padding:10px 24px 0;background:var(--page);border-bottom:1px solid var(--line)}
 .tab{display:flex;align-items:center;gap:7px;padding:10px 14px 14px;color:var(--muted);font-weight:600;cursor:pointer;border-bottom:2px solid transparent;font-size:14px}
@@ -241,7 +253,7 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
       <h2>CRM</h2>
       <div class="spacer"></div>
       <div class="logo">
-        <img src="assets/oneport365-logo.png" alt="OnePort 365" class="logo-img">
+        <img src="oneport365-logo.svg" alt="OnePort 365" class="logo-img">
       </div>
     </div>
     <div class="tabs" id="tabs">
@@ -305,7 +317,7 @@ const $=s=>document.querySelector(s);
 const co=id=>companies.find(c=>c.id===id)||{};
 const user=id=>users.find(u=>u.id===id)||{};
 const clsKey=c=>c==='Enterprise'?'ent':c==='Mid-Tier'?'mid':'spot';
-function fmt(n){if(n>=1e6)return '$'+(n/1e6).toFixed(1).replace(/\.0$/,'')+'M';if(n>=1e3)return '$'+Math.round(n/1e3)+'k';return '$'+n;}
+function fmt(n){if(n>=1e6)return '$'+(n/1e6).toFixed(1).replace(/\\.0$/,'')+'M';if(n>=1e3)return '$'+Math.round(n/1e3)+'k';return '$'+n;}
 function ava(u,cls){return `<div class="ava-sm" style="background:${u.color};color:${u.tx}">${u.ini}</div>`;}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function tick(){return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>';}
@@ -658,10 +670,37 @@ function openProfileSettings(){
 }
 
 function handleLogout(){
-  if(confirm('Are you sure you want to logout?')){
-    alert('Logout functionality will be connected to authentication system.');
-    // Future: window.location.href = '/logout';
-  }
+  showLogoutModal();
+}
+
+function showLogoutModal(){
+  modal(`<div class="modal" style="max-width:420px">
+    <div class="modal-head">
+      <div>
+        <h3>Logout</h3>
+        <div class="mh-sub">Are you sure you want to logout?</div>
+      </div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" style="padding:24px 22px">
+      <p style="color:var(--muted-2);font-size:14px;line-height:1.5;margin:0">
+        You'll need to sign in again to access your CRM dashboard.
+      </p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-ghost" style="color:#fff;background:var(--error);border-color:var(--error)" onclick="confirmLogout()">Logout</button>
+    </div>
+  </div>`);
+}
+
+function confirmLogout(){
+  // Clear authentication
+  sessionStorage.removeItem('authToken');
+  // Close modal
+  closeModal();
+  // Redirect to login
+  window.location.href = 'login.html';
 }
 
 function showAccountDetails(){
