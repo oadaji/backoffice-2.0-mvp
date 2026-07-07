@@ -556,7 +556,7 @@ function handleLogin(e) {
     if (shouldSkip2FA(email)) {
       // Skip 2FA and go directly to dashboard
       sessionStorage.setItem('authToken', 'demo-token-' + Date.now());
-      window.location.href = 'index-with-auth.html';
+      window.location.href = 'index.html';
       return;
     }
 
@@ -667,7 +667,7 @@ function handleVerify2FA(e) {
 
       // Redirect to dashboard after short delay
       setTimeout(() => {
-        window.location.href = 'index-with-auth.html';
+        window.location.href = 'index.html';
       }, 1000);
     } else {
       // Show error and clear inputs
