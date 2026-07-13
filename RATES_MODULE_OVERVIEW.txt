@@ -1,0 +1,679 @@
+================================================================================
+                    FREIGHT RATES MODULE - PRODUCT OVERVIEW
+                         OnePort 365 Backoffice MVP
+                            Created: 2026-07-10
+================================================================================
+
+EXECUTIVE SUMMARY
+================================================================================
+The Rates module is a freight rate management system that allows the OnePort 365
+team to view, search, filter, and compare freight rates from multiple carriers
+across different shipping methods. This module serves as a centralized rate
+database for the operations team to quickly find competitive rates and provide
+quotes to customers.
+
+
+WHAT THE RATES MODULE DOES
+================================================================================
+
+PRIMARY FUNCTIONS:
+1. Display freight rates from multiple carriers in a searchable table format
+2. Filter rates by carrier, rate type, route, and expiry status
+3. Show detailed rate breakdowns including all surcharges and fees
+4. Track rate expiry dates and highlight expiring/expired rates
+5. Support multiple freight types: Ocean, Air, Export Haulage, Import Haulage,
+   and Other Charges
+
+USER WORKFLOWS:
+- Operations team searches for rates based on customer requirements
+- Compare rates from different carriers side-by-side
+- View detailed charge breakdowns before providing customer quotes
+- Track which rates are about to expire
+- Export rate data to CSV for reporting/analysis
+
+
+FREIGHT TYPES SUPPORTED
+================================================================================
+
+1. OCEAN FREIGHT (15 rates currently)
+   - Port-to-port container shipping
+   - Container types: 20GP, 40GP, 40HC, 40RF (refrigerated)
+   - Shows rates per container type
+   - Includes major carriers: MSC, Maersk, CMA CGM, Hapag-Lloyd, COSCO,
+     Evergreen, ONE, PIL, ZIM
+
+2. AIR FREIGHT (4 rates currently)
+   - Airport-to-airport cargo shipping
+   - Cargo types: General Cargo, Perishables
+   - Shows rates per kilogram ($/kg) in weight brackets: +45kg, +100kg, +300kg
+   - Includes carriers: Emirates SkyCargo, Turkish Cargo, Qatar Airways Cargo,
+     Air France Cargo
+
+3. EXPORT HAULAGE (2 rates currently)
+   - Inland trucking from customer location to port/airport
+   - Nigeria-based domestic transport to export terminals
+   - Rates in Nigerian Naira (₦)
+   - Equipment: 20GP, 40HC containers
+
+4. IMPORT HAULAGE (1 rate currently)
+   - Port/airport to customer final destination
+   - Domestic delivery from import terminals
+   - Rates in Nigerian Naira (₦)
+
+5. OTHER CHARGES (1 rate currently)
+   - Terminal handling charges (THC)
+   - Port fees and surcharges
+   - Documentation fees
+   - Gate fees, scanner fees, lifting charges
+
+
+DATA MODEL - WHAT'S IN A RATE
+================================================================================
+
+Each rate record contains:
+
+BASIC INFORMATION:
+- id: Unique identifier (r1, r2, r3...)
+- type: Freight category (ocean, air, haulage-export, haulage-import, other)
+- carrier: Shipping line/airline/trucking company name
+
+ROUTE INFORMATION:
+- pol: Port/Airport of Loading (UN/LOCODE format, e.g., NGAPP, CNSHA)
+- origin: Human-readable origin location (e.g., "Nigeria", "China")
+- pod: Port/Airport of Discharge (UN/LOCODE format)
+- dest: Human-readable destination location
+
+PRICING INFORMATION:
+- rate20: Rate for 20-foot container OR +45kg air freight
+- rate40: Rate for 40-foot container OR +100kg air freight
+- rate40hc: Rate for 40-foot high-cube container OR +300kg air freight
+- Currency: USD for ocean/air, NGN (₦) for haulage/other charges
+
+OPERATIONAL DETAILS:
+- equip: Equipment/cargo type (20GP, 40HC, General Cargo, Perishables, etc.)
+- rateType: Pricing method (spot, contract, all in, published)
+- transit: Transit time in days (0.5 for local haulage, 1 for air, 14-35 for ocean)
+- expiry: Rate validity end date (YYYY-MM-DD format)
+
+CHARGE BREAKDOWN:
+- charges: Array of individual cost components
+  * Ocean freight base rate (OFR)
+  * Bunker Adjustment Factor (BAF) - fuel costs
+  * Peak Season Surcharge (PSS)
+  * Emergency Bunker Surcharge (EBS)
+  * Terminal Handling Charges - Origin (THC-O)
+  * Terminal Handling Charges - Destination (THC-D)
+  * Documentation fees (DOC)
+  * Security charges
+  * Equipment-specific charges (reefer, cool chain, etc.)
+
+
+RATE TYPES EXPLAINED
+================================================================================
+
+1. SPOT RATE
+   - Short-term market rate based on current supply/demand
+   - Typically valid for 7-30 days
+   - Subject to rapid changes
+   - Used for one-off shipments
+
+2. CONTRACT RATE
+   - Long-term negotiated rate with carrier
+   - Valid for 3-12 months
+   - Volume commitment required
+   - More stable pricing
+
+3. ALL IN RATE
+   - Includes all charges bundled together
+   - Origin + freight + destination charges included
+   - No hidden fees
+   - Easier for customer quotes
+
+4. PUBLISHED RATE
+   - Carrier's standard tariff rate
+   - Publicly available pricing
+   - Starting point for negotiations
+
+
+CURRENT FEATURES & FUNCTIONALITY
+================================================================================
+
+VIEWING & NAVIGATION:
+✓ Tab-based navigation between freight types
+✓ Dynamic rate counts per tab (e.g., "Ocean Freight (15)")
+✓ Clean table layout with sortable columns
+✓ Carrier logos for major shipping lines
+✓ Click any rate row to view detailed breakdown modal
+
+SEARCH & FILTERING:
+✓ Real-time search across:
+  - Carrier name
+  - Port of loading (POL)
+  - Port of discharge (POD)
+  - Origin location
+  - Destination location
+✓ Filter by specific carrier (dropdown)
+✓ Filter by rate type (spot/contract/all in/published)
+✓ Filters dynamically update based on available data
+
+MARKET COMPARISON (Ocean Freight Only):
+✓ "VS Market" column showing how each rate compares to market average
+✓ Market data sourced from Xeneta/Drewry APIs (currently using mock data)
+✓ Displays percentage above/below market:
+  - Red text (+X% above) for rates above market
+  - Green text (-X% below) for rates below market
+  - Dash "—" shown when no market data available for that route
+✓ Helps identify competitive pricing opportunities
+✓ Route-specific comparison (POL-POD-Equipment combination)
+
+EXPIRY TRACKING:
+✓ Automatic expiry detection
+✓ Visual indicators:
+  - Red background highlight for expired rates
+  - Orange "Xd left" badge for rates expiring within 14 days
+  - Normal date display for rates with >14 days validity
+✓ Expired rates remain visible but are clearly marked
+
+RATE DETAILS MODAL:
+✓ Comprehensive breakdown of all charges
+✓ Shows each surcharge component (BAF, PSS, THC, DOC, etc.)
+✓ Visual carrier branding with logos
+✓ Route information with port codes and locations
+✓ Equipment/cargo type specifications
+✓ Transit time display
+✓ Validity period
+✓ Action buttons: "Request Quote" and "Use This Rate"
+
+DATA DISPLAY:
+✓ Currency formatting:
+  - USD with commas for ocean freight (e.g., $3,450)
+  - USD per kg for air freight (e.g., $4.50/kg)
+  - Nigerian Naira for haulage (e.g., ₦85,000)
+✓ Dynamic table headers based on freight type:
+  - Ocean: 20' / 40' / 40HC columns
+  - Air: +45kg / +100kg / +300kg columns
+✓ Equipment badges with visual styling
+✓ Rate type badges with color coding
+✓ Transit time in days
+
+EXPORT CAPABILITY:
+✓ "Export CSV" button available (not yet functional)
+✓ Intended for downloading rate sheets
+
+
+NOT YET IMPLEMENTED
+================================================================================
+
+The following features are designed but not yet functional:
+
+ADD NEW RATES:
+- "Add Rate" button present but not connected
+- No form/modal to input new rates
+- Currently requires manual code updates to add rates
+
+REQUEST QUOTE:
+- Button present in detail modal
+- Not connected to any workflow
+- Should integrate with CRM deals/opportunities
+
+USE THIS RATE:
+- Button present in detail modal
+- No workflow to apply rate to a shipment
+- Should link to booking/quotation system
+
+EXPORT CSV:
+- Button present but non-functional
+- Should export filtered rate data to spreadsheet
+
+RATE COMPARISONS:
+- No side-by-side comparison view
+- No visual rate trends or charts
+- No "cheapest rate" highlighting
+
+NOTIFICATIONS:
+- No alerts for expiring rates
+- No email notifications to operations team
+- No dashboard for rate expiry overview
+
+
+TECHNICAL IMPLEMENTATION DETAILS
+================================================================================
+
+TECHNOLOGY STACK:
+- Vanilla JavaScript (no framework)
+- Single HTML file (index.html)
+- Inline CSS with custom properties for theming
+- Local data storage (rates array in JavaScript)
+- No backend API (all data is client-side)
+
+STATE MANAGEMENT:
+- activeSection: 'rates' to show this module
+- rateType: Currently selected tab (ocean/air/haulage-export/etc.)
+- rateSearch: Current search query
+- rateCarrier: Selected carrier filter
+- rateRateType: Selected rate type filter
+
+URL PARAMETERS (NEW):
+- ?section=rates - Load directly to rates section
+- ?rateType=air - Pre-select specific freight type
+- Enables deep linking and Figma captures
+
+CARRIER BRANDING:
+- SVG logos stored in /assets/carriers/
+- Supported carriers: MSC, Maersk, CMA, Hapag, COSCO, Evergreen, ONE, PIL, ZIM
+- Carrier-specific color coding in UI
+- Fallback to carrier initials if logo unavailable
+
+
+DATA MANAGEMENT CONSIDERATIONS
+================================================================================
+
+CURRENT STATE (PROTOTYPE):
+- 20 sample rates hardcoded in JavaScript array
+- Mix of realistic and demo data
+- No persistence (data lost on page refresh)
+- No data validation
+
+PRODUCTION REQUIREMENTS:
+- Backend API integration needed
+- Database storage (PostgreSQL/MongoDB recommended)
+- Real-time rate updates from carriers
+- Rate history tracking
+- Version control for rate changes
+- Audit trail (who updated what rate when)
+
+DATA VOLUME ESTIMATES:
+- Expected 500-1,000 ocean freight rates
+- 100-200 air freight rates
+- 50-100 haulage rates per region
+- Rates change frequently (weekly updates common)
+- Historical data important for trend analysis
+
+
+INTEGRATION POINTS
+================================================================================
+
+SHOULD INTEGRATE WITH:
+
+1. CRM MODULE (Same Application)
+   - Link rates to deal/opportunity records
+   - Auto-populate quote amounts from selected rates
+   - Track which rates are used most frequently
+   - Customer-specific rate agreements
+
+2. CARRIER SYSTEMS (External)
+   - API connections to carrier rate platforms
+   - Automated rate updates
+   - Sailing schedules integration
+   - Space availability checks
+
+2a. MARKET DATA PROVIDERS (External APIs)
+   - Xeneta API: Container freight rate benchmarking data
+   - Drewry API: Global container freight rate indices
+   - Purpose: Power "VS Market" comparison feature
+   - Data structure: Route-specific market rates (POL-POD-Equipment)
+   - Update frequency: Weekly or real-time depending on subscription tier
+   - Authentication: API keys required for both services
+   - Fallback: Show "—" when market data unavailable for specific route
+
+3. QUOTATION SYSTEM (Future Module)
+   - Use rate as base for customer quote
+   - Add margins/markups
+   - Generate PDF quote documents
+   - Send quotes to customers
+
+4. BOOKING SYSTEM (Future Module)
+   - Apply selected rate to booking
+   - Lock in rate at time of booking
+   - Track rate vs actual cost variance
+
+5. REPORTING/ANALYTICS (Future Module)
+   - Rate trends over time
+   - Carrier performance comparison
+   - Cost analysis by route/lane
+   - Margin analysis
+
+
+USER PERSONAS & USE CASES
+================================================================================
+
+PRIMARY USERS:
+
+1. OPERATIONS MANAGER
+   Use Cases:
+   - Quickly find competitive rates for customer inquiry
+   - Compare multiple carriers for same route
+   - Check rate validity before providing quote
+   - Monitor expiring rates and request renewals
+
+2. SALES REPRESENTATIVE
+   Use Cases:
+   - Look up rates to provide instant quotes
+   - Check if contracted rates are available
+   - Verify transit times for customer commitments
+   - Export rate sheets for customer presentations
+
+3. PRICING ANALYST
+   Use Cases:
+   - Monitor market rate trends
+   - Update rates from carrier emails/portals
+   - Maintain rate database accuracy
+   - Flag rates that need renegotiation
+
+4. CUSTOMER SERVICE
+   Use Cases:
+   - Verify rates quoted to customers
+   - Provide alternative routing options
+   - Check if special equipment available
+   - Explain charge breakdowns to customers
+
+
+KEY BUSINESS RULES
+================================================================================
+
+RATE VALIDITY:
+- Expired rates are not hidden but are visually marked
+- Rates expiring within 14 days show warning indicator
+- Operations team responsible for requesting rate renewals
+- Always check expiry before providing customer quote
+
+PRICING TRANSPARENCY:
+- All rates should show complete charge breakdown
+- No hidden fees
+- Clear distinction between base rate and surcharges
+- Total should match sum of all charge components
+
+CARRIER RELATIONSHIPS:
+- Contract rates require minimum volume commitment
+- Spot rates available to all customers
+- Preferred carrier partnerships may offer better rates
+- Some carriers offer equipment type restrictions
+
+ROUTE COVERAGE:
+- Focus on Nigeria import/export lanes
+- Major trading partners: China, UAE, Europe, USA
+- Regional coverage for West Africa
+- Air freight for time-sensitive cargo
+
+
+EXPANSION OPPORTUNITIES
+================================================================================
+
+SHORT-TERM ENHANCEMENTS (Next 1-3 Months):
+
+1. Make "Add Rate" Functional
+   - Create rate input form with validation
+   - Handle all freight types
+   - Auto-populate port codes from lookup
+   - Calculate totals from charge breakdown
+
+2. Implement CSV Export
+   - Export filtered results to Excel/CSV
+   - Include all columns and charge details
+   - Format for easy analysis
+   - Email export to user
+
+3. Rate Change Notifications
+   - Email alerts for expiring rates (7 days, 3 days, expired)
+   - Daily digest of rate updates
+   - Dashboard widget showing "attention needed" rates
+
+4. Quick Quote Generation
+   - "Use This Rate" creates instant quotation
+   - Add margin/markup settings
+   - Generate PDF quote document
+   - Integration with CRM deals
+
+5. Rate Comparison View
+   - Side-by-side comparison of 2-3 rates
+   - Highlight cheapest option
+   - Show transit time differences
+   - Compare charge breakdowns
+
+MEDIUM-TERM ENHANCEMENTS (3-6 Months):
+
+1. Backend API Integration
+   - Move data to database
+   - RESTful API for rate operations
+   - User authentication & permissions
+   - Rate update history/audit log
+
+2. Carrier Portal Integration
+   - Automated rate imports from carrier systems
+   - API connections to major carriers
+   - Sailing schedule integration
+   - Real-time space availability
+
+3. Advanced Filtering
+   - Date range selector (rates valid on specific date)
+   - Transit time filters (<20 days, <30 days, etc.)
+   - Price range filters
+   - Equipment type filters
+   - Multi-select filters
+
+4. Rate Analytics Dashboard
+   - Rate trend charts by route/lane
+   - Carrier price comparison graphs
+   - Volume vs cost analysis
+   - Margin tracking
+   - Most quoted routes report
+
+5. Customer-Specific Rates
+   - Store negotiated customer rates
+   - Auto-apply when creating quote for specific customer
+   - Track customer rate agreements and expirations
+   - Volume commitment tracking
+
+LONG-TERM VISION (6-12 Months):
+
+1. AI-Powered Rate Recommendations
+   - Suggest best rate based on customer history
+   - Predict rate changes based on market trends
+   - Optimize routing for cost/transit time balance
+   - Alert to unusually high/low rates
+
+2. Dynamic Pricing
+   - Real-time rate adjustments based on demand
+   - Seasonal pricing rules
+   - Volume-based automatic discounts
+   - Competitor rate monitoring
+
+3. Multi-Currency Support
+   - Display rates in customer's preferred currency
+   - Real-time exchange rate conversion
+   - Multi-currency payment tracking
+
+4. Mobile App
+   - On-the-go rate lookups
+   - Push notifications for rate changes
+   - Quick quote generation from mobile
+   - Offline rate access
+
+
+SUCCESS METRICS TO TRACK
+================================================================================
+
+USAGE METRICS:
+- Number of rate searches per day
+- Most searched routes/lanes
+- Average time to find suitable rate
+- Number of rates viewed per quote generated
+
+BUSINESS METRICS:
+- Percentage of quotes using system rates vs manual lookup
+- Rate accuracy (quoted rate vs actual cost)
+- Time saved vs manual rate management
+- Number of expired rates actively being used
+
+QUALITY METRICS:
+- Rate data accuracy percentage
+- Number of rate updates per week
+- Time lag between carrier rate change and system update
+- Customer quote rejection rate due to pricing
+
+
+KNOWN LIMITATIONS & CONSTRAINTS
+================================================================================
+
+CURRENT PROTOTYPE LIMITATIONS:
+- No real carrier rate feeds
+- Manual data entry required
+- No rate change history
+- No user permissions/access control
+- Cannot handle rate amendments or corrections
+- No support for special agreements or contracts
+- No validation of port codes or carrier names
+- Limited to 5 freight types
+- No support for FCL/LCL distinction
+- No dangerous goods or special cargo handling
+- No multi-leg routing (transshipment ports)
+
+SCALABILITY CONCERNS:
+- Client-side filtering won't scale beyond ~1,000 rates
+- No pagination or lazy loading
+- Large rate tables may cause browser performance issues
+- Export function may timeout with large datasets
+
+
+RECOMMENDED NEXT STEPS FOR PM
+================================================================================
+
+IMMEDIATE PRIORITIES:
+
+1. USER TESTING
+   - Observe operations team using the prototype
+   - Identify most painful missing features
+   - Document workflow gaps
+   - Prioritize enhancements based on real usage
+
+2. DATA STRATEGY
+   - Define rate update workflow
+   - Identify carrier rate sources
+   - Plan API integration requirements (see 2a below)
+   - Design rate change approval process
+
+   2a. MARKET DATA API INTEGRATION
+   - Set up Xeneta API account and obtain API credentials
+   - Set up Drewry API account and obtain API credentials
+   - Implement getMarketRate() function to fetch real-time data
+   - Design caching strategy (hourly/daily refresh of market rates)
+   - Handle API rate limits and error scenarios
+   - Define fallback behavior when APIs are unavailable
+   - Budget approval for Xeneta/Drewry subscription costs
+
+3. BUSINESS RULES DOCUMENTATION
+   - Document complete rate calculation logic
+   - Define margin/markup rules
+   - Clarify when to use spot vs contract rates
+   - Document approval workflows for rate overrides
+
+4. TECHNICAL PLANNING
+   - Scope backend API requirements
+   - Plan database schema for rates
+   - Define API endpoints needed
+   - Security and access control design
+
+5. STAKEHOLDER ALIGNMENT
+   - Demo prototype to operations team
+   - Gather feedback from sales team
+   - Discuss with finance on pricing rules
+   - Get IT sign-off on technical approach
+
+
+QUESTIONS TO ANSWER
+================================================================================
+
+BUSINESS QUESTIONS:
+- What is acceptable rate data refresh frequency? (Real-time? Daily? Weekly?)
+- Who should have permission to add/edit rates?
+- Should customers see rates or only receive quotes?
+- How should rate amendments be handled?
+- What approval process needed for rate overrides?
+
+TECHNICAL QUESTIONS:
+- Which carrier APIs can we integrate with?
+- What is expected concurrent user load?
+- Cloud hosting or on-premise?
+- Data backup and disaster recovery requirements?
+- Mobile app requirement timing?
+
+OPERATIONAL QUESTIONS:
+- Current manual rate management process?
+- How are carrier rate sheets received today?
+- Who is responsible for rate accuracy?
+- How often do rates typically change?
+- What happens when quoted rate is no longer valid?
+
+
+APPENDIX: SAMPLE DATA STRUCTURE
+================================================================================
+
+Example Ocean Freight Rate:
+{
+  id: 'r1',
+  type: 'ocean',
+  carrier: 'MSC',
+  pol: 'CNSHA',           // Shanghai, China
+  origin: 'China',
+  pod: 'NGAPP',           // Apapa, Nigeria
+  dest: 'Nigeria',
+  equip: '40HC',          // 40-foot High Cube container
+  rateType: 'contract',
+  rate20: 2935,           // 20-foot container rate (USD)
+  rate40: 4257,           // 40-foot container rate (USD)
+  rate40hc: 4551,         // 40HC container rate (USD)
+  transit: 28,            // Transit time in days
+  expiry: '2026-09-12',   // Rate validity end date
+  charges: [
+    {name: 'Ocean Freight (Base Rate)', code: 'OFR', category: 'Base',
+     amount: 3200, desc: 'Base ocean freight'},
+    {name: 'Bunker Adjustment Factor', code: 'BAF', category: 'Fuel',
+     amount: 650, desc: 'Fuel surcharge'},
+    {name: 'Peak Season Surcharge', code: 'PSS', category: 'Commercial',
+     amount: 420, desc: 'Peak season charge'},
+    {name: 'Terminal Handling (Origin)', code: 'THC-O', category: 'Terminal',
+     amount: 310, desc: 'Shanghai terminal'},
+    {name: 'Terminal Handling (Dest)', code: 'THC-D', category: 'Terminal',
+     amount: 265, desc: 'Apapa terminal'},
+    {name: 'Documentation Fee', code: 'DOC', category: 'Terminal',
+     amount: 75, desc: 'B/L processing'}
+  ]
+}
+
+Example Air Freight Rate:
+{
+  id: 'r15',
+  type: 'air',
+  carrier: 'Emirates SkyCargo',
+  pol: 'NGLOS',           // Lagos, Nigeria
+  origin: 'Nigeria',
+  pod: 'AEDXB',           // Dubai, UAE
+  dest: 'UAE',
+  equip: 'General Cargo',
+  rateType: 'published',
+  rate20: 4.50,           // Rate per kg for +45kg (USD/kg)
+  rate40: 4.20,           // Rate per kg for +100kg (USD/kg)
+  rate40hc: 3.95,         // Rate per kg for +300kg (USD/kg)
+  transit: 1,             // Transit time in days
+  expiry: '2026-08-15',
+  charges: [
+    {name: 'Air Freight (+45kg)', amount: 4.50},
+    {name: 'Fuel Surcharge', amount: 0.85},
+    {name: 'Security Charge', amount: 0.35},
+    {name: 'Handling', amount: 120}
+  ]
+}
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+For questions or clarifications, contact:
+- Product Team: [product@oneport365.com]
+- Technical Team: [tech@oneport365.com]
+- Operations Team: [ops@oneport365.com]
+
+Document Version: 1.0
+Last Updated: 2026-07-10
+Next Review Date: 2026-08-10
