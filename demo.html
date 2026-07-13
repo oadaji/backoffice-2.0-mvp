@@ -354,10 +354,22 @@ const rates = [
   {id:'r16',type:'air',carrier:'Turkish Cargo',pol:'NGLOS',origin:'Nigeria',pod:'TRIST',dest:'Turkey',equip:'General Cargo',rateType:'spot',rate20:3.80,rate40:3.50,rate40hc:3.25,transit:1,expiry:'2026-11-30'},
   {id:'r21',type:'air',carrier:'Qatar Airways Cargo',pol:'NGLOS',origin:'Nigeria',pod:'QADOH',dest:'Qatar',equip:'Perishables',rateType:'published',rate20:5.20,rate40:4.85,rate40hc:4.50,transit:1,expiry:'2026-09-20'},
   {id:'r22',type:'air',carrier:'Air France Cargo',pol:'NGLOS',origin:'Nigeria',pod:'FRCDG',dest:'France',equip:'General Cargo',rateType:'spot',rate20:4.15,rate40:3.90,rate40hc:3.65,transit:1,expiry:'2026-08-28'},
-  {id:'r17',type:'haulage-export',carrier:'XYZ Logistics',pol:'Lagos',origin:'Lagos',pod:'NGAPP',dest:'Apapa Port',equip:'20GP',rateType:'spot',rate20:85000,rate40:125000,rate40hc:135000,transit:0.5,expiry:'2026-09-01'},
-  {id:'r18',type:'haulage-export',carrier:'ABC Transport',pol:'Kano',origin:'Kano',pod:'NGAPP',dest:'Apapa Port',equip:'40HC',rateType:'contract',rate20:180000,rate40:250000,rate40hc:265000,transit:2,expiry:'2026-12-31'},
-  {id:'r19',type:'haulage-import',carrier:'Port Haulage Ltd',pol:'NGAPP',origin:'Apapa Port',pod:'Lagos',dest:'Lagos',equip:'20GP',rateType:'spot',rate20:75000,rate40:110000,rate40hc:120000,transit:0.5,expiry:'2026-08-20'},
-  {id:'r20',type:'other',carrier:'Terminal Operator',pol:'NGAPP',origin:'Nigeria',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:45000,rate40:65000,rate40hc:70000,transit:0,expiry:'2026-12-31'},
+  {id:'r17',type:'haulage-export',terminal:'KAC Depot (Ibafo)',port:'IBAFO',originCity:'Ibafo',originLGA:'—',state:'Ogun',equip:'40HC',price:380000,expiry:'2026-09-01'},
+  {id:'r18',type:'haulage-export',terminal:'Kachicares Terminal',port:'KACHI',originCity:'Oshodi',originLGA:'—',state:'Lagos',equip:'40HC',price:180000,expiry:'2026-12-31'},
+  {id:'r19',type:'haulage-export',terminal:'Customer Warehouse',port:'CUST',originCity:'Kano',originLGA:'—',state:'Kano',equip:'20GP',price:2200000,expiry:'2026-10-15'},
+  {id:'r20',type:'haulage-export',terminal:'Lekki FTZ',port:'NGLKI',originCity:'Lekki',originLGA:'—',state:'Lagos',equip:'40HC',price:250000,expiry:'2026-11-30'},
+  {id:'r21',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ikeja',destLGA:'—',state:'Lagos',equip:'40HC',price:450000,expiry:'2026-08-20'},
+  {id:'r22',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Kano',destLGA:'—',state:'Kano',equip:'40HC',price:2400000,expiry:'2026-09-15'},
+  {id:'r23',type:'haulage-import',terminal:'Tin Can (TICT)',port:'NGTCN',destCity:'Ikorodu',destLGA:'—',state:'Lagos',equip:'20GP',price:280000,expiry:'2026-10-01'},
+  {id:'r24',type:'haulage-import',terminal:'Lekki Deep Sea',port:'NGLKI',destCity:'Lekki FTZ',destLGA:'—',state:'Lagos',equip:'40HC',price:350000,expiry:'2026-11-20'},
+  {id:'r25',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ibadan',destLGA:'—',state:'Oyo',equip:'20GP',price:650000,expiry:'2026-12-10'},
+  {id:'r26',type:'other',item:'NESS Inspection Fee',category:'Compliance',chargeType:'export',currency:'NGN',price:510000,asPerReceipt:'—',expiry:'2026-08-15'},
+  {id:'r27',type:'other',item:'NXP Processing',category:'Compliance',chargeType:'export',currency:'NGN',price:25000,asPerReceipt:'—',expiry:'2026-09-30'},
+  {id:'r28',type:'other',item:'Terminal Handling Charge (THC)',category:'Terminal',chargeType:'import',currency:'NGN',price:185000,asPerReceipt:'—',expiry:'2026-10-20'},
+  {id:'r29',type:'other',item:'Container Deposit (40HC)',category:'Terminal',chargeType:'import',currency:'USD',price:1500,asPerReceipt:'—',expiry:'2026-11-15'},
+  {id:'r30',type:'other',item:'Customs Examination Fee',category:'Customs',chargeType:'import',currency:'NGN',price:350000,asPerReceipt:'—',expiry:'2026-12-01'},
+  {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:75000,asPerReceipt:'—',expiry:'2026-09-25'},
+  {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:120000,asPerReceipt:'—',expiry:'2026-10-30'},
 ];
 let activeTab='pipeline', pipeView='board', activeSection='crm', seq=100;
 let rateType='ocean', rateSearch='', rateCarrier='', rateRateType='';
@@ -1021,26 +1033,25 @@ function renderRates(){
     return marketRates[routeKey]||null;
   }
 
-  html+=`<div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Carrier</th>
-          <th>From</th>
-          <th>To</th>
-          <th>${isAir?'Cargo Type':'Equipment'}</th>
-          <th>Rate Type</th>
-          <th>${col1Label}</th>
-          <th>${col2Label}</th>
-          <th>${col3Label}</th>
-          <th>Transit</th>
-          <th>Expiry</th>
-          ${isOcean?'<th>VS Market</th>':''}
-        </tr>
-      </thead>
-      <tbody>`;
+  const isHaulageExport=rateType==='haulage-export';
+  const isHaulageImport=rateType==='haulage-import';
+  const isOther=rateType==='other';
 
-  const emptyColspan=isOcean?11:10;
+  html+=`<div class="tbl-wrap"><table><thead><tr>`;
+
+  if(isHaulageExport){
+    html+=`<th>Terminal</th><th>Port</th><th>Origin City</th><th>Origin LGA</th><th>State</th><th>Equip</th><th>Price (NGN)</th><th>Expiry</th>`;
+  }else if(isHaulageImport){
+    html+=`<th>Terminal</th><th>Port</th><th>Dest City</th><th>Dest LGA</th><th>State</th><th>Equip</th><th>Price (NGN)</th><th>Expiry</th>`;
+  }else if(isOther){
+    html+=`<th>Item</th><th>Category</th><th>Type</th><th>Currency</th><th>Price</th><th>As Per Receipt</th><th>Expiry</th>`;
+  }else{
+    html+=`<th>Carrier</th><th>From</th><th>To</th><th>${isAir?'Cargo Type':'Equipment'}</th><th>Rate Type</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>Transit</th><th>Expiry</th>${isOcean?'<th>VS Market</th>':''}`;
+  }
+
+  html+=`</tr></thead><tbody>`;
+
+  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?8:(isOcean?11:10);
 
   if(filtered.length===0){
     html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
@@ -1050,44 +1061,78 @@ function renderRates(){
     </td></tr>`;
   }else{
     filtered.forEach(r=>{
-      const rateClass=r.rateType.replace(' ','-');
-      const carrierInitials=r.carrier.split(' ').map(w=>w[0]).join('').slice(0,3);
-      const logoClass=carrierClass(r.carrier);
-      const logoPath=carrierLogo(r.carrier);
       const expDate=new Date(r.expiry);
       const isExpired=expDate<today;
       const expiredClass=isExpired?' expired':'';
 
-      const logoHtml=logoPath?`<img src="${logoPath}" alt="${r.carrier}">`:carrierInitials;
+      if(isHaulageExport){
+        html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
+          <td style="font-weight:600;color:var(--ink)">${r.terminal}</td>
+          <td><span style="background:#E8F5E9;color:#2E7D32;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700">${r.port}</span></td>
+          <td>${r.originCity}</td>
+          <td style="color:var(--muted)">${r.originLGA}</td>
+          <td>${r.state}</td>
+          <td><span class="equip-badge">${r.equip}</span></td>
+          <td class="rate-amount">₦${r.price.toLocaleString()}</td>
+          <td>${formatExpiry(r.expiry)}</td>
+        </tr>`;
+      }else if(isHaulageImport){
+        html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
+          <td style="font-weight:600;color:var(--ink)">${r.terminal}</td>
+          <td><span style="background:#E8F5E9;color:#2E7D32;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700">${r.port}</span></td>
+          <td>${r.destCity}</td>
+          <td style="color:var(--muted)">${r.destLGA}</td>
+          <td>${r.state}</td>
+          <td><span class="equip-badge">${r.equip}</span></td>
+          <td class="rate-amount">₦${r.price.toLocaleString()}</td>
+          <td>${formatExpiry(r.expiry)}</td>
+        </tr>`;
+      }else if(isOther){
+        html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
+          <td style="font-weight:600;color:var(--ink)">${r.item}</td>
+          <td>${r.category}</td>
+          <td><span class="rate-badge">${r.chargeType}</span></td>
+          <td>${r.currency}</td>
+          <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price.toLocaleString()}</td>
+          <td style="color:var(--muted)">${r.asPerReceipt}</td>
+          <td>${formatExpiry(r.expiry)}</td>
+        </tr>`;
+      }else{
+        const rateClass=r.rateType.replace(' ','-');
+        const carrierInitials=r.carrier.split(' ').map(w=>w[0]).join('').slice(0,3);
+        const logoClass=carrierClass(r.carrier);
+        const logoPath=carrierLogo(r.carrier);
+        const logoHtml=logoPath?`<img src="${logoPath}" alt="${r.carrier}">`:carrierInitials;
 
-      let vsMarket='';
-      if(isOcean){
-        const marketRate=getMarketRate(r.pol,r.pod,r.equip);
-        if(marketRate&&r.rate40hc>0){
-          const diff=((r.rate40hc-marketRate)/marketRate)*100;
-          const diffAbs=Math.abs(diff).toFixed(1);
-          const sign=diff>0?'+':'';
-          const label=diff>0?'above':'below';
-          const color=diff>0?'#D32F2F':'#2E7D32';
-          vsMarket=`<td><span style="color:${color};font-weight:600;font-size:12px">${sign}${diffAbs}% ${label}</span></td>`;
-        }else{
-          vsMarket='<td style="color:var(--muted);font-size:13px">—</td>';
+        let vsMarket='';
+        if(isOcean){
+          const marketRate=getMarketRate(r.pol,r.pod,r.equip);
+          if(marketRate&&r.rate40hc>0){
+            const diff=((r.rate40hc-marketRate)/marketRate)*100;
+            const diffAbs=Math.abs(diff).toFixed(1);
+            const sign=diff>0?'+':'';
+            const label=diff>0?'above':'below';
+            const color=diff>0?'#D32F2F':'#2E7D32';
+            vsMarket=`<td><span style="color:${color};font-weight:600;font-size:12px">${sign}${diffAbs}% ${label}</span></td>`;
+          }else{
+            vsMarket='<td style="color:var(--muted);font-size:13px">—</td>';
+          }
         }
-      }
 
-      html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
-        <td><span class="carrier-logo ${logoClass}">${logoHtml}</span><span style="font-weight:600;color:var(--green)">${r.carrier}</span></td>
-        <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pol}</div><div style="color:var(--muted);margin-top:1px">${r.origin}</div></td>
-        <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pod}</div><div style="color:var(--muted);margin-top:1px">${r.dest}</div></td>
-        <td><span class="equip-badge">${r.equip}</span></td>
-        <td><span class="rate-badge ${rateClass}">${r.rateType}</span></td>
-        <td class="rate-amount">${formatAmount(r.rate20,r.type)}</td>
-        <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
-        <td class="rate-amount">${formatAmount(r.rate40hc,r.type)}</td>
-        <td style="color:var(--muted-2)">${r.transit}d</td>
-        <td>${formatExpiry(r.expiry)}</td>
-        ${vsMarket}
-      </tr>`;
+        html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
+          <td><span class="carrier-logo ${logoClass}">${logoHtml}</span><span style="font-weight:600;color:var(--green)">${r.carrier}</span></td>
+          <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pol}</div><div style="color:var(--muted);margin-top:1px">${r.origin}</div></td>
+          <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pod}</div><div style="color:var(--muted);margin-top:1px">${r.dest}</div></td>
+          <td><span class="equip-badge">${r.equip}</span></td>
+          <td><span class="rate-badge ${rateClass}">${r.rateType}</span></td>
+          <td class="rate-amount">${formatAmount(r.rate20,r.type)}</td>
+          <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
+          <td class="rate-amount">${formatAmount(r.rate40hc,r.type)}</td>
+          <td style="color:var(--muted-2)">${r.transit}d</td>
+          <td>${formatExpiry(r.expiry)}</td>
+          ${vsMarket}
+        </tr>`;
+      }
     });
   }
 
