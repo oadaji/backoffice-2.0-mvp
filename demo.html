@@ -204,6 +204,36 @@ td .link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1
 .dropdown-item.logout{color:var(--error)}
 .dropdown-item.logout svg{color:var(--error)}
 @media(max-width:760px){.kpis{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+.btn-outline{background:#fff;border:1px solid var(--line-2);color:var(--green-2);padding:9px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn-outline:hover{background:var(--lime-soft);border-color:var(--green-3)}
+.btn-outline svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+.btn-upload-large{background:var(--lime);border:none;color:var(--green);padding:11px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--sh-card)}
+.btn-upload-large:hover{filter:brightness(.97)}
+.btn-upload-large svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.rates-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.rates-actions{display:flex;gap:10px;align-items:center}
+.rate-row{cursor:pointer;transition:background .15s}
+.rate-row:hover{background:var(--lime-soft)}
+.rate-row.expired{background:#FFF5F5;opacity:0.85}
+.rate-row.expired:hover{background:#FFEBEB}
+.carrier-logo{width:28px;height:28px;border-radius:6px;background:#fff;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);margin-right:8px;vertical-align:middle;overflow:hidden}
+.carrier-logo img{width:100%;height:100%;object-fit:contain;padding:0}
+.carrier-logo.msc{background:#003D6B;color:#fff}
+.carrier-logo.maersk{background:#42B0D5;color:#fff}
+.carrier-logo.cma{background:#009EE0;color:#fff}
+.carrier-logo.hapag{background:#F27E21;color:#fff}
+.carrier-logo.cosco{background:#003087;color:#fff}
+.carrier-logo.evergreen{background:#005A32;color:#fff}
+.carrier-logo.one{background:#E4032E;color:#fff}
+.carrier-logo.pil{background:#003DA5;color:#fff}
+.carrier-logo.zim{background:#0066B3;color:#fff}
+.equip-badge{display:inline-block;font-size:12px;padding:3px 7px;border-radius:5px;font-weight:600;background:var(--cream);color:var(--muted-2);border:1px solid var(--line)}
+.rate-badge{font-size:11px;padding:4px 10px;border-radius:6px;font-weight:600;text-transform:capitalize;background:#E8F5E9;color:#2E7D32}
+.rate-badge.spot{background:#FFF3CC;color:#B8860B}
+.rate-badge.contract{background:#E3F2FD;color:#1565C0}
+.expiry-soon{color:#FF8C1A;font-weight:600}
+.expiry-normal{color:var(--ink)}
+td.rate-amount{font-weight:600;color:var(--ink);font-size:13px}
 </style>
 </head>
 <body>
