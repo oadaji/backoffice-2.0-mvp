@@ -818,7 +818,17 @@ function showAccountDetails(){
 document.getElementById('tabs').addEventListener('click',e=>{
   const t=e.target.closest('.tab');if(!t)return;activeTab=t.dataset.tab;render();
 });
-render();
+
+// Hash-based routing for rates tabs
+const hash = window.location.hash.slice(1);
+const validRateTypes = ['ocean', 'air', 'haulage-export', 'haulage-import', 'other'];
+if(validRateTypes.includes(hash)) {
+  rateType = hash;
+  activeSection = 'rates';
+  switchSection('rates');
+} else {
+  render();
+}
 
 // Update avatar with current user
 const avatarEl = document.getElementById('user-avatar');
