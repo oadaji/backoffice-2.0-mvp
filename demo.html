@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:400 500;src:url('https://db.onlinewebfonts.com/t/29ddb4605533a38e086b48fa105e0d12.woff2') format('woff2');font-display:swap}
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:600 800;src:url('https://db.onlinewebfonts.com/t/2acd1ac6664b7b1a1545cc36d0680783.woff2') format('woff2');font-display:swap}
@@ -371,8 +372,13 @@ const rates = [
   {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:75000,asPerReceipt:'—',expiry:'2026-09-25'},
   {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:120000,asPerReceipt:'—',expiry:'2026-10-30'},
 ];
-let activeTab='pipeline', pipeView='board', activeSection='crm', seq=100;
-let rateType='ocean', rateSearch='', rateCarrier='', rateRateType='';
+// Check URL params for initial section/rate type
+const urlParams = new URLSearchParams(window.location.search);
+const initialSection = urlParams.get('section') || 'crm';
+const initialRateType = urlParams.get('rateType') || 'ocean';
+
+let activeTab='pipeline', pipeView='board', activeSection=initialSection, seq=100;
+let rateType=initialRateType, rateSearch='', rateCarrier='', rateRateType='';
 const LOST_REASONS=['Price too high','Chose competitor','Went in-house','No response','Timing not right','Other'];
 const $=s=>document.querySelector(s);
 const co=id=>companies.find(c=>c.id===id)||{};
@@ -819,12 +825,17 @@ document.getElementById('tabs').addEventListener('click',e=>{
   const t=e.target.closest('.tab');if(!t)return;activeTab=t.dataset.tab;render();
 });
 
-// Hash-based routing for rates tabs
+// Hash-based routing for rates tabs (fallback)
 const hash = window.location.hash.slice(1);
+const hashParts = hash.split('&')[0]; // Get first part before any query params
 const validRateTypes = ['ocean', 'air', 'haulage-export', 'haulage-import', 'other'];
-if(validRateTypes.includes(hash)) {
-  rateType = hash;
+if(validRateTypes.includes(hashParts)) {
+  rateType = hashParts;
   activeSection = 'rates';
+}
+
+// Render based on initial section
+if(activeSection === 'rates') {
   switchSection('rates');
 } else {
   render();
@@ -931,7 +942,157 @@ function filterRateType(val){
 }
 
 function openRateDetails(id){
-  alert('Rate details modal would open for: '+id);
+  const rate=rates.find(r=>r.id===id);
+  if(!rate)return;
+
+  const isOcean=rate.type==='ocean';
+  const isAir=rate.type==='air';
+  const isHaulageExport=rate.type==='haulage-export';
+  const isHaulageImport=rate.type==='haulage-import';
+  const isOther=rate.type==='other';
+
+  let detailsHtml='';
+
+  if(isOcean||isAir){
+    const carrierLogo=carrierLogoPath(rate.carrier);
+    const logoHtml=carrierLogo?`<img src="${carrierLogo}" alt="${rate.carrier}" style="width:32px;height:32px;object-fit:contain">`:rate.carrier.split(' ').map(w=>w[0]).join('').slice(0,3);
+
+    detailsHtml=`
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <div style="width:48px;height:48px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--green)">${logoHtml}</div>
+        <div>
+          <h3 style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:2px">${rate.carrier}</h3>
+          <span style="font-size:13px;color:var(--muted)">${rate.type==='ocean'?'Ocean Freight':'Air Freight'}</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">From</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.pol}</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:2px">${rate.origin}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">To</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.pod}</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:2px">${rate.dest}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+45kg':'20\\''}  </label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate20.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+100kg':'40\\''}</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate40.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+300kg':'40HC'}</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate40hc.toLocaleString()}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Equipment</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.equip}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Rate Type</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.rateType}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Transit Time</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.transit} days</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Expiry Date</label>
+        <div style="font-size:14px;color:var(--ink)">${new Date(rate.expiry).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
+      </div>
+    `;
+  }else if(isHaulageExport||isHaulageImport){
+    detailsHtml=`
+      <div style="margin-bottom:20px">
+        <h3 style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px">${rate.terminal}</h3>
+        <span style="font-size:13px;color:var(--muted)">${isHaulageExport?'Export Haulage':'Import Haulage'}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Port</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.port}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isHaulageExport?'Origin':'Destination'}</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${isHaulageExport?rate.originCity:rate.destCity}</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:2px">${rate.state}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Equipment</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.equip}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Price</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">₦${rate.price.toLocaleString()}</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Expiry Date</label>
+        <div style="font-size:14px;color:var(--ink)">${new Date(rate.expiry).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
+      </div>
+    `;
+  }else if(isOther){
+    detailsHtml=`
+      <div style="margin-bottom:20px">
+        <h3 style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px">${rate.item}</h3>
+        <span style="font-size:13px;color:var(--muted)">${rate.category} · ${rate.chargeType}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Currency</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.currency}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Price</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">${rate.currency==='NGN'?'₦':'$'}${rate.price.toLocaleString()}</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr;gap:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">As Per Receipt</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.asPerReceipt}</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Expiry Date</label>
+        <div style="font-size:14px;color:var(--ink)">${new Date(rate.expiry).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
+      </div>
+    `;
+  }
+
+  modal(`<div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h3>Rate Details</h3>
+        <div class="mh-sub">View rate information</div>
+      </div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      ${detailsHtml}
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      <button class="btn btn-lime" onclick="closeModal()">Request Quote</button>
+    </div>
+  </div>`);
+}
+
+function carrierLogoPath(name){
+  const cls=carrierClass(name);
+  if(cls) return `assets/carriers/${cls}.svg`;
+  return null;
 }
 
 function exportRatesToCSV(){
@@ -939,7 +1100,46 @@ function exportRatesToCSV(){
 }
 
 function openUploadRateModal(){
-  alert('Upload rates modal would open');
+  modal(`<div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h3>Upload Rates</h3>
+        <div class="mh-sub">Import rates from a CSV or Excel file</div>
+      </div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:20px">
+        <label style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block">Rate Type</label>
+        <select id="upload-rate-type" style="width:100%;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;font-family:var(--f-body);font-size:14px">
+          <option value="ocean">Ocean Freight</option>
+          <option value="air">Air Freight</option>
+          <option value="haulage-export">Export Haulage</option>
+          <option value="haulage-import">Import Haulage</option>
+          <option value="other">Other Charges</option>
+        </select>
+      </div>
+      <div style="border:2px dashed var(--line-2);border-radius:12px;padding:32px;text-align:center;background:var(--cream);cursor:pointer" onclick="document.getElementById('rate-file-input').click()">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin:0 auto 16px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <div style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:4px">Click to upload or drag and drop</div>
+        <div style="font-size:13px;color:var(--muted)">CSV or XLSX (max 10MB)</div>
+        <input type="file" id="rate-file-input" accept=".csv,.xlsx" style="display:none">
+      </div>
+      <div style="margin-top:20px;padding:16px;background:var(--lime-soft);border-radius:10px;border:1px solid #C8D99E">
+        <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px">Required Columns:</div>
+        <div style="font-size:12px;color:var(--muted-2);line-height:1.6">
+          <strong>Ocean/Air:</strong> carrier, pol, pod, origin, dest, equip, rateType, rate20, rate40, rate40hc, transit, expiry<br>
+          <strong>Haulage Export:</strong> terminal, port, originCity, originLGA, state, equip, price, expiry<br>
+          <strong>Haulage Import:</strong> terminal, port, destCity, destLGA, state, equip, price, expiry<br>
+          <strong>Other:</strong> item, category, chargeType, currency, price, asPerReceipt, expiry
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-lime" onclick="alert('Upload rates functionality');closeModal()">Upload Rates</button>
+    </div>
+  </div>`);
 }
 
 function renderRates(){
