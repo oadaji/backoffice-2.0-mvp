@@ -317,7 +317,33 @@ let deals = [
   {id:'d7',company:'c4',contact:'',owner:'u4',amount:40000,stage:'Closed',cls:'Enterprise',product:'Ocean Freight / FreightSaver 365',status:'lost',lostReason:'Chose competitor',comments:[]},
 ];
 
+const rates = [
+  {id:'r1',type:'ocean',carrier:'MSC',pol:'NGAPP',origin:'Nigeria',pod:'NLRTH',dest:'Netherlands',equip:'20GP',rateType:'all in',rate20:2533,rate40:3673,rate40hc:3926,transit:21,expiry:'2026-08-11'},
+  {id:'r2',type:'ocean',carrier:'Maersk',pol:'NGAPP',origin:'Nigeria',pod:'BEANR',dest:'Belgium',equip:'40HC',rateType:'spot',rate20:1250,rate40:1813,rate40hc:1938,transit:18,expiry:'2026-08-04'},
+  {id:'r3',type:'ocean',carrier:'CMA CGM',pol:'NGAPP',origin:'Nigeria',pod:'GHTEM',dest:'Ghana',equip:'40HC',rateType:'contract',rate20:1674,rate40:2427,rate40hc:2595,transit:5,expiry:'2026-12-29'},
+  {id:'r4',type:'ocean',carrier:'Hapag-Lloyd',pol:'NGAPP',origin:'Nigeria',pod:'DEHAM',dest:'Germany',equip:'20GP',rateType:'spot',rate20:2818,rate40:4086,rate40hc:4368,transit:20,expiry:'2026-08-07'},
+  {id:'r5',type:'ocean',carrier:'PIL',pol:'NGAPP',origin:'Nigeria',pod:'KEMBA',dest:'Kenya',equip:'40RF',rateType:'all in',rate20:2614,rate40:3790,rate40hc:4052,transit:18,expiry:'2026-09-03'},
+  {id:'r6',type:'ocean',carrier:'Evergreen',pol:'NGAPP',origin:'Nigeria',pod:'SGSIN',dest:'Singapore',equip:'40HC',rateType:'contract',rate20:3202,rate40:4643,rate40hc:4963,transit:28,expiry:'2026-12-26'},
+  {id:'r7',type:'ocean',carrier:'COSCO',pol:'NGAPP',origin:'Nigeria',pod:'CNSHA',dest:'China',equip:'20FT',rateType:'spot',rate20:2668,rate40:3869,rate40hc:4135,transit:32,expiry:'2026-06-15'},
+  {id:'r8',type:'ocean',carrier:'ONE',pol:'NLRTM',origin:'Netherlands',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'all in',rate20:857,rate40:1243,rate40hc:1328,transit:19,expiry:'2026-08-21'},
+  {id:'r9',type:'ocean',carrier:'ZIM',pol:'CNSHA',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:1614,rate40:2340,rate40hc:2502,transit:35,expiry:'2026-06-28'},
+  {id:'r10',type:'ocean',carrier:'MSC',pol:'CNTAO',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',rate20:2835,rate40:4111,rate40hc:4394,transit:33,expiry:'2026-08-17'},
+  {id:'r11',type:'ocean',carrier:'Maersk',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:2314,rate40:3355,rate40hc:3587,transit:16,expiry:'2026-11-20'},
+  {id:'r12',type:'ocean',carrier:'CMA CGM',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',rate20:2564,rate40:3718,rate40hc:3974,transit:17,expiry:'2026-07-25'},
+  {id:'r13',type:'ocean',carrier:'Hapag-Lloyd',pol:'DEHAM',origin:'Germany',pod:'NGAPP',dest:'Nigeria',equip:'40RF',rateType:'all in',rate20:1668,rate40:2419,rate40hc:2585,transit:20,expiry:'2026-07-18'},
+  {id:'r14',type:'ocean',carrier:'PIL',pol:'TRIST',origin:'Turkey',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:1046,rate40:1517,rate40hc:1621,transit:14,expiry:'2026-10-16'},
+  {id:'r15',type:'air',carrier:'Emirates SkyCargo',pol:'NGLOS',origin:'Nigeria',pod:'AEDXB',dest:'UAE',equip:'General Cargo',rateType:'published',rate20:4.50,rate40:4.20,rate40hc:3.95,transit:1,expiry:'2026-08-15'},
+  {id:'r16',type:'air',carrier:'Turkish Cargo',pol:'NGLOS',origin:'Nigeria',pod:'TRIST',dest:'Turkey',equip:'General Cargo',rateType:'spot',rate20:3.80,rate40:3.50,rate40hc:3.25,transit:1,expiry:'2026-11-30'},
+  {id:'r21',type:'air',carrier:'Qatar Airways Cargo',pol:'NGLOS',origin:'Nigeria',pod:'QADOH',dest:'Qatar',equip:'Perishables',rateType:'published',rate20:5.20,rate40:4.85,rate40hc:4.50,transit:1,expiry:'2026-09-20'},
+  {id:'r22',type:'air',carrier:'Air France Cargo',pol:'NGLOS',origin:'Nigeria',pod:'FRCDG',dest:'France',equip:'General Cargo',rateType:'spot',rate20:4.15,rate40:3.90,rate40hc:3.65,transit:1,expiry:'2026-08-28'},
+  {id:'r17',type:'haulage-export',carrier:'XYZ Logistics',pol:'Lagos',origin:'Lagos',pod:'NGAPP',dest:'Apapa Port',equip:'20GP',rateType:'spot',rate20:85000,rate40:125000,rate40hc:135000,transit:0.5,expiry:'2026-09-01'},
+  {id:'r18',type:'haulage-export',carrier:'ABC Transport',pol:'Kano',origin:'Kano',pod:'NGAPP',dest:'Apapa Port',equip:'40HC',rateType:'contract',rate20:180000,rate40:250000,rate40hc:265000,transit:2,expiry:'2026-12-31'},
+  {id:'r19',type:'haulage-import',carrier:'Port Haulage Ltd',pol:'NGAPP',origin:'Apapa Port',pod:'Lagos',dest:'Lagos',equip:'20GP',rateType:'spot',rate20:75000,rate40:110000,rate40hc:120000,transit:0.5,expiry:'2026-08-20'},
+  {id:'r20',type:'other',carrier:'Terminal Operator',pol:'NGAPP',origin:'Nigeria',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:45000,rate40:65000,rate40hc:70000,transit:0,expiry:'2026-12-31'},
+];
+
 let activeTab='pipeline', pipeView='board', activeSection='crm', seq=100;
+let rateType='ocean', rateSearch='', rateCarrier='', rateRateType='';
 const LOST_REASONS=['Price too high','Chose competitor','Went in-house','No response','Timing not right','Other'];
 const $=s=>document.querySelector(s);
 const co=id=>companies.find(c=>c.id===id)||{};
@@ -338,7 +364,7 @@ function switchSection(section){
   }else if(section==='rates'){
     $('.topbar h2').textContent='Rates';
     $('#tabs').style.display='none';
-    window.location.href='rates.html';
+    renderRates();
   }else{
     $('.topbar h2').textContent=section.charAt(0).toUpperCase()+section.slice(1);
     $('#tabs').style.display='none';
@@ -787,6 +813,237 @@ document.addEventListener('click', function(e) {
     dropdown.classList.remove('open');
   }
 });
+
+// Rates helper functions
+function carrierClass(name){
+  const n=name.toLowerCase();
+  if(n.includes('msc'))return 'msc';
+  if(n.includes('maersk'))return 'maersk';
+  if(n.includes('cma'))return 'cma';
+  if(n.includes('hapag'))return 'hapag';
+  if(n.includes('cosco'))return 'cosco';
+  if(n.includes('evergreen'))return 'evergreen';
+  if(n.includes('one'))return 'one';
+  if(n.includes('pil'))return 'pil';
+  if(n.includes('zim'))return 'zim';
+  return '';
+}
+
+function carrierLogo(name){
+  const cls=carrierClass(name);
+  if(cls) return `assets/carriers/${cls}.svg`;
+  return null;
+}
+
+function setRateType(type){
+  rateType=type;
+  rateSearch='';
+  rateCarrier='';
+  rateRateType='';
+  renderRates();
+}
+
+function searchRates(val){
+  rateSearch=val.toLowerCase();
+  renderRates();
+}
+
+function filterCarrier(val){
+  rateCarrier=val;
+  renderRates();
+}
+
+function filterRateType(val){
+  rateRateType=val;
+  renderRates();
+}
+
+function openRateDetails(id){
+  alert('Rate details modal would open for: '+id);
+}
+
+function exportRatesToCSV(){
+  alert('Export to CSV functionality');
+}
+
+function openUploadRateModal(){
+  alert('Upload rates modal would open');
+}
+
+function renderRates(){
+  const today=new Date();
+  const soon=new Date();soon.setDate(soon.getDate()+14);
+
+  function isExpiringSoon(dateStr){
+    const exp=new Date(dateStr);
+    return exp<=soon&&exp>=today;
+  }
+
+  function formatExpiry(dateStr){
+    const exp=new Date(dateStr);
+    const days=Math.ceil((exp-today)/(1000*60*60*24));
+    if(isExpiringSoon(dateStr))return `<span class="expiry-soon">${days}d left</span>`;
+    return `<span class="expiry-normal">${exp.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</span>`;
+  }
+
+  function formatAmount(amt,type){
+    if(type==='air')return `$${amt.toFixed(2)}/kg`;
+    if(type==='haulage-export'||type==='haulage-import'||type==='other')return `₦${amt.toLocaleString()}`;
+    return `$${amt.toLocaleString()}`;
+  }
+
+  const RATE_TYPES=[
+    {key:'ocean',label:'Ocean Freight',icon:'<svg viewBox="0 0 24 24"><path d="M3 18h18M4 12h16v6H4zM6 12V8l6-4 6 4v4"/></svg>'},
+    {key:'air',label:'Air Freight',icon:'<svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 10-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>'},
+    {key:'haulage-export',label:'Export Haulage',icon:'<svg viewBox="0 0 24 24"><rect x="1" y="9" width="14" height="9" rx="1"/><path d="M15 12h4l2 3v3h-3M15 18H4M8 18v-2a2 2 0 114 0v2"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M1 9l3-4h8"/></svg>'},
+    {key:'haulage-import',label:'Import Haulage',icon:'<svg viewBox="0 0 24 24"><rect x="1" y="9" width="14" height="9" rx="1"/><path d="M15 12h4l2 3v3h-3M15 18H4M8 18v-2a2 2 0 114 0v2"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M19 6l-3 4h-8"/></svg>'},
+    {key:'other',label:'Other Charges',icon:'<svg viewBox="0 0 24 24"><path d="M12 2v20M17 7l-5-5-5 5M7 17l5 5 5-5M2 12h20"/></svg>'},
+  ];
+
+  let filtered=rates.filter(r=>r.type===rateType);
+
+  if(rateSearch){
+    filtered=filtered.filter(r=>
+      r.carrier.toLowerCase().includes(rateSearch)||
+      r.pol.toLowerCase().includes(rateSearch)||
+      r.pod.toLowerCase().includes(rateSearch)||
+      r.origin.toLowerCase().includes(rateSearch)||
+      r.dest.toLowerCase().includes(rateSearch)
+    );
+  }
+
+  if(rateCarrier)filtered=filtered.filter(r=>r.carrier===rateCarrier);
+  if(rateRateType)filtered=filtered.filter(r=>r.rateType===rateRateType);
+
+  const typeRates=rates.filter(r=>r.type===rateType);
+  const carriers=[...new Set(typeRates.map(r=>r.carrier))].sort();
+  const rateTypes=[...new Set(typeRates.map(r=>r.rateType))].sort();
+
+  let html=`
+  <div class="rates-header">
+    <div></div>
+    <div class="rates-actions">
+      <button class="btn-outline" onclick="exportRatesToCSV()"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export CSV</button>
+      <button class="btn-upload-large" onclick="openUploadRateModal()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <span class="upload-text">Upload Rates</span>
+      </button>
+    </div>
+  </div>
+  <div class="tabs" style="padding-left:22px;padding-right:22px;background:#fff;border:none;border-bottom:1px solid var(--line);margin:0">`;
+
+  RATE_TYPES.forEach(rt=>{
+    const count=rates.filter(r=>r.type===rt.key).length;
+    html+=`<div class="tab ${rateType===rt.key?'active':''}" onclick="setRateType('${rt.key}')">${rt.icon}${rt.label} (${count})</div>`;
+  });
+
+  html+=`</div>
+  <div class="toolbar">
+    <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="text" placeholder="Search rates…" value="${esc(rateSearch)}" oninput="searchRates(this.value)" style="border:none;outline:none;background:transparent;flex:1;font-family:var(--f-body);font-size:13px;color:var(--ink)"></div>
+    <select onchange="filterCarrier(this.value)" style="font-size:13px;font-weight:500;color:var(--ink)"><option value="">All carriers</option>${carriers.map(c=>`<option value="${esc(c)}" ${rateCarrier===c?'selected':''}>${esc(c)}</option>`).join('')}</select>
+    <select onchange="filterRateType(this.value)" style="font-size:13px;font-weight:500;color:var(--ink)"><option value="">All rate types</option>${rateTypes.map(rt=>`<option value="${esc(rt)}" ${rateRateType===rt?'selected':''}>${esc(rt)}</option>`).join('')}</select>
+  </div>`;
+
+  const isAir=rateType==='air';
+  const isOcean=rateType==='ocean';
+  const col1Label=isAir?'+45kg':'20\'';
+  const col2Label=isAir?'+100kg':'40\'';
+  const col3Label=isAir?'+300kg':'40HC';
+
+  const marketRates={
+    'CNSHA-NGAPP-40HC':4200,
+    'CNSHA-NGAPP-40\'':3850,
+    'CNSHA-NGAPP-20GP':2350,
+    'CNTAO-NGAPP-40HC':4300,
+    'CNTAO-NGAPP-40\'':3950,
+    'CNTAO-NGAPP-20\'':2400,
+    'AEJEA-NGAPP-40HC':3700,
+    'AEJEA-NGAPP-40\'':3400,
+    'AEJEA-NGAPP-20GP':2500,
+    'NLRTM-NGAPP-40HC':1400,
+    'DEHAM-NGAPP-40HC':2700,
+    'DEHAM-NGAPP-40RF':2650,
+    'TRIST-NGAPP-40HC':1700
+  };
+
+  function getMarketRate(pol,pod,equipment){
+    const routeKey=`${pol}-${pod}-${equipment}`;
+    return marketRates[routeKey]||null;
+  }
+
+  html+=`<div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Carrier</th>
+          <th>From</th>
+          <th>To</th>
+          <th>${isAir?'Cargo Type':'Equipment'}</th>
+          <th>Rate Type</th>
+          <th>${col1Label}</th>
+          <th>${col2Label}</th>
+          <th>${col3Label}</th>
+          <th>Transit</th>
+          <th>Expiry</th>
+          ${isOcean?'<th>VS Market</th>':''}
+        </tr>
+      </thead>
+      <tbody>`;
+
+  const emptyColspan=isOcean?11:10;
+
+  if(filtered.length===0){
+    html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:12px;opacity:0.3"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px">No rates found</div>
+      <div style="font-size:13px">Try adjusting your search or filters</div>
+    </td></tr>`;
+  }else{
+    filtered.forEach(r=>{
+      const rateClass=r.rateType.replace(' ','-');
+      const carrierInitials=r.carrier.split(' ').map(w=>w[0]).join('').slice(0,3);
+      const logoClass=carrierClass(r.carrier);
+      const logoPath=carrierLogo(r.carrier);
+      const expDate=new Date(r.expiry);
+      const isExpired=expDate<today;
+      const expiredClass=isExpired?' expired':'';
+
+      const logoHtml=logoPath?`<img src="${logoPath}" alt="${r.carrier}">`:carrierInitials;
+
+      let vsMarket='';
+      if(isOcean){
+        const marketRate=getMarketRate(r.pol,r.pod,r.equip);
+        if(marketRate&&r.rate40hc>0){
+          const diff=((r.rate40hc-marketRate)/marketRate)*100;
+          const diffAbs=Math.abs(diff).toFixed(1);
+          const sign=diff>0?'+':'';
+          const label=diff>0?'above':'below';
+          const color=diff>0?'#D32F2F':'#2E7D32';
+          vsMarket=`<td><span style="color:${color};font-weight:600;font-size:12px">${sign}${diffAbs}% ${label}</span></td>`;
+        }else{
+          vsMarket='<td style="color:var(--muted);font-size:13px">—</td>';
+        }
+      }
+
+      html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
+        <td><span class="carrier-logo ${logoClass}">${logoHtml}</span><span style="font-weight:600;color:var(--green)">${r.carrier}</span></td>
+        <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pol}</div><div style="color:var(--muted);margin-top:1px">${r.origin}</div></td>
+        <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pod}</div><div style="color:var(--muted);margin-top:1px">${r.dest}</div></td>
+        <td><span class="equip-badge">${r.equip}</span></td>
+        <td><span class="rate-badge ${rateClass}">${r.rateType}</span></td>
+        <td class="rate-amount">${formatAmount(r.rate20,r.type)}</td>
+        <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
+        <td class="rate-amount">${formatAmount(r.rate40hc,r.type)}</td>
+        <td style="color:var(--muted-2)">${r.transit}d</td>
+        <td>${formatExpiry(r.expiry)}</td>
+        ${vsMarket}
+      </tr>`;
+    });
+  }
+
+  html+=`</tbody></table></div>`;
+  $('#content').innerHTML=html;
+}
 
 // Render functions for other modules
 function renderMarket(){
