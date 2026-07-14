@@ -1215,12 +1215,12 @@ function renderRates(){
   }else if(isOther){
     html+=`<th>Item</th><th>Category</th><th>Type</th><th>Currency</th><th>Price</th><th>As Per Receipt</th><th>Expiry</th>`;
   }else{
-    html+=`<th>Carrier</th><th>From</th><th>To</th><th>${isAir?'Cargo Type':'Equipment'}</th><th>Rate Type</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>Transit</th><th>Expiry</th>${isOcean?'<th>VS Market</th>':''}`;
+    html+=`<th>Carrier</th><th>From</th><th>To</th><th>Rate Type</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>Transit</th><th>Expiry</th>${isOcean?'<th>VS Market</th>':''}`;
   }
 
   html+=`</tr></thead><tbody>`;
 
-  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?8:(isOcean?11:10);
+  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?8:(isOcean?10:9);
 
   if(filtered.length===0){
     html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
@@ -1292,7 +1292,6 @@ function renderRates(){
           <td><span class="carrier-logo ${logoClass}">${logoHtml}</span><span style="font-weight:600;color:var(--green)">${r.carrier}</span></td>
           <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pol}</div><div style="color:var(--muted);margin-top:1px">${r.origin}</div></td>
           <td style="font-size:12px"><div style="font-weight:600;color:var(--ink)">${r.pod}</div><div style="color:var(--muted);margin-top:1px">${r.dest}</div></td>
-          <td><span class="equip-badge">${r.equip}</span></td>
           <td><span class="rate-badge ${rateClass}">${r.rateType}</span></td>
           <td class="rate-amount">${formatAmount(r.rate20,r.type)}</td>
           <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
