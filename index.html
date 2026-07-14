@@ -7,18 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Authentication check - runs before page loads
-(function() {
-  const authToken = sessionStorage.getItem('authToken');
-
-  // If not authenticated, redirect to login
-  if (!authToken) {
-    window.location.href = 'login.html';
-    return;
-  }
-})();
-</script>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <style>
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:400 500;src:url('https://db.onlinewebfonts.com/t/29ddb4605533a38e086b48fa105e0d12.woff2') format('woff2');font-display:swap}
 @font-face{font-family:'Nohemi';font-style:normal;font-weight:600 800;src:url('https://db.onlinewebfonts.com/t/2acd1ac6664b7b1a1545cc36d0680783.woff2') format('woff2');font-display:swap}
@@ -383,9 +372,13 @@ const rates = [
   {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:75000,asPerReceipt:'—',expiry:'2026-09-25'},
   {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:120000,asPerReceipt:'—',expiry:'2026-10-30'},
 ];
+// Check URL params for initial section/rate type
+const urlParams = new URLSearchParams(window.location.search);
+const initialSection = urlParams.get('section') || 'crm';
+const initialRateType = urlParams.get('rateType') || 'ocean';
 
-let activeTab='pipeline', pipeView='board', activeSection='crm', seq=100;
-let rateType='ocean', rateSearch='', rateCarrier='', rateRateType='';
+let activeTab='pipeline', pipeView='board', activeSection=initialSection, seq=100;
+let rateType=initialRateType, rateSearch='', rateCarrier='', rateRateType='';
 const LOST_REASONS=['Price too high','Chose competitor','Went in-house','No response','Timing not right','Other'];
 const $=s=>document.querySelector(s);
 const co=id=>companies.find(c=>c.id===id)||{};
@@ -831,7 +824,31 @@ function showAccountDetails(){
 document.getElementById('tabs').addEventListener('click',e=>{
   const t=e.target.closest('.tab');if(!t)return;activeTab=t.dataset.tab;render();
 });
-render();
+
+// Hash-based routing for rates tabs (fallback)
+const hash = window.location.hash.slice(1);
+const hashParts = hash.split('&')[0]; // Get first part before any query params
+const validRateTypes = ['ocean', 'air', 'haulage-export', 'haulage-import', 'other'];
+if(validRateTypes.includes(hashParts)) {
+  rateType = hashParts;
+  activeSection = 'rates';
+}
+
+// Render based on initial section
+if(activeSection === 'rates') {
+  switchSection('rates');
+} else {
+  render();
+}
+
+// Auto-open modals for testing/capture
+const autoModal = urlParams.get('autoModal');
+const rateId = urlParams.get('rateId');
+if(autoModal === 'rateDetails' && rateId) {
+  setTimeout(() => openRateDetails(rateId), 500);
+} else if(autoModal === 'uploadRates') {
+  setTimeout(() => openUploadRateModal(), 500);
+}
 
 // Update avatar with current user
 const avatarEl = document.getElementById('user-avatar');
@@ -855,6 +872,39 @@ document.addEventListener('click', function(e) {
     dropdown.classList.remove('open');
   }
 });
+
+// Render functions for other modules
+function renderMarket(){
+  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Market Intelligence</h3>
+    <p style="color:var(--muted);font-size:14px">Xeneta API integration, Drewry index tracking, and freight rate benchmarking coming soon.</p>
+  </div>`;
+}
+
+function renderBooking(){
+  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M7.5 4.21l4.5 2.6 4.5-2.6M12 22v-10"/></svg>
+    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Booking Management</h3>
+    <p style="color:var(--muted);font-size:14px">Shipment creation, container booking, and document generation coming soon.</p>
+  </div>`;
+}
+
+function renderQuoting(){
+  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8m8 4H8m2-8H8"/></svg>
+    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Quote Management</h3>
+    <p style="color:var(--muted);font-size:14px">AI-powered quote generation and management system coming soon.</p>
+  </div>`;
+}
+
+function renderShipping(){
+  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M4 10 L6 14 L18 14 L20 10 Z M6 14 L6 18 L18 18 L18 14 M2 18 C2 18 4 20 12 20 C20 20 22 18 22 18 L18 18 M8 10 L8 6 L16 6 L16 10"/></svg>
+    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Shipping Documentation</h3>
+    <p style="color:var(--muted);font-size:14px">Bill of Lading, Commercial Invoice, Packing List, and Customs documentation coming soon.</p>
+  </div>`;
+}
 
 // Rates helper functions
 function carrierClass(name){
@@ -898,12 +948,6 @@ function filterCarrier(val){
 function filterRateType(val){
   rateRateType=val;
   renderRates();
-}
-
-function carrierLogoPath(name){
-  const cls=carrierClass(name);
-  if(cls) return `assets/carriers/${cls}.svg`;
-  return null;
 }
 
 function openRateDetails(id){
@@ -1052,6 +1096,12 @@ function openRateDetails(id){
       <button class="btn btn-lime" onclick="closeModal()">Request Quote</button>
     </div>
   </div>`);
+}
+
+function carrierLogoPath(name){
+  const cls=carrierClass(name);
+  if(cls) return `assets/carriers/${cls}.svg`;
+  return null;
 }
 
 function exportRatesToCSV(){
@@ -1306,39 +1356,6 @@ function renderRates(){
 
   html+=`</tbody></table></div>`;
   $('#content').innerHTML=html;
-}
-
-// Render functions for other modules
-function renderMarket(){
-  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Market Intelligence</h3>
-    <p style="color:var(--muted);font-size:14px">Xeneta API integration, Drewry index tracking, and freight rate benchmarking coming soon.</p>
-  </div>`;
-}
-
-function renderBooking(){
-  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M7.5 4.21l4.5 2.6 4.5-2.6M12 22v-10"/></svg>
-    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Booking Management</h3>
-    <p style="color:var(--muted);font-size:14px">Shipment creation, container booking, and document generation coming soon.</p>
-  </div>`;
-}
-
-function renderQuoting(){
-  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8m8 4H8m2-8H8"/></svg>
-    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Quote Management</h3>
-    <p style="color:var(--muted);font-size:14px">AI-powered quote generation and management system coming soon.</p>
-  </div>`;
-}
-
-function renderShipping(){
-  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M4 10 L6 14 L18 14 L20 10 Z M6 14 L6 18 L18 18 L18 14 M2 18 C2 18 4 20 12 20 C20 20 22 18 22 18 L18 18 M8 10 L8 6 L16 6 L16 10"/></svg>
-    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Shipping Documentation</h3>
-    <p style="color:var(--muted);font-size:14px">Bill of Lading, Commercial Invoice, Packing List, and Customs documentation coming soon.</p>
-  </div>`;
 }
 
 function renderBrain(){
