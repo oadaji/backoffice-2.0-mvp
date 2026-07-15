@@ -1266,18 +1266,18 @@ function renderRates(){
   html+=`<div class="tbl-wrap"><table><thead><tr>`;
 
   if(isHaulageExport){
-    html+=`<th>Terminal</th><th>Port</th><th>Origin City</th><th>Origin LGA</th><th>State</th><th>20FT</th><th>40FT</th><th>2X20FT</th><th>Expiry</th>`;
+    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
   }else if(isHaulageImport){
-    html+=`<th>Terminal</th><th>Port</th><th>Dest City</th><th>Dest LGA</th><th>State</th><th>20FT</th><th>40FT</th><th>2X20FT</th><th>Expiry</th>`;
+    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
   }else if(isOther){
-    html+=`<th>Item</th><th>Category</th><th>Type</th><th>20FT</th><th>40FT</th><th>40HC</th><th>Expiry</th>`;
+    html+=`<th>CLASSIFICATION</th><th>PARAMETERS</th><th>20FT</th><th>40FT</th><th>40HC</th>`;
   }else{
-    html+=`<th>Carrier</th><th>From</th><th>To</th><th>Rate Type</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>Transit</th><th>Expiry</th>${isOcean?'<th>VS Market</th>':''}`;
+    html+=`<th>CARRIER</th><th>ORIGIN PORT</th><th>DESTINATION PORT</th><th>RATE TYPE</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>TRANSIT TIME</th>${isOcean?'<th>FREE DAYS</th>':''}<th>VALIDITY</th>`;
   }
 
   html+=`</tr></thead><tbody>`;
 
-  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?9:(isOcean?10:9);
+  const emptyColspan=isOther?5:(isHaulageExport||isHaulageImport)?5:(isOcean?10:9);
 
   if(filtered.length===0){
     html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
@@ -1293,37 +1293,27 @@ function renderRates(){
 
       if(isHaulageExport){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
-          <td style="font-weight:600;color:var(--ink)">${r.terminal}</td>
-          <td><span style="background:#E8F5E9;color:#2E7D32;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700">${r.port}</span></td>
-          <td>${r.originCity}</td>
-          <td style="color:var(--muted)">${r.originLGA}</td>
-          <td>${r.state}</td>
+          <td style="font-weight:600;color:var(--ink)">${r.originCity}, ${r.state}</td>
+          <td>${r.port}</td>
           <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
-          <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else if(isHaulageImport){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
-          <td style="font-weight:600;color:var(--ink)">${r.terminal}</td>
-          <td><span style="background:#E8F5E9;color:#2E7D32;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700">${r.port}</span></td>
-          <td>${r.destCity}</td>
-          <td style="color:var(--muted)">${r.destLGA}</td>
-          <td>${r.state}</td>
+          <td style="font-weight:600;color:var(--ink)">${r.port}</td>
+          <td>${r.destCity}, ${r.state}</td>
           <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
-          <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else if(isOther){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
-          <td style="font-weight:600;color:var(--ink)">${r.item}</td>
-          <td>${r.category}</td>
-          <td><span class="rate-badge">${r.chargeType}</span></td>
+          <td style="font-weight:600;color:var(--ink);text-transform:capitalize">${r.chargeType}</td>
+          <td>${r.item}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price20.toLocaleString()}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40.toLocaleString()}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40hc.toLocaleString()}</td>
-          <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else{
         const rateClass=r.rateType.replace(' ','-');
@@ -1331,21 +1321,6 @@ function renderRates(){
         const logoClass=carrierClass(r.carrier);
         const logoPath=carrierLogo(r.carrier);
         const logoHtml=logoPath?`<img src="${logoPath}" alt="${r.carrier}">`:carrierInitials;
-
-        let vsMarket='';
-        if(isOcean){
-          const marketRate=getMarketRate(r.pol,r.pod,r.equip);
-          if(marketRate&&r.rate40hc>0){
-            const diff=((r.rate40hc-marketRate)/marketRate)*100;
-            const diffAbs=Math.abs(diff).toFixed(1);
-            const sign=diff>0?'+':'';
-            const label=diff>0?'above':'below';
-            const color=diff>0?'#D32F2F':'#2E7D32';
-            vsMarket=`<td><span style="color:${color};font-weight:600;font-size:12px">${sign}${diffAbs}% ${label}</span></td>`;
-          }else{
-            vsMarket='<td style="color:var(--muted);font-size:13px">—</td>';
-          }
-        }
 
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
           <td><span class="carrier-logo ${logoClass}">${logoHtml}</span><span style="font-weight:600;color:var(--green)">${r.carrier}</span></td>
@@ -1356,8 +1331,8 @@ function renderRates(){
           <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
           <td class="rate-amount">${formatAmount(r.rate40hc,r.type)}</td>
           <td style="color:var(--muted-2)">${r.transit}d</td>
+          ${isOcean?`<td style="color:var(--muted-2)">${r.freeDays||'—'}d</td>`:''}
           <td>${formatExpiry(r.expiry)}</td>
-          ${vsMarket}
         </tr>`;
       }
     });
