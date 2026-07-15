@@ -1063,11 +1063,11 @@ function openRateDetails(id){
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">CLASSIFICATION</label>
-          <div style="font-weight:600;font-size:15px;color:var(--ink);text-transform:capitalize">${rate.chargeType}</div>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.category}</div>
         </div>
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">PARAMETERS</label>
-          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.category}</div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">TYPE</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink);text-transform:capitalize">${rate.chargeType}</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
@@ -1309,7 +1309,7 @@ function renderRates(){
         </tr>`;
       }else if(isOther){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
-          <td style="font-weight:600;color:var(--ink);text-transform:capitalize">${r.chargeType}</td>
+          <td style="font-weight:600;color:var(--ink)">${r.category}</td>
           <td>${r.item}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price20.toLocaleString()}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40.toLocaleString()}</td>
