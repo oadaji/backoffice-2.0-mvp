@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test Modal - Click Me</title>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+.overlay{position:fixed;inset:0;background:rgba(10,26,12,.42);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:520px;width:100%;box-shadow:0 4px 8px rgba(2,56,25,.06),0 18px 40px -16px rgba(2,56,25,.22);max-height:90vh;display:flex;flex-direction:column}
+.modal.wide{max-width:800px}
+.modal-head{padding:24px 24px 16px;border-bottom:1px solid rgba(2,56,25,.09);display:flex;justify-content:space-between;align-items:flex-start}
+.modal-body{padding:24px;overflow-y:auto;flex:1}
+.modal-foot{padding:16px 24px;border-top:1px solid rgba(2,56,25,.09);display:flex;gap:10px;justify-content:flex-end}
+.btn{border:1px solid transparent;border-radius:10px;padding:11px 18px;font-weight:600;font-size:14px;cursor:pointer}
+.btn-ghost{background:#fff;border:1px solid rgba(2,56,25,.16);color:#383838}
+.btn-lime{background:#BFFB4F;color:#023819}
+.test-button{background:#BFFB4F;color:#023819;border:none;padding:20px 40px;font-size:18px;font-weight:700;cursor:pointer;border-radius:12px;margin:100px auto;display:block}
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center;margin-top:50px">TEST: Click button to open modal</h1>
+<button class="test-button" onclick="openTestModal()">CLICK ME - Open Rate Details Modal</button>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()"></div>
+
+<script>
+function openTestModal(){
+  document.getElementById('overlay').innerHTML = `
+    <div class="modal wide">
+      <div class="modal-head">
+        <div>
+          <h3 style="font-size:20px;font-weight:700;color:#023819">Rate Details</h3>
+          <div style="font-size:13px;color:#808080;margin-top:4px">MSC Ocean Freight - Shanghai to Lagos</div>
+        </div>
+        <button style="border:none;background:none;font-size:28px;color:#808080;cursor:pointer" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:20px">
+          <div style="font-weight:700;font-size:18px;color:#023819">MSC</div>
+          <div style="font-size:13px;color:#808080">Ocean Freight</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+          <div>
+            <label style="font-size:11px;color:#5F5E5A;text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">From</label>
+            <div style="font-weight:600;font-size:15px">CNSHA - Shanghai, China</div>
+          </div>
+          <div>
+            <label style="font-size:11px;color:#5F5E5A;text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">To</label>
+            <div style="font-weight:600;font-size:15px">NGAPP - Apapa, Lagos</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+          <div>
+            <label style="font-size:11px;color:#5F5E5A;text-transform:uppercase;font-weight:600">20'</label>
+            <div style="font-weight:700;font-size:18px;color:#023819">$2,400</div>
+          </div>
+          <div>
+            <label style="font-size:11px;color:#5F5E5A;text-transform:uppercase;font-weight:600">40'</label>
+            <div style="font-weight:700;font-size:18px;color:#023819">$3,900</div>
+          </div>
+          <div>
+            <label style="font-size:11px;color:#5F5E5A;text-transform:uppercase;font-weight:600">40HC</label>
+            <div style="font-weight:700;font-size:18px;color:#023819">$4,300</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+        <button class="btn btn-lime" onclick="closeModal()">Request Quote</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+}
+</script>
+
+</body>
+</html>

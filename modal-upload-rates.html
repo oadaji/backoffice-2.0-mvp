@@ -37,6 +37,19 @@ body{font-family:var(--f-body);color:var(--ink);background:var(--page);font-size
 .btn{border:1px solid transparent;border-radius:10px;padding:11px 18px;font-family:var(--f-body);font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
 .btn-ghost{background:#fff;border:1px solid var(--line-2);color:var(--ink)}
 .btn-lime{background:var(--lime);color:var(--green);box-shadow:var(--sh-card)}
+
+.upload-tabs{display:flex;gap:8px;margin-bottom:20px;background:var(--cream);padding:4px;border-radius:10px}
+.upload-tab{flex:1;padding:10px 16px;border:none;background:transparent;font-family:var(--f-body);font-weight:600;font-size:14px;color:var(--muted-2);cursor:pointer;border-radius:8px;transition:all .15s}
+.upload-tab.active{background:#fff;color:var(--green);box-shadow:var(--sh-card)}
+.upload-view{display:none}
+.upload-view.active{display:block}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block}
+.form-input,.form-select{width:100%;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;font-family:var(--f-body);font-size:14px;color:var(--ink);background:#fff}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--green)}
 </style>
 </head>
 <body>
@@ -45,14 +58,21 @@ body{font-family:var(--f-body);color:var(--ink);background:var(--page);font-size
     <div class="modal-head">
       <div>
         <h3>Upload Rates</h3>
-        <div class="mh-sub">Import rates from a CSV or Excel file</div>
+        <div class="mh-sub">Import from file or add individual rate</div>
       </div>
-      <button class="x">×</button>
+      <button class="x" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
+      <!-- Upload Mode Tabs -->
+      <div class="upload-tabs">
+        <button class="upload-tab active" onclick="switchUploadMode('bulk')">Bulk Upload</button>
+        <button class="upload-tab" onclick="switchUploadMode('individual')">Add Individual Rate</button>
+      </div>
+
+      <!-- Rate Type Selection -->
       <div style="margin-bottom:20px">
-        <label style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block">Rate Type</label>
-        <select style="width:100%;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;font-family:var(--f-body);font-size:14px;color:var(--ink);background:#fff">
+        <label class="form-label">Rate Type</label>
+        <select id="rateTypeSelect" class="form-select" onchange="updateRequiredColumns()">
           <option value="ocean">Ocean Freight</option>
           <option value="air">Air Freight</option>
           <option value="haulage-export">Export Haulage</option>
@@ -60,28 +80,295 @@ body{font-family:var(--f-body);color:var(--ink);background:var(--page);font-size
           <option value="other">Other Charges</option>
         </select>
       </div>
-      <div style="border:2px dashed var(--line-2);border-radius:12px;padding:32px;text-align:center;background:var(--cream);cursor:pointer">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin:0 auto 16px">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
-        </svg>
-        <div style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:4px">Click to upload or drag and drop</div>
-        <div style="font-size:13px;color:var(--muted)">CSV or XLSX (max 10MB)</div>
+
+      <!-- Bulk Upload View -->
+      <div id="bulkView" class="upload-view active">
+        <div style="border:2px dashed var(--line-2);border-radius:12px;padding:32px;text-align:center;background:var(--cream);cursor:pointer;margin-bottom:20px">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin:0 auto 16px">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
+          <div style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:4px">Click to upload or drag and drop</div>
+          <div style="font-size:13px;color:var(--muted)">CSV or XLSX (max 10MB)</div>
+        </div>
+        <div id="requiredColumns" style="padding:16px;background:var(--lime-soft);border-radius:10px;border:1px solid #C8D99E">
+          <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px">Required Columns:</div>
+          <div id="columnsText" style="font-size:12px;color:var(--muted-2);line-height:1.6">
+            <strong>Ocean/Air:</strong> carrier, pol, pod, origin, dest, rateType, rate20, rate40, rate40hc, transit, freeDays, expiry
+          </div>
+        </div>
       </div>
-      <div style="margin-top:20px;padding:16px;background:var(--lime-soft);border-radius:10px;border:1px solid #C8D99E">
-        <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px">Required Columns:</div>
-        <div style="font-size:12px;color:var(--muted-2);line-height:1.6">
-          <strong>Ocean/Air:</strong> carrier, pol, pod, origin, dest, equip, rateType, rate20, rate40, rate40hc, transit, expiry<br>
-          <strong>Haulage Export:</strong> terminal, port, originCity, originLGA, state, equip, price, expiry<br>
-          <strong>Haulage Import:</strong> terminal, port, destCity, destLGA, state, equip, price, expiry<br>
-          <strong>Other:</strong> item, category, chargeType, currency, price, asPerReceipt, expiry
+
+      <!-- Individual Upload View -->
+      <div id="individualView" class="upload-view">
+        <!-- Ocean/Air Form -->
+        <div id="oceanForm" class="rate-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Carrier</label>
+              <input type="text" class="form-input" placeholder="e.g. MSC">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rate Type</label>
+              <select class="form-select">
+                <option>Contract Rate</option>
+                <option>Spot Rate</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">POL (Port of Loading)</label>
+              <input type="text" class="form-input" placeholder="e.g. CNSHA">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Origin</label>
+              <input type="text" class="form-input" placeholder="e.g. Shanghai, China">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">POD (Port of Discharge)</label>
+              <input type="text" class="form-input" placeholder="e.g. NGAPP">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Destination</label>
+              <input type="text" class="form-input" placeholder="e.g. Apapa, Lagos">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">20FT Rate</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">40FT Rate</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">40HC Rate</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Transit Time (days)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Free Days</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Validity Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Haulage Export Form -->
+        <div id="haulageExportForm" class="rate-form" style="display:none">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Terminal</label>
+              <input type="text" class="form-input" placeholder="e.g. KAC Depot">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Port</label>
+              <input type="text" class="form-input" placeholder="e.g. APAPA">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Origin City</label>
+              <input type="text" class="form-input" placeholder="e.g. Ibafo">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" class="form-input" placeholder="e.g. Ogun">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">20FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">40FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">2x20FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Validity Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Haulage Import Form -->
+        <div id="haulageImportForm" class="rate-form" style="display:none">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Terminal</label>
+              <input type="text" class="form-input" placeholder="e.g. KAC Depot">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Port</label>
+              <input type="text" class="form-input" placeholder="e.g. APAPA">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Destination City</label>
+              <input type="text" class="form-input" placeholder="e.g. Kano">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" class="form-input" placeholder="e.g. Kano">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">20FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">40FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">2x20FT Price (₦)</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Validity Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Charges Form -->
+        <div id="otherForm" class="rate-form" style="display:none">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Item Name</label>
+              <input type="text" class="form-input" placeholder="e.g. NESS Inspection Fee">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select">
+                <option>Compliance</option>
+                <option>Terminal</option>
+                <option>Customs</option>
+                <option>Documentation</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Charge Type</label>
+              <select class="form-select">
+                <option value="export">Export</option>
+                <option value="import">Import</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Currency</label>
+              <select class="form-select">
+                <option value="NGN">NGN (₦)</option>
+                <option value="USD">USD ($)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">20FT Price</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">40FT Price</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">40HC Price</label>
+              <input type="number" class="form-input" placeholder="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Validity Date</label>
+              <input type="date" class="form-input">
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-ghost">Cancel</button>
-      <button class="btn btn-lime">Upload Rates</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button id="submitBtn" class="btn btn-lime">Upload Rates</button>
     </div>
   </div>
 </div>
+
+<script>
+function switchUploadMode(mode){
+  document.querySelectorAll('.upload-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.upload-view').forEach(v=>v.classList.remove('active'));
+
+  if(mode==='bulk'){
+    document.querySelectorAll('.upload-tab')[0].classList.add('active');
+    document.getElementById('bulkView').classList.add('active');
+    document.getElementById('submitBtn').textContent='Upload Rates';
+  }else{
+    document.querySelectorAll('.upload-tab')[1].classList.add('active');
+    document.getElementById('individualView').classList.add('active');
+    document.getElementById('submitBtn').textContent='Add Rate';
+    updateRateForm();
+  }
+}
+
+function updateRequiredColumns(){
+  const rateType=document.getElementById('rateTypeSelect').value;
+  const columnsText=document.getElementById('columnsText');
+
+  const columns={
+    'ocean':'<strong>Ocean Freight:</strong> carrier, pol, pod, origin, dest, rateType, rate20, rate40, rate40hc, transit, freeDays, expiry',
+    'air':'<strong>Air Freight:</strong> carrier, pol, pod, origin, dest, rateType, rate20, rate40, rate40hc, transit, freeDays, expiry',
+    'haulage-export':'<strong>Export Haulage:</strong> terminal, port, originCity, state, price20, price40, price2x20, expiry',
+    'haulage-import':'<strong>Import Haulage:</strong> terminal, port, destCity, state, price20, price40, price2x20, expiry',
+    'other':'<strong>Other Charges:</strong> item, category, chargeType, currency, price20, price40, price40hc, expiry'
+  };
+
+  columnsText.innerHTML=columns[rateType];
+  updateRateForm();
+}
+
+function updateRateForm(){
+  const rateType=document.getElementById('rateTypeSelect').value;
+  document.querySelectorAll('.rate-form').forEach(f=>f.style.display='none');
+
+  if(rateType==='ocean'||rateType==='air'){
+    document.getElementById('oceanForm').style.display='block';
+  }else if(rateType==='haulage-export'){
+    document.getElementById('haulageExportForm').style.display='block';
+  }else if(rateType==='haulage-import'){
+    document.getElementById('haulageImportForm').style.display='block';
+  }else if(rateType==='other'){
+    document.getElementById('otherForm').style.display='block';
+  }
+}
+
+function closeModal(){
+  console.log('Close modal');
+}
+</script>
 </body>
 </html>

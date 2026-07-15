@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upload Rates - Individual Entry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+@font-face{font-family:'Nohemi';font-style:normal;font-weight:400 500;src:url('https://db.onlinewebfonts.com/t/29ddb4605533a38e086b48fa105e0d12.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Nohemi';font-style:normal;font-weight:600 800;src:url('https://db.onlinewebfonts.com/t/2acd1ac6664b7b1a1545cc36d0680783.woff2') format('woff2');font-display:swap}
+:root{
+  --green:#023819; --green-2:#2f6b1e; --green-3:#7fae2e; --lime:#BFFB4F; --lime-soft:#EDF4E1;
+  --gold:#FFCC1A; --gold-deep:#B8860B; --success:#008751; --error:#FF1A1A;
+  --cream:#FDFBF1; --panel:#FFFFFF; --page:#faf9f5; --sage:#D1DBBD;
+  --line:rgba(2,56,25,.09); --line-2:rgba(2,56,25,.16);
+  --ink:#383838; --muted:#808080; --muted-2:#5F5E5A;
+  --sh-card:0 1px 2px rgba(2,56,25,.05);
+  --sh-raise:0 2px 4px rgba(2,56,25,.05),0 10px 24px -10px rgba(2,56,25,.16);
+  --sh-modal:0 4px 8px rgba(2,56,25,.06),0 18px 40px -16px rgba(2,56,25,.22);
+  --f-head:'Nohemi','Poppins',sans-serif; --f-body:'Poppins',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--f-body);color:var(--ink);background:var(--page);font-size:14px;-webkit-font-smoothing:antialiased;padding:40px}
+.overlay{position:fixed;inset:0;background:rgba(10,26,12,.42);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal{background:#fff;border-radius:16px;max-width:520px;width:100%;box-shadow:var(--sh-modal);max-height:90vh;display:flex;flex-direction:column}
+.modal.wide{max-width:800px}
+.modal-head{padding:24px 24px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start}
+.modal-head h3{font-size:20px;font-weight:700;color:var(--green);margin-bottom:2px}
+.modal-head .mh-sub{font-size:13px;color:var(--muted);margin-top:4px}
+.modal-head .x{border:none;background:none;font-size:28px;color:var(--muted);cursor:pointer;padding:0;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px}
+.modal-head .x:hover{background:var(--cream)}
+.modal-body{padding:24px;overflow-y:auto;flex:1}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end}
+.btn{border:1px solid transparent;border-radius:10px;padding:11px 18px;font-family:var(--f-body);font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.btn-ghost{background:#fff;border:1px solid var(--line-2);color:var(--ink)}
+.btn-lime{background:var(--lime);color:var(--green);box-shadow:var(--sh-card)}
+
+.upload-tabs{display:flex;gap:8px;margin-bottom:20px;background:var(--cream);padding:4px;border-radius:10px}
+.upload-tab{flex:1;padding:10px 16px;border:none;background:transparent;font-family:var(--f-body);font-weight:600;font-size:14px;color:var(--muted-2);cursor:pointer;border-radius:8px;transition:all .15s}
+.upload-tab.active{background:#fff;color:var(--green);box-shadow:var(--sh-card)}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block}
+.form-input,.form-select{width:100%;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;font-family:var(--f-body);font-size:14px;color:var(--ink);background:#fff}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--green)}
+</style>
+</head>
+<body>
+<div class="overlay">
+  <div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h3>Upload Rates</h3>
+        <div class="mh-sub">Import from file or add individual rate</div>
+      </div>
+      <button class="x">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="upload-tabs">
+        <button class="upload-tab">Bulk Upload</button>
+        <button class="upload-tab active">Add Individual Rate</button>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <label class="form-label">Rate Type</label>
+        <select class="form-select">
+          <option value="ocean">Ocean Freight</option>
+          <option value="air">Air Freight</option>
+          <option value="haulage-export">Export Haulage</option>
+          <option value="haulage-import">Import Haulage</option>
+          <option value="other">Other Charges</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Carrier</label><input type="text" class="form-input" placeholder="e.g. MSC"></div>
+        <div class="form-group"><label class="form-label">Rate Type</label><select class="form-select"><option>Contract Rate</option><option>Spot Rate</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">POL (Port of Loading)</label><input type="text" class="form-input" placeholder="e.g. CNSHA"></div>
+        <div class="form-group"><label class="form-label">Origin</label><input type="text" class="form-input" placeholder="e.g. Shanghai, China"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">POD (Port of Discharge)</label><input type="text" class="form-input" placeholder="e.g. NGAPP"></div>
+        <div class="form-group"><label class="form-label">Destination</label><input type="text" class="form-input" placeholder="e.g. Apapa, Lagos"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">20FT Rate</label><input type="number" class="form-input" placeholder="0"></div>
+        <div class="form-group"><label class="form-label">40FT Rate</label><input type="number" class="form-input" placeholder="0"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">40HC Rate</label><input type="number" class="form-input" placeholder="0"></div>
+        <div class="form-group"><label class="form-label">Transit Time (days)</label><input type="number" class="form-input" placeholder="0"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Free Days</label><input type="number" class="form-input" placeholder="0"></div>
+        <div class="form-group"><label class="form-label">Validity Date</label><input type="date" class="form-input"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost">Cancel</button>
+      <button class="btn btn-lime">Add Rate</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
