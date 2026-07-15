@@ -293,8 +293,8 @@ td.rate-amount{font-weight:600;color:var(--ink);font-size:13px}
 <div class="overlay" id="overlay"></div>
 
 <script>
-// VERSION: v2.1.0 - Updated 2026-07-15 11:00 - Modals match Excel with 3 price columns
-console.log('%c🚀 OnePort 365 v2.1.0 - 3 price columns per Excel template', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
+// VERSION: v2.1.1 - Updated 2026-07-15 11:05 - Fixed table rendering for 3 price columns
+console.log('%c🚀 OnePort 365 v2.1.1 - Table rendering fixed', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
 const STAGES = ['Prospect','Contacted','Qualified','Quote Issued','Closed'];
 const PRODUCTS = ['Ocean Freight / FreightSaver 365','ONEXPORT 365 (OFAP Export)','Auto Imports','VAAS / Spot Accounts','LAAP - Enterprise Accounts'];
 const CLASSES = ['Spot / SME','Mid-Tier','Enterprise'];
@@ -1266,18 +1266,18 @@ function renderRates(){
   html+=`<div class="tbl-wrap"><table><thead><tr>`;
 
   if(isHaulageExport){
-    html+=`<th>Terminal</th><th>Port</th><th>Origin City</th><th>Origin LGA</th><th>State</th><th>Equip</th><th>Price (NGN)</th><th>Expiry</th>`;
+    html+=`<th>Terminal</th><th>Port</th><th>Origin City</th><th>Origin LGA</th><th>State</th><th>20FT</th><th>40FT</th><th>2X20FT</th><th>Expiry</th>`;
   }else if(isHaulageImport){
-    html+=`<th>Terminal</th><th>Port</th><th>Dest City</th><th>Dest LGA</th><th>State</th><th>Equip</th><th>Price (NGN)</th><th>Expiry</th>`;
+    html+=`<th>Terminal</th><th>Port</th><th>Dest City</th><th>Dest LGA</th><th>State</th><th>20FT</th><th>40FT</th><th>2X20FT</th><th>Expiry</th>`;
   }else if(isOther){
-    html+=`<th>Item</th><th>Category</th><th>Type</th><th>Currency</th><th>Price</th><th>As Per Receipt</th><th>Expiry</th>`;
+    html+=`<th>Item</th><th>Category</th><th>Type</th><th>20FT</th><th>40FT</th><th>40HC</th><th>Expiry</th>`;
   }else{
     html+=`<th>Carrier</th><th>From</th><th>To</th><th>Rate Type</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>Transit</th><th>Expiry</th>${isOcean?'<th>VS Market</th>':''}`;
   }
 
   html+=`</tr></thead><tbody>`;
 
-  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?8:(isOcean?10:9);
+  const emptyColspan=isOther?7:(isHaulageExport||isHaulageImport)?9:(isOcean?10:9);
 
   if(filtered.length===0){
     html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
@@ -1298,8 +1298,9 @@ function renderRates(){
           <td>${r.originCity}</td>
           <td style="color:var(--muted)">${r.originLGA}</td>
           <td>${r.state}</td>
-          <td><span class="equip-badge">${r.equip}</span></td>
-          <td class="rate-amount">₦${r.price.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
           <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else if(isHaulageImport){
@@ -1309,8 +1310,9 @@ function renderRates(){
           <td>${r.destCity}</td>
           <td style="color:var(--muted)">${r.destLGA}</td>
           <td>${r.state}</td>
-          <td><span class="equip-badge">${r.equip}</span></td>
-          <td class="rate-amount">₦${r.price.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
+          <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
           <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else if(isOther){
@@ -1318,9 +1320,9 @@ function renderRates(){
           <td style="font-weight:600;color:var(--ink)">${r.item}</td>
           <td>${r.category}</td>
           <td><span class="rate-badge">${r.chargeType}</span></td>
-          <td>${r.currency}</td>
-          <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price.toLocaleString()}</td>
-          <td style="color:var(--muted)">${r.asPerReceipt}</td>
+          <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price20.toLocaleString()}</td>
+          <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40.toLocaleString()}</td>
+          <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40hc.toLocaleString()}</td>
           <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }else{
