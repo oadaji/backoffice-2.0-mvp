@@ -293,8 +293,8 @@ td.rate-amount{font-weight:600;color:var(--ink);font-size:13px}
 <div class="overlay" id="overlay"></div>
 
 <script>
-// VERSION: v2.0.2 - Updated 2026-07-15 10:45 - All modals updated with correct fields
-console.log('%c🚀 OnePort 365 v2.0.2 - All modals updated', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
+// VERSION: v2.0.3 - Updated 2026-07-15 10:50 - Modal headers match Excel template
+console.log('%c🚀 OnePort 365 v2.0.3 - Headers match Excel template', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
 const STAGES = ['Prospect','Contacted','Qualified','Quote Issued','Closed'];
 const PRODUCTS = ['Ocean Freight / FreightSaver 365','ONEXPORT 365 (OFAP Export)','Auto Imports','VAAS / Spot Accounts','LAAP - Enterprise Accounts'];
 const CLASSES = ['Spot / SME','Mid-Tier','Enterprise'];
@@ -978,23 +978,23 @@ function openRateDetails(id){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">From</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Origin Port</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.pol}</div>
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${rate.origin}</div>
         </div>
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">To</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Destination Port</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.pod}</div>
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${rate.dest}</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+45kg':'20\''}</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+45kg':'20FT'}</label>
           <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate20.toLocaleString()}</div>
         </div>
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+100kg':'40\''}</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${isAir?'+100kg':'40FT'}</label>
           <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate40.toLocaleString()}</div>
         </div>
         <div>
@@ -1004,10 +1004,6 @@ function openRateDetails(id){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Equipment</label>
-          <div style="font-size:14px;color:var(--ink)">${rate.equip}</div>
-        </div>
-        <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Rate Type</label>
           <div style="font-size:14px;color:var(--ink)">${rate.rateType}</div>
         </div>
@@ -1015,20 +1011,13 @@ function openRateDetails(id){
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Transit Time</label>
           <div style="font-size:14px;color:var(--ink)">${rate.transit} days</div>
         </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
-        <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Shipment Type</label>
-          <div style="font-size:14px;color:var(--ink);text-transform:capitalize">${rate.shipmentType||'N/A'}</div>
-        </div>
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Free Days</label>
           <div style="font-size:14px;color:var(--ink)">${rate.freeDays?rate.freeDays+' days':'N/A'}</div>
         </div>
-        <div></div>
       </div>
       <div>
-        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Expiry Date</label>
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Validity</label>
         <div style="font-size:14px;color:var(--ink)">${new Date(rate.expiry).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
       </div>
     `;
@@ -1040,20 +1029,19 @@ function openRateDetails(id){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Origin</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">ORIGIN</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${isHaulageExport?rate.originCity:rate.port}</div>
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${isHaulageExport?rate.state:''}</div>
         </div>
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Destination</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">DESTINATION</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${isHaulageExport?rate.port:rate.destCity}</div>
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${isHaulageExport?'':rate.state}</div>
         </div>
       </div>
       <div>
-        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Buy Rate & Equipment Type</label>
-        <div style="font-weight:700;font-size:24px;color:var(--green);margin-bottom:8px">₦${rate.price.toLocaleString()}</div>
-        <div style="font-size:14px;color:var(--muted)">${rate.equip}</div>
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${rate.equip}</label>
+        <div style="font-weight:700;font-size:24px;color:var(--green)">₦${rate.price.toLocaleString()}</div>
       </div>
     `;
   }else if(isOther){
@@ -1064,18 +1052,18 @@ function openRateDetails(id){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Classification</label>
-          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.chargeType}</div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">CLASSIFICATION</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink);text-transform:capitalize">${rate.chargeType}</div>
         </div>
         <div>
-          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Charge Category</label>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">PARAMETERS</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.category}</div>
         </div>
       </div>
       <div>
-        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Buy Rate & Equipment Type</label>
-        <div style="font-weight:700;font-size:24px;color:var(--green);margin-bottom:8px">${rate.currency==='NGN'?'₦':'$'}${rate.price.toLocaleString()}</div>
-        <div style="font-size:14px;color:var(--muted)">${rate.asPerReceipt}</div>
+        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">PRICE</label>
+        <div style="font-weight:700;font-size:24px;color:var(--green);margin-bottom:4px">${rate.currency==='NGN'?'₦':'$'}${rate.price.toLocaleString()}</div>
+        <div style="font-size:13px;color:var(--muted)">${rate.asPerReceipt}</div>
       </div>
     `;
   }
