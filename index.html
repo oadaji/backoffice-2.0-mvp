@@ -337,20 +337,20 @@ let deals = [
 ];
 
 const rates = [
-  {id:'r1',type:'ocean',carrier:'MSC',pol:'NGAPP',origin:'Nigeria',pod:'NLRTH',dest:'Netherlands',equip:'20GP',rateType:'all in',rate20:2533,rate40:3673,rate40hc:3926,transit:21,expiry:'2026-08-11'},
-  {id:'r2',type:'ocean',carrier:'Maersk',pol:'NGAPP',origin:'Nigeria',pod:'BEANR',dest:'Belgium',equip:'40HC',rateType:'spot',rate20:1250,rate40:1813,rate40hc:1938,transit:18,expiry:'2026-08-04'},
-  {id:'r3',type:'ocean',carrier:'CMA CGM',pol:'NGAPP',origin:'Nigeria',pod:'GHTEM',dest:'Ghana',equip:'40HC',rateType:'contract',rate20:1674,rate40:2427,rate40hc:2595,transit:5,expiry:'2026-12-29'},
-  {id:'r4',type:'ocean',carrier:'Hapag-Lloyd',pol:'NGAPP',origin:'Nigeria',pod:'DEHAM',dest:'Germany',equip:'20GP',rateType:'spot',rate20:2818,rate40:4086,rate40hc:4368,transit:20,expiry:'2026-08-07'},
-  {id:'r5',type:'ocean',carrier:'PIL',pol:'NGAPP',origin:'Nigeria',pod:'KEMBA',dest:'Kenya',equip:'40RF',rateType:'all in',rate20:2614,rate40:3790,rate40hc:4052,transit:18,expiry:'2026-09-03'},
-  {id:'r6',type:'ocean',carrier:'Evergreen',pol:'NGAPP',origin:'Nigeria',pod:'SGSIN',dest:'Singapore',equip:'40HC',rateType:'contract',rate20:3202,rate40:4643,rate40hc:4963,transit:28,expiry:'2026-12-26'},
-  {id:'r7',type:'ocean',carrier:'COSCO',pol:'NGAPP',origin:'Nigeria',pod:'CNSHA',dest:'China',equip:'20FT',rateType:'spot',rate20:2668,rate40:3869,rate40hc:4135,transit:32,expiry:'2026-06-15'},
-  {id:'r8',type:'ocean',carrier:'ONE',pol:'NLRTM',origin:'Netherlands',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'all in',rate20:857,rate40:1243,rate40hc:1328,transit:19,expiry:'2026-08-21'},
-  {id:'r9',type:'ocean',carrier:'ZIM',pol:'CNSHA',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:1614,rate40:2340,rate40hc:2502,transit:35,expiry:'2026-06-28'},
-  {id:'r10',type:'ocean',carrier:'MSC',pol:'CNTAO',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',rate20:2835,rate40:4111,rate40hc:4394,transit:33,expiry:'2026-08-17'},
-  {id:'r11',type:'ocean',carrier:'Maersk',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:2314,rate40:3355,rate40hc:3587,transit:16,expiry:'2026-11-20'},
-  {id:'r12',type:'ocean',carrier:'CMA CGM',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',rate20:2564,rate40:3718,rate40hc:3974,transit:17,expiry:'2026-07-25'},
-  {id:'r13',type:'ocean',carrier:'Hapag-Lloyd',pol:'DEHAM',origin:'Germany',pod:'NGAPP',dest:'Nigeria',equip:'40RF',rateType:'all in',rate20:1668,rate40:2419,rate40hc:2585,transit:20,expiry:'2026-07-18'},
-  {id:'r14',type:'ocean',carrier:'PIL',pol:'TRIST',origin:'Turkey',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:1046,rate40:1517,rate40hc:1621,transit:14,expiry:'2026-10-16'},
+  {id:'r1',type:'ocean',carrier:'MSC',pol:'NGAPP',origin:'Nigeria',pod:'NLRTH',dest:'Netherlands',equip:'20GP',rateType:'all in',rate20:2533,rate40:3673,rate40hc:3926,transit:21,shipmentType:'export',freeDays:7,expiry:'2026-08-11'},
+  {id:'r2',type:'ocean',carrier:'Maersk',pol:'NGAPP',origin:'Nigeria',pod:'BEANR',dest:'Belgium',equip:'40HC',rateType:'spot',rate20:1250,rate40:1813,rate40hc:1938,transit:18,shipmentType:'export',freeDays:5,expiry:'2026-08-04'},
+  {id:'r3',type:'ocean',carrier:'CMA CGM',pol:'NGAPP',origin:'Nigeria',pod:'GHTEM',dest:'Ghana',equip:'40HC',rateType:'contract',rate20:1674,rate40:2427,rate40hc:2595,transit:5,shipmentType:'export',freeDays:14,expiry:'2026-12-29'},
+  {id:'r4',type:'ocean',carrier:'Hapag-Lloyd',pol:'NGAPP',origin:'Nigeria',pod:'DEHAM',dest:'Germany',equip:'20GP',rateType:'spot',rate20:2818,rate40:4086,rate40hc:4368,transit:20,shipmentType:'export',freeDays:7,expiry:'2026-08-07'},
+  {id:'r5',type:'ocean',carrier:'PIL',pol:'NGAPP',origin:'Nigeria',pod:'KEMBA',dest:'Kenya',equip:'40RF',rateType:'all in',rate20:2614,rate40:3790,rate40hc:4052,transit:18,shipmentType:'export',freeDays:10,expiry:'2026-09-03'},
+  {id:'r6',type:'ocean',carrier:'Evergreen',pol:'NGAPP',origin:'Nigeria',pod:'SGSIN',dest:'Singapore',equip:'40HC',rateType:'contract',rate20:3202,rate40:4643,rate40hc:4963,transit:28,shipmentType:'export',freeDays:14,expiry:'2026-12-26'},
+  {id:'r7',type:'ocean',carrier:'COSCO',pol:'NGAPP',origin:'Nigeria',pod:'CNSHA',dest:'China',equip:'20FT',rateType:'spot',rate20:2668,rate40:3869,rate40hc:4135,transit:32,shipmentType:'export',freeDays:7,expiry:'2026-06-15'},
+  {id:'r8',type:'ocean',carrier:'ONE',pol:'NLRTM',origin:'Netherlands',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'all in',rate20:857,rate40:1243,rate40hc:1328,transit:19,shipmentType:'import',freeDays:14,expiry:'2026-08-21'},
+  {id:'r9',type:'ocean',carrier:'ZIM',pol:'CNSHA',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:1614,rate40:2340,rate40hc:2502,transit:35,shipmentType:'import',freeDays:10,expiry:'2026-06-28'},
+  {id:'r10',type:'ocean',carrier:'MSC',pol:'CNTAO',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',rate20:2835,rate40:4111,rate40hc:4394,transit:33,shipmentType:'import',freeDays:7,expiry:'2026-08-17'},
+  {id:'r11',type:'ocean',carrier:'Maersk',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:2314,rate40:3355,rate40hc:3587,transit:16,shipmentType:'import',freeDays:14,expiry:'2026-11-20'},
+  {id:'r12',type:'ocean',carrier:'CMA CGM',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',rate20:2564,rate40:3718,rate40hc:3974,transit:17,shipmentType:'import',freeDays:7,expiry:'2026-07-25'},
+  {id:'r13',type:'ocean',carrier:'Hapag-Lloyd',pol:'DEHAM',origin:'Germany',pod:'NGAPP',dest:'Nigeria',equip:'40RF',rateType:'all in',rate20:1668,rate40:2419,rate40hc:2585,transit:20,shipmentType:'import',freeDays:10,expiry:'2026-07-18'},
+  {id:'r14',type:'ocean',carrier:'PIL',pol:'TRIST',origin:'Turkey',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:1046,rate40:1517,rate40hc:1621,transit:14,shipmentType:'import',freeDays:14,expiry:'2026-10-16'},
   {id:'r15',type:'air',carrier:'Emirates SkyCargo',pol:'NGLOS',origin:'Nigeria',pod:'AEDXB',dest:'UAE',equip:'General Cargo',rateType:'published',rate20:4.50,rate40:4.20,rate40hc:3.95,transit:1,expiry:'2026-08-15'},
   {id:'r16',type:'air',carrier:'Turkish Cargo',pol:'NGLOS',origin:'Nigeria',pod:'TRIST',dest:'Turkey',equip:'General Cargo',rateType:'spot',rate20:3.80,rate40:3.50,rate40hc:3.25,transit:1,expiry:'2026-11-30'},
   {id:'r21',type:'air',carrier:'Qatar Airways Cargo',pol:'NGLOS',origin:'Nigeria',pod:'QADOH',dest:'Qatar',equip:'Perishables',rateType:'published',rate20:5.20,rate40:4.85,rate40hc:4.50,transit:1,expiry:'2026-09-20'},
@@ -1000,7 +1000,7 @@ function openRateDetails(id){
           <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate40hc.toLocaleString()}</div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Equipment</label>
           <div style="font-size:14px;color:var(--ink)">${rate.equip}</div>
@@ -1014,7 +1014,18 @@ function openRateDetails(id){
           <div style="font-size:14px;color:var(--ink)">${rate.transit} days</div>
         </div>
       </div>
-      <div style="margin-top:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Shipment Type</label>
+          <div style="font-size:14px;color:var(--ink);text-transform:capitalize">${rate.shipmentType||'N/A'}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Free Days</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.freeDays?rate.freeDays+' days':'N/A'}</div>
+        </div>
+        <div></div>
+      </div>
+      <div>
         <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Expiry Date</label>
         <div style="font-size:14px;color:var(--ink)">${new Date(rate.expiry).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>
       </div>
