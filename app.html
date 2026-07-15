@@ -293,8 +293,8 @@ td.rate-amount{font-weight:600;color:var(--ink);font-size:13px}
 <div class="overlay" id="overlay"></div>
 
 <script>
-// VERSION: v2.0.3 - Updated 2026-07-15 10:50 - Modal headers match Excel template
-console.log('%c🚀 OnePort 365 v2.0.3 - Headers match Excel template', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
+// VERSION: v2.1.0 - Updated 2026-07-15 11:00 - Modals match Excel with 3 price columns
+console.log('%c🚀 OnePort 365 v2.1.0 - 3 price columns per Excel template', 'background: #BFFB4F; color: #023819; font-weight: bold; padding: 4px 8px; border-radius: 4px;');
 const STAGES = ['Prospect','Contacted','Qualified','Quote Issued','Closed'];
 const PRODUCTS = ['Ocean Freight / FreightSaver 365','ONEXPORT 365 (OFAP Export)','Auto Imports','VAAS / Spot Accounts','LAAP - Enterprise Accounts'];
 const CLASSES = ['Spot / SME','Mid-Tier','Enterprise'];
@@ -357,22 +357,22 @@ const rates = [
   {id:'r16',type:'air',carrier:'Turkish Cargo',pol:'NGLOS',origin:'Nigeria',pod:'TRIST',dest:'Turkey',equip:'General Cargo',rateType:'spot',rate20:3.80,rate40:3.50,rate40hc:3.25,transit:1,expiry:'2026-11-30'},
   {id:'r21',type:'air',carrier:'Qatar Airways Cargo',pol:'NGLOS',origin:'Nigeria',pod:'QADOH',dest:'Qatar',equip:'Perishables',rateType:'published',rate20:5.20,rate40:4.85,rate40hc:4.50,transit:1,expiry:'2026-09-20'},
   {id:'r22',type:'air',carrier:'Air France Cargo',pol:'NGLOS',origin:'Nigeria',pod:'FRCDG',dest:'France',equip:'General Cargo',rateType:'spot',rate20:4.15,rate40:3.90,rate40hc:3.65,transit:1,expiry:'2026-08-28'},
-  {id:'r17',type:'haulage-export',terminal:'KAC Depot (Ibafo)',port:'IBAFO',originCity:'Ibafo',originLGA:'—',state:'Ogun',equip:'40HC',price:380000,expiry:'2026-09-01'},
-  {id:'r18',type:'haulage-export',terminal:'Kachicares Terminal',port:'KACHI',originCity:'Oshodi',originLGA:'—',state:'Lagos',equip:'40HC',price:180000,expiry:'2026-12-31'},
-  {id:'r19',type:'haulage-export',terminal:'Customer Warehouse',port:'CUST',originCity:'Kano',originLGA:'—',state:'Kano',equip:'20GP',price:2200000,expiry:'2026-10-15'},
-  {id:'r20',type:'haulage-export',terminal:'Lekki FTZ',port:'NGLKI',originCity:'Lekki',originLGA:'—',state:'Lagos',equip:'40HC',price:250000,expiry:'2026-11-30'},
-  {id:'r21',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ikeja',destLGA:'—',state:'Lagos',equip:'40HC',price:450000,expiry:'2026-08-20'},
-  {id:'r22',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Kano',destLGA:'—',state:'Kano',equip:'40HC',price:2400000,expiry:'2026-09-15'},
-  {id:'r23',type:'haulage-import',terminal:'Tin Can (TICT)',port:'NGTCN',destCity:'Ikorodu',destLGA:'—',state:'Lagos',equip:'20GP',price:280000,expiry:'2026-10-01'},
-  {id:'r24',type:'haulage-import',terminal:'Lekki Deep Sea',port:'NGLKI',destCity:'Lekki FTZ',destLGA:'—',state:'Lagos',equip:'40HC',price:350000,expiry:'2026-11-20'},
-  {id:'r25',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ibadan',destLGA:'—',state:'Oyo',equip:'20GP',price:650000,expiry:'2026-12-10'},
-  {id:'r26',type:'other',item:'NESS Inspection Fee',category:'Compliance',chargeType:'export',currency:'NGN',price:510000,asPerReceipt:'—',expiry:'2026-08-15'},
-  {id:'r27',type:'other',item:'NXP Processing',category:'Compliance',chargeType:'export',currency:'NGN',price:25000,asPerReceipt:'—',expiry:'2026-09-30'},
-  {id:'r28',type:'other',item:'Terminal Handling Charge (THC)',category:'Terminal',chargeType:'import',currency:'NGN',price:185000,asPerReceipt:'—',expiry:'2026-10-20'},
-  {id:'r29',type:'other',item:'Container Deposit (40HC)',category:'Terminal',chargeType:'import',currency:'USD',price:1500,asPerReceipt:'—',expiry:'2026-11-15'},
-  {id:'r30',type:'other',item:'Customs Examination Fee',category:'Customs',chargeType:'import',currency:'NGN',price:350000,asPerReceipt:'—',expiry:'2026-12-01'},
-  {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:75000,asPerReceipt:'—',expiry:'2026-09-25'},
-  {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price:120000,asPerReceipt:'—',expiry:'2026-10-30'},
+  {id:'r17',type:'haulage-export',terminal:'KAC Depot (Ibafo)',port:'IBAFO',originCity:'Ibafo',originLGA:'—',state:'Ogun',price20:320000,price40:380000,price2x20:640000,expiry:'2026-09-01'},
+  {id:'r18',type:'haulage-export',terminal:'Kachicares Terminal',port:'KACHI',originCity:'Oshodi',originLGA:'—',state:'Lagos',price20:150000,price40:180000,price2x20:300000,expiry:'2026-12-31'},
+  {id:'r19',type:'haulage-export',terminal:'Customer Warehouse',port:'CUST',originCity:'Kano',originLGA:'—',state:'Kano',price20:2200000,price40:2800000,price2x20:4400000,expiry:'2026-10-15'},
+  {id:'r20',type:'haulage-export',terminal:'Lekki FTZ',port:'NGLKI',originCity:'Lekki',originLGA:'—',state:'Lagos',price20:220000,price40:250000,price2x20:440000,expiry:'2026-11-30'},
+  {id:'r21',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ikeja',destLGA:'—',state:'Lagos',price20:380000,price40:450000,price2x20:760000,expiry:'2026-08-20'},
+  {id:'r22',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Kano',destLGA:'—',state:'Kano',price20:2000000,price40:2400000,price2x20:4000000,expiry:'2026-09-15'},
+  {id:'r23',type:'haulage-import',terminal:'Tin Can (TICT)',port:'NGTCN',destCity:'Ikorodu',destLGA:'—',state:'Lagos',price20:280000,price40:320000,price2x20:560000,expiry:'2026-10-01'},
+  {id:'r24',type:'haulage-import',terminal:'Lekki Deep Sea',port:'NGLKI',destCity:'Lekki FTZ',destLGA:'—',state:'Lagos',price20:300000,price40:350000,price2x20:600000,expiry:'2026-11-20'},
+  {id:'r25',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ibadan',destLGA:'—',state:'Oyo',price20:650000,price40:750000,price2x20:1300000,expiry:'2026-12-10'},
+  {id:'r26',type:'other',item:'NESS Inspection Fee',category:'Compliance',chargeType:'export',currency:'NGN',price20:510000,price40:510000,price40hc:510000,expiry:'2026-08-15'},
+  {id:'r27',type:'other',item:'NXP Processing',category:'Compliance',chargeType:'export',currency:'NGN',price20:25000,price40:25000,price40hc:25000,expiry:'2026-09-30'},
+  {id:'r28',type:'other',item:'Terminal Handling Charge (THC)',category:'Terminal',chargeType:'import',currency:'NGN',price20:150000,price40:185000,price40hc:200000,expiry:'2026-10-20'},
+  {id:'r29',type:'other',item:'Container Deposit (40HC)',category:'Terminal',chargeType:'import',currency:'USD',price20:1200,price40:1500,price40hc:1500,expiry:'2026-11-15'},
+  {id:'r30',type:'other',item:'Customs Examination Fee',category:'Customs',chargeType:'import',currency:'NGN',price20:300000,price40:350000,price40hc:380000,expiry:'2026-12-01'},
+  {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price20:75000,price40:75000,price40hc:75000,expiry:'2026-09-25'},
+  {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price20:120000,price40:120000,price40hc:120000,expiry:'2026-10-30'},
 ];
 // Check URL params for initial section/rate type
 const urlParams = new URLSearchParams(window.location.search);
@@ -1039,9 +1039,19 @@ function openRateDetails(id){
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${isHaulageExport?'':rate.state}</div>
         </div>
       </div>
-      <div>
-        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">${rate.equip}</label>
-        <div style="font-weight:700;font-size:24px;color:var(--green)">₦${rate.price.toLocaleString()}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">20FT</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">₦${rate.price20.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">40FT</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">₦${rate.price40.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">2X20FT</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">₦${rate.price2x20.toLocaleString()}</div>
+        </div>
       </div>
     `;
   }else if(isOther){
@@ -1060,10 +1070,19 @@ function openRateDetails(id){
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.category}</div>
         </div>
       </div>
-      <div>
-        <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">PRICE</label>
-        <div style="font-weight:700;font-size:24px;color:var(--green);margin-bottom:4px">${rate.currency==='NGN'?'₦':'$'}${rate.price.toLocaleString()}</div>
-        <div style="font-size:13px;color:var(--muted)">${rate.asPerReceipt}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">20FT</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">${rate.currency==='NGN'?'₦':'$'}${rate.price20.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">40FT</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">${rate.currency==='NGN'?'₦':'$'}${rate.price40.toLocaleString()}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">40HC</label>
+          <div style="font-weight:700;font-size:18px;color:var(--green)">${rate.currency==='NGN'?'₦':'$'}${rate.price40hc.toLocaleString()}</div>
+        </div>
       </div>
     `;
   }
