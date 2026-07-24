@@ -246,6 +246,116 @@ td.rate-amount{font-weight:600;color:var(--ink);font-size:13px}
 .form-label{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;display:block}
 .form-input,.form-select{width:100%;border:1px solid var(--line-2);border-radius:10px;padding:11px 12px;font-family:var(--f-body);font-size:14px;color:var(--ink);background:#fff}
 .form-input:focus,.form-select:focus{outline:none;border-color:var(--green)}
+
+/* Shipping Section Styles */
+.shipment-row{cursor:pointer;transition:background .15s}
+.shipment-row:hover{background:var(--lime-soft)}
+.shipment-stage{display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600}
+.shipment-stage.pre-shipment{background:#EDF4E1;color:#2f6b1e}
+.shipment-stage.in-transit{background:#E3F2FD;color:#1565C0}
+.shipment-stage.arrived{background:#FFF3E0;color:#E65100}
+.shipment-stage.customs{background:#FFF8E1;color:#F57F17}
+.shipment-stage.delivered{background:#E8F5E9;color:#2E7D32}
+.ship-icon{width:32px;height:32px;border-radius:8px;background:var(--lime-soft);display:inline-flex;align-items:center;justify-content:center;margin-right:10px;flex-shrink:0}
+.ship-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.5}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--muted-2);font-size:14px;font-weight:500;cursor:pointer;padding:8px 12px;border-radius:8px;margin-right:12px}
+.back-btn:hover{background:var(--cream);color:var(--green)}
+.back-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.shipment-header{display:flex;align-items:center;margin-bottom:20px}
+.shipment-header h1{font-size:22px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:10px}
+.shipment-tabs{display:flex;gap:4px;background:var(--cream);padding:4px;border-radius:10px;margin-bottom:20px}
+.shipment-tab{padding:10px 18px;border:none;background:transparent;font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--muted-2);cursor:pointer;border-radius:8px;transition:all .15s}
+.shipment-tab.active{background:#fff;color:var(--green);box-shadow:var(--sh-card)}
+.shipment-tab:hover:not(.active){color:var(--green-2)}
+.progress-bar{display:flex;align-items:center;gap:0;margin-bottom:24px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.progress-step{flex:1;display:flex;align-items:center;gap:8px}
+.progress-step .dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--line-2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);flex-shrink:0}
+.progress-step.active .dot{background:var(--green);border-color:var(--green);color:#fff}
+.progress-step.done .dot{background:var(--success);border-color:var(--success);color:#fff}
+.progress-step .label{font-size:12px;color:var(--muted-2);font-weight:500}
+.progress-step.active .label,.progress-step.done .label{color:var(--green);font-weight:600}
+.progress-step .line{flex:1;height:2px;background:var(--line-2);margin:0 8px}
+.progress-step.done .line{background:var(--success)}
+.job-stage-select{padding:5px 8px;border:1px solid var(--line-2);border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;background:#fff}
+.job-stage-select.completed{background:#E8F5E9;color:#2E7D32;border-color:#A5D6A7}
+.job-stage-select.in-progress{background:#E3F2FD;color:#1565C0;border-color:#90CAF9}
+.job-stage-select.pending{background:#FFF8E1;color:#F57F17;border-color:#FFE082}
+.job-stage-select.blocked{background:#FFEBEE;color:#C62828;border-color:#EF9A9A}
+.team-avatar{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;margin-right:-8px;border:2px solid #fff}
+.wizard-step{display:none}
+.wizard-step.active{display:block}
+.wizard-progress{display:flex;gap:8px;margin-bottom:20px}
+.wizard-dot{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.wizard-dot.active{background:var(--green)}
+.wizard-dot.done{background:var(--success)}
+
+/* Messages Tab Styles */
+.messages-container{display:flex;height:500px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.msg-list-panel{width:320px;border-right:1px solid var(--line);display:flex;flex-direction:column}
+.msg-conv-panel{flex:1;display:flex;flex-direction:column;background:var(--page)}
+.msg-channel-tabs{display:flex;gap:6px;padding:12px;border-bottom:1px solid var(--line);background:#fff}
+.msg-channel-tab{padding:6px 12px;border:none;background:var(--cream);font-size:12px;font-weight:500;color:var(--muted-2);cursor:pointer;border-radius:6px;display:flex;align-items:center;gap:6px;transition:all .15s}
+.msg-channel-tab.active{background:var(--green);color:#fff}
+.msg-channel-tab:hover:not(.active){background:var(--lime-soft);color:var(--green)}
+.msg-badge{background:var(--error);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center}
+.msg-channel-tab.active .msg-badge{background:rgba(255,255,255,.3);color:#fff}
+.msg-search{padding:10px 12px;border-bottom:1px solid var(--line)}
+.msg-search input{width:100%;padding:8px 12px;border:1px solid var(--line-2);border-radius:8px;font-size:13px;font-family:var(--f-body)}
+.msg-search input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(2,56,25,.08)}
+.msg-items{flex:1;overflow-y:auto}
+.msg-item{display:flex;gap:10px;padding:12px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .15s}
+.msg-item:hover{background:var(--cream)}
+.msg-item.active{background:var(--lime-soft);border-left:3px solid var(--green)}
+.msg-item.unread{background:rgba(191,251,79,.1)}
+.msg-item.unread .msg-item-preview{font-weight:600;color:var(--ink)}
+.msg-avatar{width:40px;height:40px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--green);flex-shrink:0;position:relative}
+.msg-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.msg-channel-icon{position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.msg-channel-icon.outlook{background:#0078D4}
+.msg-channel-icon.whatsapp{background:#25D366}
+.msg-channel-icon svg{width:10px;height:10px;fill:#fff}
+.msg-item-content{flex:1;min-width:0}
+.msg-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.msg-item-name{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-item-time{font-size:11px;color:var(--muted);flex-shrink:0}
+.msg-item-preview{font-size:12px;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msg-conv-header{padding:14px 16px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.msg-conv-info{flex:1}
+.msg-conv-name{font-size:15px;font-weight:600;color:var(--ink)}
+.msg-conv-channel{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.msg-conv-channel svg{width:12px;height:12px}
+.msg-conv-actions{display:flex;gap:8px}
+.msg-conv-actions button{width:32px;height:32px;border:none;background:var(--cream);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted-2);transition:all .15s}
+.msg-conv-actions button:hover{background:var(--lime-soft);color:var(--green)}
+.msg-conv-actions button svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.msg-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg-bubble-wrap{display:flex;flex-direction:column;max-width:70%}
+.msg-bubble-wrap.incoming{align-self:flex-start}
+.msg-bubble-wrap.outgoing{align-self:flex-end}
+.msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+.msg-bubble-wrap.incoming .msg-bubble{background:#fff;color:var(--ink);border-bottom-left-radius:4px}
+.msg-bubble-wrap.outgoing .msg-bubble{background:var(--green);color:#fff;border-bottom-right-radius:4px}
+.msg-bubble-time{font-size:10px;color:var(--muted);margin-top:4px}
+.msg-bubble-wrap.outgoing .msg-bubble-time{text-align:right}
+.msg-input-wrap{padding:12px 16px;background:#fff;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.msg-input-row{display:flex;gap:8px;align-items:flex-end}
+.msg-input{flex:1;padding:10px 14px;border:1px solid var(--line-2);border-radius:10px;font-size:13px;font-family:var(--f-body);resize:none;min-height:42px;max-height:120px}
+.msg-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(2,56,25,.08)}
+.msg-send-btn{width:42px;height:42px;border:none;background:var(--green);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.msg-send-btn:hover{background:var(--green-2)}
+.msg-send-btn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
+.msg-toolbar{display:flex;gap:4px;align-items:center}
+.msg-toolbar button{width:32px;height:32px;border:none;background:transparent;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted-2);transition:all .15s}
+.msg-toolbar button:hover{background:var(--cream);color:var(--green)}
+.msg-toolbar button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.msg-channel-select{padding:6px 10px;border:1px solid var(--line-2);border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;background:#fff}
+.msg-quick-replies{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0}
+.msg-quick-reply{padding:6px 12px;background:var(--cream);border:1px solid var(--line-2);border-radius:16px;font-size:12px;color:var(--muted-2);cursor:pointer;transition:all .15s}
+.msg-quick-reply:hover{background:var(--lime-soft);border-color:var(--green);color:var(--green)}
+.msg-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);padding:40px}
+.msg-empty svg{width:48px;height:48px;stroke:var(--line-2);fill:none;stroke-width:1.5;margin-bottom:12px}
+.msg-empty-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.msg-empty-text{font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -350,24 +460,35 @@ let deals = [
 ];
 
 const rates = [
-  {id:'r1',type:'ocean',carrier:'MSC',pol:'NGAPP',origin:'Nigeria',pod:'NLRTH',dest:'Netherlands',equip:'20GP',rateType:'all in',rate20:2533,rate40:3673,rate40hc:3926,transit:21,shipmentType:'export',freeDays:7,expiry:'2026-08-11'},
-  {id:'r2',type:'ocean',carrier:'Maersk',pol:'NGAPP',origin:'Nigeria',pod:'BEANR',dest:'Belgium',equip:'40HC',rateType:'spot',rate20:1250,rate40:1813,rate40hc:1938,transit:18,shipmentType:'export',freeDays:5,expiry:'2026-08-04'},
-  {id:'r3',type:'ocean',carrier:'CMA CGM',pol:'NGAPP',origin:'Nigeria',pod:'GHTEM',dest:'Ghana',equip:'40HC',rateType:'contract',rate20:1674,rate40:2427,rate40hc:2595,transit:5,shipmentType:'export',freeDays:14,expiry:'2026-12-29'},
-  {id:'r4',type:'ocean',carrier:'Hapag-Lloyd',pol:'NGAPP',origin:'Nigeria',pod:'DEHAM',dest:'Germany',equip:'20GP',rateType:'spot',rate20:2818,rate40:4086,rate40hc:4368,transit:20,shipmentType:'export',freeDays:7,expiry:'2026-08-07'},
-  {id:'r5',type:'ocean',carrier:'PIL',pol:'NGAPP',origin:'Nigeria',pod:'KEMBA',dest:'Kenya',equip:'40RF',rateType:'all in',rate20:2614,rate40:3790,rate40hc:4052,transit:18,shipmentType:'export',freeDays:10,expiry:'2026-09-03'},
-  {id:'r6',type:'ocean',carrier:'Evergreen',pol:'NGAPP',origin:'Nigeria',pod:'SGSIN',dest:'Singapore',equip:'40HC',rateType:'contract',rate20:3202,rate40:4643,rate40hc:4963,transit:28,shipmentType:'export',freeDays:14,expiry:'2026-12-26'},
-  {id:'r7',type:'ocean',carrier:'COSCO',pol:'NGAPP',origin:'Nigeria',pod:'CNSHA',dest:'China',equip:'20FT',rateType:'spot',rate20:2668,rate40:3869,rate40hc:4135,transit:32,shipmentType:'export',freeDays:7,expiry:'2026-06-15'},
-  {id:'r8',type:'ocean',carrier:'ONE',pol:'NLRTM',origin:'Netherlands',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'all in',rate20:857,rate40:1243,rate40hc:1328,transit:19,shipmentType:'import',freeDays:14,expiry:'2026-08-21'},
-  {id:'r9',type:'ocean',carrier:'ZIM',pol:'CNSHA',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'all in',rate20:1614,rate40:2340,rate40hc:2502,transit:35,shipmentType:'import',freeDays:10,expiry:'2026-06-28'},
-  {id:'r10',type:'ocean',carrier:'MSC',pol:'CNTAO',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',rate20:2835,rate40:4111,rate40hc:4394,transit:33,shipmentType:'import',freeDays:7,expiry:'2026-08-17'},
-  {id:'r11',type:'ocean',carrier:'Maersk',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:2314,rate40:3355,rate40hc:3587,transit:16,shipmentType:'import',freeDays:14,expiry:'2026-11-20'},
-  {id:'r12',type:'ocean',carrier:'CMA CGM',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',rate20:2564,rate40:3718,rate40hc:3974,transit:17,shipmentType:'import',freeDays:7,expiry:'2026-07-25'},
-  {id:'r13',type:'ocean',carrier:'Hapag-Lloyd',pol:'DEHAM',origin:'Germany',pod:'NGAPP',dest:'Nigeria',equip:'40RF',rateType:'all in',rate20:1668,rate40:2419,rate40hc:2585,transit:20,shipmentType:'import',freeDays:10,expiry:'2026-07-18'},
-  {id:'r14',type:'ocean',carrier:'PIL',pol:'TRIST',origin:'Turkey',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',rate20:1046,rate40:1517,rate40hc:1621,transit:14,shipmentType:'import',freeDays:14,expiry:'2026-10-16'},
-  {id:'r15',type:'air',carrier:'Emirates SkyCargo',pol:'NGLOS',origin:'Nigeria',pod:'AEDXB',dest:'UAE',equip:'General Cargo',rateType:'published',rate20:4.50,rate40:4.20,rate40hc:3.95,transit:1,expiry:'2026-08-15'},
-  {id:'r16',type:'air',carrier:'Turkish Cargo',pol:'NGLOS',origin:'Nigeria',pod:'TRIST',dest:'Turkey',equip:'General Cargo',rateType:'spot',rate20:3.80,rate40:3.50,rate40hc:3.25,transit:1,expiry:'2026-11-30'},
-  {id:'r21',type:'air',carrier:'Qatar Airways Cargo',pol:'NGLOS',origin:'Nigeria',pod:'QADOH',dest:'Qatar',equip:'Perishables',rateType:'published',rate20:5.20,rate40:4.85,rate40hc:4.50,transit:1,expiry:'2026-09-20'},
-  {id:'r22',type:'air',carrier:'Air France Cargo',pol:'NGLOS',origin:'Nigeria',pod:'FRCDG',dest:'France',equip:'General Cargo',rateType:'spot',rate20:4.15,rate40:3.90,rate40hc:3.65,transit:1,expiry:'2026-08-28'},
+  {id:'r1',type:'ocean',carrier:'MSC',pol:'NGAPP',origin:'Nigeria',pod:'NLRTH',dest:'Netherlands',equip:'20GP',rateType:'spot',cargoClass:'GEN',rate20:2533,rate40:3673,rate40hc:3926,transit:21,shipmentType:'export',freeDays:7,expiry:'2026-08-11'},
+  {id:'r2',type:'ocean',carrier:'Maersk',pol:'NGAPP',origin:'Nigeria',pod:'BEANR',dest:'Belgium',equip:'40HC',rateType:'spot',cargoClass:'GEN',rate20:1250,rate40:1813,rate40hc:1938,transit:18,shipmentType:'export',freeDays:5,expiry:'2026-08-04'},
+  {id:'r3',type:'ocean',carrier:'CMA CGM',pol:'NGAPP',origin:'Nigeria',pod:'GHTEM',dest:'Ghana',equip:'40HC',rateType:'contract',cargoClass:'GEN',rate20:1674,rate40:2427,rate40hc:2595,transit:5,shipmentType:'export',freeDays:14,expiry:'2026-12-29'},
+  {id:'r4',type:'ocean',carrier:'Hapag-Lloyd',pol:'NGAPP',origin:'Nigeria',pod:'DEHAM',dest:'Germany',equip:'20GP',rateType:'spot',cargoClass:'DG',rate20:2818,rate40:4086,rate40hc:4368,transit:20,shipmentType:'export',freeDays:7,expiry:'2026-08-07'},
+  {id:'r5',type:'ocean',carrier:'PIL',pol:'NGAPP',origin:'Nigeria',pod:'KEMBA',dest:'Kenya',equip:'40RF',rateType:'spot',cargoClass:'GEN',rate20:2614,rate40:3790,rate40hc:4052,transit:18,shipmentType:'export',freeDays:10,expiry:'2026-09-03'},
+  {id:'r6',type:'ocean',carrier:'Evergreen',pol:'NGAPP',origin:'Nigeria',pod:'SGSIN',dest:'Singapore',equip:'40HC',rateType:'contract',cargoClass:'GEN',rate20:3202,rate40:4643,rate40hc:4963,transit:28,shipmentType:'export',freeDays:14,expiry:'2026-12-26'},
+  {id:'r7',type:'ocean',carrier:'COSCO',pol:'NGAPP',origin:'Nigeria',pod:'CNSHA',dest:'China',equip:'20FT',rateType:'spot',cargoClass:'DG',rate20:2668,rate40:3869,rate40hc:4135,transit:32,shipmentType:'export',freeDays:7,expiry:'2026-06-15'},
+  {id:'r8',type:'ocean',carrier:'ONE',pol:'NLRTM',origin:'Netherlands',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',cargoClass:'GEN',rate20:857,rate40:1243,rate40hc:1328,transit:19,shipmentType:'import',freeDays:14,expiry:'2026-08-21'},
+  {id:'r9',type:'ocean',carrier:'ZIM',pol:'CNSHA',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',cargoClass:'GEN',rate20:1614,rate40:2340,rate40hc:2502,transit:35,shipmentType:'import',freeDays:10,expiry:'2026-06-28'},
+  {id:'r10',type:'ocean',carrier:'MSC',pol:'CNTAO',origin:'China',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'spot',cargoClass:'DG',rate20:2835,rate40:4111,rate40hc:4394,transit:33,shipmentType:'import',freeDays:7,expiry:'2026-08-17'},
+  {id:'r11',type:'ocean',carrier:'Maersk',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',cargoClass:'GEN',rate20:2314,rate40:3355,rate40hc:3587,transit:16,shipmentType:'import',freeDays:14,expiry:'2026-11-20'},
+  {id:'r12',type:'ocean',carrier:'CMA CGM',pol:'AEJEA',origin:'UAE',pod:'NGAPP',dest:'Nigeria',equip:'20GP',rateType:'spot',cargoClass:'GEN',rate20:2564,rate40:3718,rate40hc:3974,transit:17,shipmentType:'import',freeDays:7,expiry:'2026-07-25'},
+  {id:'r13',type:'ocean',carrier:'Hapag-Lloyd',pol:'DEHAM',origin:'Germany',pod:'NGAPP',dest:'Nigeria',equip:'40RF',rateType:'spot',cargoClass:'GEN',rate20:1668,rate40:2419,rate40hc:2585,transit:20,shipmentType:'import',freeDays:10,expiry:'2026-07-18'},
+  {id:'r14',type:'ocean',carrier:'PIL',pol:'TRIST',origin:'Turkey',pod:'NGAPP',dest:'Nigeria',equip:'40HC',rateType:'contract',cargoClass:'GEN',rate20:1046,rate40:1517,rate40hc:1621,transit:14,shipmentType:'import',freeDays:14,expiry:'2026-10-16'},
+  // Air Freight - new data model per spec
+  {id:'air1',type:'air',carrier:{name:'Air France',code:'AF'},originPort:'USIAH',destinationPort:'NENIM',routing:['USIAH','FRCDG','NENIM'],rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:4.40,rateUnit:'cw',transitTime:'4-5d',chargeLines:[{name:'Air freight',category:'freight',basis:'per_cw',rate:4.40,currency:'USD'},{name:'Fuel surcharge',category:'surcharge',basis:'per_kg',rate:0.35,currency:'USD',includedInFreight:true}],terms:['Subject to space confirmation','Fuel included'],rawSource:'Air France quote via email - 4.40/CW all-in incl. fuel, USIAH-FRCDG-NENIM, 4-5 days transit'},
+  {id:'air2',type:'air',carrier:{name:'Ethiopian',code:'ET'},originPort:null,destinationPort:'NGLOS',rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:5.40,rateUnit:'kg',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:5.40,currency:'USD'}],extras:[{label:'Agent contact',value:'cargo@ethiopian.com'}],rawSource:'Ethiopian rate sheet - $5.40/kg actual weight, FAK basis, to LOS'},
+  {id:'air3',type:'air',carrier:null,originPort:null,destinationPort:null,rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:4.31,rateUnit:'kg',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:4.31,currency:'USD'}],notes:'Rate from forwarding partner, no lane specified',rawSource:'Partner quote - $4.31/kg actual, no specific routing'},
+  {id:'air4',type:'air',carrier:{name:'Emirates',code:'EK'},originPort:'NGLOS',destinationPort:'AEDXB',rateType:'contract',cargoClass:'DG',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:5.20,rateUnit:'kg',breaks:[{minKg:0,rate:5.20},{minKg:45,rate:4.50},{minKg:100,rate:4.20},{minKg:300,rate:3.95},{minKg:500,rate:3.80}],transitTime:'1d',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:4.50,currency:'USD'},{name:'Security screening',category:'fee',basis:'flat',rate:45,currency:'USD',min:45}]},
+  {id:'air5',type:'air',carrier:{name:'Qatar',code:'QR'},originPort:'NGLOS',destinationPort:'QADOH',rateType:'contract',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:3.90,rateUnit:'kg',transitTime:'1d',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:3.90,currency:'USD'}]},
+  {id:'air6',type:'air',carrier:{name:'Turkish',code:'TK'},originPort:'NGLOS',destinationPort:'TRIST',rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:3.75,rateUnit:'kg',transitTime:'1d',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:3.75,currency:'USD'}]},
+  {id:'air7',type:'air',carrier:{name:'British Airways',code:'BA'},originPort:'NGLOS',destinationPort:'GBLHR',rateType:'contract',cargoClass:'FAK',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:4.85,rateUnit:'kg',breaks:[{minKg:0,rate:5.50},{minKg:45,rate:4.85},{minKg:100,rate:4.50},{minKg:300,rate:4.20}],transitTime:'6h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:4.85,currency:'USD'}]},
+  {id:'air8',type:'air',carrier:{name:'Lufthansa',code:'LH'},originPort:'NGLOS',destinationPort:'DEFRA',rateType:'spot',cargoClass:'DG',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:5.60,rateUnit:'kg',transitTime:'8h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:5.60,currency:'USD'},{name:'DG handling',category:'fee',basis:'flat',rate:150,currency:'USD'}]},
+  {id:'air9',type:'air',carrier:{name:'KLM',code:'KL'},originPort:'NGLOS',destinationPort:'NLAMS',rateType:'contract',cargoClass:'FAK',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:4.25,rateUnit:'kg',breaks:[{minKg:0,rate:4.90},{minKg:45,rate:4.25},{minKg:100,rate:3.95},{minKg:300,rate:3.70}],transitTime:'7h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:4.25,currency:'USD'}]},
+  {id:'air10',type:'air',carrier:{name:'Kenya Airways',code:'KQ'},originPort:'NGLOS',destinationPort:'KENBO',rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:2.80,rateUnit:'kg',transitTime:'3h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:2.80,currency:'USD'}]},
+  {id:'air11',type:'air',carrier:{name:'South African',code:'SA'},originPort:'NGLOS',destinationPort:'ZAJNB',rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:3.45,rateUnit:'kg',transitTime:'5h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:3.45,currency:'USD'}]},
+  {id:'air12',type:'air',carrier:{name:'Cathay Pacific',code:'CX'},originPort:'NGLOS',destinationPort:'HKHKG',rateType:'contract',cargoClass:'FAK',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:6.20,rateUnit:'kg',breaks:[{minKg:0,rate:7.00},{minKg:100,rate:6.20},{minKg:300,rate:5.80},{minKg:500,rate:5.50}],transitTime:'14h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:6.20,currency:'USD'}]},
+  {id:'air13',type:'air',carrier:{name:'Singapore',code:'SQ'},originPort:'NGLOS',destinationPort:'SGSIN',rateType:'contract',cargoClass:'DG',currency:'USD',weightBasis:'chargeable',volumeRatioKgPerCbm:166.67,headlineRate:6.80,rateUnit:'kg',transitTime:'12h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:6.80,currency:'USD'},{name:'DG surcharge',category:'surcharge',basis:'per_kg',rate:0.50,currency:'USD'}]},
+  {id:'air14',type:'air',carrier:{name:'Royal Air Maroc',code:'AT'},originPort:'NGLOS',destinationPort:'MACMN',rateType:'spot',cargoClass:'FAK',currency:'USD',weightBasis:'actual',headlineRate:3.20,rateUnit:'kg',transitTime:'4h',chargeLines:[{name:'Air freight',category:'freight',basis:'per_kg',rate:3.20,currency:'USD'}]},
   {id:'r17',type:'haulage-export',terminal:'KAC Depot (Ibafo)',port:'IBAFO',originCity:'Ibafo',originLGA:'—',state:'Ogun',price20:320000,price40:380000,price2x20:640000,expiry:'2026-09-01'},
   {id:'r18',type:'haulage-export',terminal:'Kachicares Terminal',port:'KACHI',originCity:'Oshodi',originLGA:'—',state:'Lagos',price20:150000,price40:180000,price2x20:300000,expiry:'2026-12-31'},
   {id:'r19',type:'haulage-export',terminal:'Customer Warehouse',port:'CUST',originCity:'Kano',originLGA:'—',state:'Kano',price20:2200000,price40:2800000,price2x20:4400000,expiry:'2026-10-15'},
@@ -377,21 +498,54 @@ const rates = [
   {id:'r23',type:'haulage-import',terminal:'Tin Can (TICT)',port:'NGTCN',destCity:'Ikorodu',destLGA:'—',state:'Lagos',price20:280000,price40:320000,price2x20:560000,expiry:'2026-10-01'},
   {id:'r24',type:'haulage-import',terminal:'Lekki Deep Sea',port:'NGLKI',destCity:'Lekki FTZ',destLGA:'—',state:'Lagos',price20:300000,price40:350000,price2x20:600000,expiry:'2026-11-20'},
   {id:'r25',type:'haulage-import',terminal:'Apapa (APMT)',port:'NGAPP',destCity:'Ibadan',destLGA:'—',state:'Oyo',price20:650000,price40:750000,price2x20:1300000,expiry:'2026-12-10'},
-  {id:'r26',type:'other',item:'NESS Inspection Fee',category:'Compliance',chargeType:'export',currency:'NGN',price20:510000,price40:510000,price40hc:510000,expiry:'2026-08-15'},
-  {id:'r27',type:'other',item:'NXP Processing',category:'Compliance',chargeType:'export',currency:'NGN',price20:25000,price40:25000,price40hc:25000,expiry:'2026-09-30'},
-  {id:'r28',type:'other',item:'Terminal Handling Charge (THC)',category:'Terminal',chargeType:'import',currency:'NGN',price20:150000,price40:185000,price40hc:200000,expiry:'2026-10-20'},
-  {id:'r29',type:'other',item:'Container Deposit (40HC)',category:'Terminal',chargeType:'import',currency:'USD',price20:1200,price40:1500,price40hc:1500,expiry:'2026-11-15'},
-  {id:'r30',type:'other',item:'Customs Examination Fee',category:'Customs',chargeType:'import',currency:'NGN',price20:300000,price40:350000,price40hc:380000,expiry:'2026-12-01'},
-  {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price20:75000,price40:75000,price40hc:75000,expiry:'2026-09-25'},
-  {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',currency:'NGN',price20:120000,price40:120000,price40hc:120000,expiry:'2026-10-30'},
+  {id:'r26',type:'other',item:'NESS Inspection Fee',category:'Compliance',chargeType:'export',cargoClass:'FAK',currency:'NGN',price20:510000,price40:510000,price40hc:510000,expiry:'2026-08-15'},
+  {id:'r27',type:'other',item:'NXP Processing',category:'Compliance',chargeType:'export',cargoClass:'FAK',currency:'NGN',price20:25000,price40:25000,price40hc:25000,expiry:'2026-09-30'},
+  {id:'r28',type:'other',item:'Terminal Handling Charge (THC)',category:'Terminal',chargeType:'import',cargoClass:'FAK',currency:'NGN',price20:150000,price40:185000,price40hc:200000,expiry:'2026-10-20'},
+  {id:'r29',type:'other',item:'Container Deposit (40HC)',category:'Terminal',chargeType:'import',cargoClass:'DG',currency:'USD',price20:1200,price40:1500,price40hc:1500,expiry:'2026-11-15'},
+  {id:'r30',type:'other',item:'Customs Examination Fee',category:'Customs',chargeType:'import',cargoClass:'FAK',currency:'NGN',price20:300000,price40:350000,price40hc:380000,expiry:'2026-12-01'},
+  {id:'r31',type:'other',item:'Phytosanitary Certificate',category:'Compliance',chargeType:'export',cargoClass:'FAK',currency:'NGN',price20:75000,price40:75000,price40hc:75000,expiry:'2026-09-25'},
+  {id:'r32',type:'other',item:'Fumigation Certificate',category:'Compliance',chargeType:'export',cargoClass:'DG',currency:'NGN',price20:120000,price40:120000,price40hc:120000,expiry:'2026-10-30'},
 ];
+
+// Shipment sample data (for click-through prototype)
+const SHIPMENT_STAGES = ['Pre-Shipment','In Transit','Arrived','Customs','Delivered'];
+const JOB_TASKS = ['File Entry and Activation','Pre-shipment docs','Booking Confirmation','Container Loading','Bill of Lading','Customs Clearance','Delivery Coordination','Invoice Processing'];
+
+// SLA-based team roles (each role is responsible for specific stages)
+const SHIPMENT_ROLES = [
+  {role: 'Account Manager', stage: 'All', desc: 'Customer relationship & oversight'},
+  {role: 'Documentation Officer', stage: 'Pre-Shipment', desc: 'File entry, activation & docs'},
+  {role: 'Booking Coordinator', stage: 'Pre-Shipment', desc: 'Carrier booking & confirmation'},
+  {role: 'Operations Lead', stage: 'In Transit', desc: 'Shipment tracking & coordination'},
+  {role: 'Customs Broker', stage: 'Customs', desc: 'Customs clearance & compliance'},
+  {role: 'Finance Officer', stage: 'All', desc: 'Invoicing & payment tracking'},
+  {role: 'Delivery Coordinator', stage: 'Delivered', desc: 'Last-mile delivery & handover'}
+];
+
+const shipments = [
+  {id:'sh1',ref:'SHP-001',customer:'c1',pol:'NGAPP',polName:'Apapa, Nigeria',pod:'NLRTM',podName:'Rotterdam, Netherlands',carrier:'MSC',vessel:'MSC AURORA',voyage:'26W',etd:'2026-07-25',eta:'2026-08-15',containers:['MSCU1234567','MSCU7654321'],stage:'Pre-Shipment',
+    team:[{userId:'u1',role:'Account Manager'},{userId:'u6',role:'Operations Lead'}],
+    jobs:[
+      {id:'j1',task:'File Entry and Activation',stage:'Completed',assignee:'u1',startDate:'2026-07-18',dueDate:'2026-07-18',comments:[{text:'All documents received and verified',user:'u1',date:'Jul 18, 2026'}]},
+      {id:'j2',task:'Pre-shipment docs',stage:'In Progress',assignee:'u6',startDate:'2026-07-18',dueDate:'2026-07-20',comments:[{text:'Waiting for commercial invoice from customer',user:'u6',date:'Jul 18, 2026'}]}
+    ]},
+  {id:'sh2',ref:'SHP-002',customer:'c2',pol:'CNSHA',polName:'Shanghai, China',pod:'NGAPP',podName:'Apapa, Nigeria',carrier:'Maersk',vessel:'MAERSK SENTOSA',voyage:'128E',etd:'2026-07-20',eta:'2026-08-25',containers:['MSKU9876543'],stage:'In Transit',
+    team:[{userId:'u2',role:'Sales Executive'},{userId:'u6',role:'Operations Lead'}],
+    jobs:[
+      {id:'j3',task:'File Entry and Activation',stage:'Completed',assignee:'u2',startDate:'2026-07-10',dueDate:'2026-07-10',comments:[]},
+      {id:'j4',task:'Booking Confirmation',stage:'Completed',assignee:'u6',startDate:'2026-07-12',dueDate:'2026-07-15',comments:[{text:'Booking confirmed with Maersk',user:'u6',date:'Jul 14, 2026'}]},
+      {id:'j5',task:'Bill of Lading',stage:'In Progress',assignee:'u6',startDate:'2026-07-18',dueDate:'2026-07-22',comments:[]}
+    ]}
+];
+
 // Check URL params for initial section/rate type
 const urlParams = new URLSearchParams(window.location.search);
 const initialSection = urlParams.get('section') || 'crm';
 const initialRateType = urlParams.get('rateType') || 'ocean';
 
 let activeTab='pipeline', pipeView='board', activeSection=initialSection, seq=100;
-let rateType=initialRateType, rateSearch='', rateCarrier='', rateRateType='';
+let rateType=initialRateType, rateSearch='', rateCarrier='', rateRateType='', rateDirection='';
+let shippingView='list', selectedShipment=null, shipmentTab='progress';
 const LOST_REASONS=['Price too high','Chose competitor','Went in-house','No response','Timing not right','Other'];
 const $=s=>document.querySelector(s);
 const co=id=>companies.find(c=>c.id===id)||{};
@@ -912,11 +1066,748 @@ function renderQuoting(){
 }
 
 function renderShipping(){
-  $('#content').innerHTML=`<div style="padding:40px;text-align:center">
-    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.5" style="margin-bottom:20px;opacity:0.3"><path d="M4 10 L6 14 L18 14 L20 10 Z M6 14 L6 18 L18 18 L18 14 M2 18 C2 18 4 20 12 20 C20 20 22 18 22 18 L18 18 M8 10 L8 6 L16 6 L16 10"/></svg>
-    <h3 style="font-size:20px;color:var(--green);margin-bottom:8px">Shipping Documentation</h3>
-    <p style="color:var(--muted);font-size:14px">Bill of Lading, Commercial Invoice, Packing List, and Customs documentation coming soon.</p>
+  if(shippingView==='detail' && selectedShipment){
+    renderShipmentDetail();
+    return;
+  }
+  // Shipments List View
+  const shipIcon=`<svg viewBox="0 0 24 24"><path d="M4 10 L6 14 L18 14 L20 10 Z M6 14 L6 18 L18 18 L18 14 M2 18 C2 18 4 20 12 20 C20 20 22 18 22 18 L18 18 M8 10 L8 6 L16 6 L16 10"/></svg>`;
+  const totalJobs=shipments.reduce((sum,s)=>sum+s.jobs.length,0);
+  const pendingJobs=shipments.reduce((sum,s)=>sum+s.jobs.filter(j=>j.stage!=='Completed').length,0);
+  const inTransit=shipments.filter(s=>s.stage==='In Transit').length;
+
+  let html=`
+  <div class="kpis">
+    <div class="kpi">
+      <div class="lbl">Total Shipments</div>
+      <div class="kpi-mid"><div class="val">${shipments.length}</div>
+        <div class="kpi-ico">${shipIcon}</div></div>
+      <div class="note">Active shipments</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">In Transit</div>
+      <div class="kpi-mid"><div class="val">${inTransit}</div>
+        <div class="kpi-ico"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      <div class="note">Currently shipping</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Pending Tasks</div>
+      <div class="kpi-mid"><div class="val gold">${pendingJobs}</div>
+        <div class="kpi-ico" style="background:#FFF3CC"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--gold-deep)" fill="none" stroke-width="1.8"><path d="M12 2v10l4 2"/><circle cx="12" cy="12" r="10"/></svg></div></div>
+      <div class="note">Jobs to complete</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input type="text" placeholder="Search shipments…" style="border:none;flex:1;font-size:14px;outline:none"></div>
+    <select style="min-width:140px">
+      <option value="">All Stages</option>
+      ${SHIPMENT_STAGES.map(s=>`<option value="${s}">${s}</option>`).join('')}
+    </select>
+    <button class="btn btn-lime" onclick="openCreateShipment()"><svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Shipment</button>
+  </div>
+
+  <div class="tbl-wrap"><table><thead><tr>
+    <th style="width:50px"></th>
+    <th>REF #</th>
+    <th>CUSTOMER</th>
+    <th>POL</th>
+    <th>POD</th>
+    <th>CARRIER</th>
+    <th>STAGE</th>
+    <th>TEAM</th>
+    <th>ETD</th>
+  </tr></thead><tbody>`;
+
+  shipments.forEach(s=>{
+    const c=co(s.customer);
+    const stageClass=s.stage.toLowerCase().replace(/\s+/g,'-');
+    const teamAvatars=s.team.slice(0,3).map(t=>{
+      const u=user(t.userId);
+      return `<span class="team-avatar" style="background:${u.color};color:${u.tx}" title="${u.name} - ${t.role}">${u.ini}</span>`;
+    }).join('');
+    const etd=new Date(s.etd).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+    html+=`<tr class="shipment-row" onclick="viewShipment('${s.id}')">
+      <td><div class="ship-icon">${shipIcon}</div></td>
+      <td style="font-weight:600;color:var(--green)">${s.ref}</td>
+      <td><div class="co-name">${esc(c.name||s.customer)}</div></td>
+      <td><span style="font-weight:500">${s.pol}</span><div style="font-size:11px;color:var(--muted)">${s.polName.split(',')[0]}</div></td>
+      <td><span style="font-weight:500">${s.pod}</span><div style="font-size:11px;color:var(--muted)">${s.podName.split(',')[0]}</div></td>
+      <td>${s.carrier}</td>
+      <td><span class="shipment-stage ${stageClass}">${s.stage}</span></td>
+      <td><div style="display:flex">${teamAvatars}</div></td>
+      <td>${etd}</td>
+    </tr>`;
+  });
+
+  html+=`</tbody></table></div>`;
+  $('#content').innerHTML=html;
+}
+
+function renderShipmentDetail(){
+  const s=shipments.find(x=>x.id===selectedShipment);
+  if(!s)return;
+  const c=co(s.customer);
+  const shipIcon=`<svg viewBox="0 0 24 24" width="24" height="24" stroke="var(--green)" fill="none" stroke-width="1.5"><path d="M4 10 L6 14 L18 14 L20 10 Z M6 14 L6 18 L18 18 L18 14 M2 18 C2 18 4 20 12 20 C20 20 22 18 22 18 L18 18 M8 10 L8 6 L16 6 L16 10"/></svg>`;
+
+  let html=`
+  <div class="shipment-header">
+    <button class="back-btn" onclick="backToShipments()">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back
+    </button>
+    <h1>${shipIcon} ${s.ref} / ${c.name||s.customer}</h1>
+  </div>
+
+  <div class="shipment-tabs">
+    <button class="shipment-tab ${shipmentTab==='progress'?'active':''}" onclick="setShipmentTab('progress')">Progress</button>
+    <button class="shipment-tab ${shipmentTab==='containers'?'active':''}" onclick="setShipmentTab('containers')">Containers</button>
+    <button class="shipment-tab ${shipmentTab==='documents'?'active':''}" onclick="setShipmentTab('documents')">Documents</button>
+    <button class="shipment-tab ${shipmentTab==='finance'?'active':''}" onclick="setShipmentTab('finance')">Finance</button>
+    <button class="shipment-tab ${shipmentTab==='team'?'active':''}" onclick="setShipmentTab('team')">Team</button>
+    <button class="shipment-tab ${shipmentTab==='messages'?'active':''}" onclick="setShipmentTab('messages')">Messages</button>
   </div>`;
+
+  // Tab content
+  if(shipmentTab==='progress'){
+    html+=renderProgressTab(s);
+  }else if(shipmentTab==='containers'){
+    html+=renderContainersTab(s);
+  }else if(shipmentTab==='documents'){
+    html+=renderDocumentsTab(s);
+  }else if(shipmentTab==='finance'){
+    html+=renderFinanceTab(s);
+  }else if(shipmentTab==='team'){
+    html+=renderTeamTab(s);
+  }else if(shipmentTab==='messages'){
+    html+=renderMessagesTab(s);
+  }
+
+  $('#content').innerHTML=html;
+}
+
+function renderProgressTab(s){
+  const currentIdx=SHIPMENT_STAGES.indexOf(s.stage);
+  let html=`<div class="progress-bar">`;
+  SHIPMENT_STAGES.forEach((stage,i)=>{
+    const isDone=i<currentIdx;
+    const isActive=i===currentIdx;
+    const cls=isDone?'done':isActive?'active':'';
+    html+=`<div class="progress-step ${cls}">
+      <div class="dot">${isDone?'✓':(i+1)}</div>
+      <div class="label">${stage}</div>
+      ${i<SHIPMENT_STAGES.length-1?'<div class="line"></div>':''}
+    </div>`;
+  });
+  html+=`</div>`;
+
+  html+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h3 style="font-size:16px;color:var(--green)">Jobs</h3>
+    <button class="btn btn-ghost" onclick="openAddJob('${s.id}')"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add Job</button>
+  </div>`;
+
+  html+=`<div class="tbl-wrap"><table><thead><tr>
+    <th>JOB</th>
+    <th>TASK</th>
+    <th>STAGE</th>
+    <th>ASSIGNEE</th>
+    <th>START</th>
+    <th>DUE</th>
+    <th></th>
+  </tr></thead><tbody>`;
+
+  s.jobs.forEach((job,i)=>{
+    const u=user(job.assignee);
+    const stageClass=job.stage.toLowerCase().replace(/\s+/g,'-');
+    const startDate=new Date(job.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const dueDate=new Date(job.dueDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    html+=`<tr class="job-row">
+      <td style="font-weight:600">Job ${i+1}${String.fromCharCode(65+i%26)}</td>
+      <td>${job.task}</td>
+      <td><select class="job-stage-select ${stageClass}">
+        <option ${job.stage==='Pending'?'selected':''}>Pending</option>
+        <option ${job.stage==='In Progress'?'selected':''}>In Progress</option>
+        <option ${job.stage==='Blocked'?'selected':''}>Blocked</option>
+        <option ${job.stage==='Completed'?'selected':''}>Completed</option>
+      </select></td>
+      <td><div class="owner">${ava(u)}<span class="nm">${u.name||'—'}</span></div></td>
+      <td>${startDate}</td>
+      <td>${dueDate}</td>
+      <td><a href="#" onclick="openJobComments('${s.id}','${job.id}');return false;" style="color:var(--green-2);font-size:13px">View Comments</a></td>
+    </tr>`;
+  });
+
+  html+=`</tbody></table></div>`;
+  return html;
+}
+
+function renderContainersTab(s){
+  let html=`<div class="tbl-wrap"><table><thead><tr>
+    <th>CONTAINER #</th>
+    <th>TYPE</th>
+    <th>SEAL</th>
+    <th>STATUS</th>
+  </tr></thead><tbody>`;
+  s.containers.forEach(c=>{
+    html+=`<tr>
+      <td style="font-weight:600;color:var(--green)">${c}</td>
+      <td>40HC</td>
+      <td>SEAL${Math.floor(Math.random()*90000)+10000}</td>
+      <td><span class="shipment-stage in-transit">Loaded</span></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  return html;
+}
+
+function renderDocumentsTab(s){
+  return `<div class="tbl-wrap"><table><thead><tr>
+    <th>DOCUMENT</th>
+    <th>STATUS</th>
+    <th>UPLOADED</th>
+    <th></th>
+  </tr></thead><tbody>
+    <tr><td>Commercial Invoice</td><td><span class="shipment-stage delivered">Uploaded</span></td><td>Jul 18, 2026</td><td><a href="#" style="color:var(--green-2)">View</a></td></tr>
+    <tr><td>Packing List</td><td><span class="shipment-stage delivered">Uploaded</span></td><td>Jul 18, 2026</td><td><a href="#" style="color:var(--green-2)">View</a></td></tr>
+    <tr><td>Bill of Lading</td><td><span class="shipment-stage in-transit">Pending</span></td><td>—</td><td><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px">Upload</button></td></tr>
+    <tr><td>Certificate of Origin</td><td><span class="shipment-stage in-transit">Pending</span></td><td>—</td><td><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px">Upload</button></td></tr>
+  </tbody></table></div>`;
+}
+
+function renderFinanceTab(s){
+  return `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px">
+    <div class="kpi"><div class="lbl">Invoice Total</div><div class="kpi-mid"><div class="val">$12,450</div></div><div class="note">2 invoices</div></div>
+    <div class="kpi"><div class="lbl">Amount Paid</div><div class="kpi-mid"><div class="val green">$8,200</div></div><div class="note">66% collected</div></div>
+    <div class="kpi"><div class="lbl">Outstanding</div><div class="kpi-mid"><div class="val gold">$4,250</div></div><div class="note">Due in 14 days</div></div>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+    <th>INVOICE #</th><th>AMOUNT</th><th>STATUS</th><th>DUE DATE</th>
+  </tr></thead><tbody>
+    <tr><td style="font-weight:600">INV-2026-0847</td><td>$8,200</td><td><span class="shipment-stage delivered">Paid</span></td><td>Jul 15, 2026</td></tr>
+    <tr><td style="font-weight:600">INV-2026-0892</td><td>$4,250</td><td><span class="shipment-stage customs">Pending</span></td><td>Aug 01, 2026</td></tr>
+  </tbody></table></div>`;
+}
+
+function renderTeamTab(s){
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <h3 style="font-size:16px;color:var(--green)">Team Members</h3>
+    <button class="btn btn-ghost" onclick="openAddTeamMember('${s.id}')"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add Member</button>
+  </div>`;
+  html+=`<div class="tbl-wrap"><table><thead><tr>
+    <th>NAME</th><th>ROLE</th><th>EMAIL</th><th></th>
+  </tr></thead><tbody>`;
+  s.team.forEach(t=>{
+    const u=user(t.userId);
+    html+=`<tr>
+      <td><div class="owner">${ava(u)}<span class="nm" style="font-weight:600">${u.name||'—'}</span></div></td>
+      <td style="color:var(--muted-2)">${t.role}</td>
+      <td><span style="color:var(--green-2)">${u.email||'—'}</span></td>
+      <td style="text-align:right"><button class="link-btn">Remove</button></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div>`;
+  return html;
+}
+
+function renderMessagesTab(s){
+  const c=companies.find(x=>x.name===s.customer)||{};
+
+  // Sample messages data (static for now)
+  const messages = [
+    { id: 'm1', channel: 'outlook', from: 'customer', sender: c.name || s.customer, email: 'procurement@buafoods.com', subject: 'RE: SHP-001 - Shipping Documents', preview: 'Please find attached the updated packing list for the shipment. Let us know if you need any changes.', time: '2 hours ago', unread: true },
+    { id: 'm2', channel: 'whatsapp', from: 'customer', sender: 'John (BUA Foods)', phone: '+234 803 555 1234', preview: 'Hi, when can we expect the vessel to arrive? The warehouse team needs to prepare.', time: '4 hours ago', unread: true },
+    { id: 'm3', channel: 'outlook', from: 'team', sender: 'James Mitchell', email: 'james@oneport365.com', subject: 'RE: SHP-001 - Shipping Documents', preview: 'Documents received. I will process the file entry and get back to you by EOD.', time: 'Yesterday', unread: false },
+    { id: 'm4', channel: 'whatsapp', from: 'team', sender: 'Ngozi Eze', phone: '+234 809 123 4567', preview: 'Good afternoon! The vessel ETA is July 25th. I will send the arrival notice once confirmed.', time: 'Yesterday', unread: false },
+    { id: 'm5', channel: 'outlook', from: 'customer', sender: c.name || s.customer, email: 'logistics@buafoods.com', subject: 'SHP-001 - Initial Inquiry', preview: 'Good morning, we would like to confirm the booking details for our shipment from Shanghai.', time: '2 days ago', unread: false }
+  ];
+
+  let html = `
+  <div style="display:flex;gap:20px;height:calc(100vh - 320px);min-height:500px">
+    <!-- Conversations List -->
+    <div style="width:380px;background:#fff;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;overflow:hidden">
+      <!-- Channel Tabs -->
+      <div style="display:flex;border-bottom:1px solid var(--line);padding:4px;gap:4px;background:var(--cream)">
+        <button class="msg-channel-tab active" data-channel="all" onclick="filterMessages('all',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          All
+          <span class="msg-badge">5</span>
+        </button>
+        <button class="msg-channel-tab" data-channel="outlook" onclick="filterMessages('outlook',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+          Outlook
+          <span class="msg-badge">3</span>
+        </button>
+        <button class="msg-channel-tab" data-channel="whatsapp" onclick="filterMessages('whatsapp',this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+          <span class="msg-badge">2</span>
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div style="padding:12px;border-bottom:1px solid var(--line)">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--page);border:1px solid var(--line);border-radius:8px;padding:8px 12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" stroke="var(--muted)" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search messages..." style="border:none;background:transparent;flex:1;font-size:13px;outline:none;color:var(--ink)">
+        </div>
+      </div>
+
+      <!-- Message List -->
+      <div class="msg-list" style="flex:1;overflow-y:auto">`;
+
+  messages.forEach(msg => {
+    const isOutlook = msg.channel === 'outlook';
+    const isCustomer = msg.from === 'customer';
+    const channelIcon = isOutlook
+      ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="#0078D4"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>`
+      : `<svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+    const initials = msg.sender.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const avatarBg = isCustomer ? 'var(--gold)' : 'var(--green)';
+    const avatarColor = isCustomer ? 'var(--green)' : '#fff';
+
+    html += `
+        <div class="msg-item ${msg.unread ? 'unread' : ''}" data-channel="${msg.channel}" data-msgid="${msg.id}" onclick="selectMessage('${msg.id}')">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="width:40px;height:40px;border-radius:50%;background:${avatarBg};color:${avatarColor};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">${initials}</div>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="font-weight:600;font-size:13px;color:var(--ink)">${msg.sender}</span>
+                  ${channelIcon}
+                  ${msg.unread ? '<span style="width:8px;height:8px;background:var(--green-3);border-radius:50%"></span>' : ''}
+                </div>
+                <span style="font-size:11px;color:var(--muted)">${msg.time}</span>
+              </div>
+              ${isOutlook ? `<div style="font-size:12px;color:var(--muted-2);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${msg.subject}</div>` : ''}
+              <div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${msg.preview}</div>
+            </div>
+          </div>
+        </div>`;
+  });
+
+  html += `
+      </div>
+    </div>
+
+    <!-- Conversation View -->
+    <div style="flex:1;background:#fff;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;overflow:hidden">
+      <!-- Conversation Header -->
+      <div id="msgConvHeader" style="padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">BF</div>
+        <div style="flex:1">
+          <div style="font-weight:600;color:var(--ink)">${c.name || s.customer}</div>
+          <div style="font-size:12px;color:var(--muted)">procurement@buafoods.com • Last active 2 hours ago</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost" style="padding:8px" title="Call">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </button>
+          <button class="btn btn-ghost" style="padding:8px" title="More">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;background:var(--page)">
+        <!-- Date Separator -->
+        <div style="text-align:center;font-size:11px;color:var(--muted);padding:8px 0">
+          <span style="background:var(--page);padding:0 12px">Today</span>
+        </div>
+
+        <!-- Incoming Message (Customer via Outlook) -->
+        <div style="display:flex;gap:10px;max-width:70%">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;flex-shrink:0">BF</div>
+          <div>
+            <div style="background:#fff;border:1px solid var(--line);border-radius:12px;border-top-left-radius:4px;padding:12px 16px;box-shadow:var(--sh-card)">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#0078D4"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                <span style="font-size:11px;color:var(--muted)">via Outlook</span>
+              </div>
+              <div style="font-weight:600;font-size:12px;color:var(--ink);margin-bottom:4px">RE: SHP-001 - Shipping Documents</div>
+              <p style="font-size:13px;color:var(--ink);margin:0;line-height:1.5">Please find attached the updated packing list for the shipment. Let us know if you need any changes.</p>
+              <div style="margin-top:10px;padding:10px;background:var(--page);border-radius:8px;display:flex;align-items:center;gap:10px">
+                <svg width="20" height="20" viewBox="0 0 24 24" stroke="var(--green)" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <div>
+                  <div style="font-size:12px;font-weight:600;color:var(--ink)">Packing_List_SHP001_v2.pdf</div>
+                  <div style="font-size:11px;color:var(--muted)">245 KB</div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;margin-left:4px">10:34 AM</div>
+          </div>
+        </div>
+
+        <!-- Outgoing Message (Team via WhatsApp) -->
+        <div style="display:flex;gap:10px;max-width:70%;margin-left:auto;flex-direction:row-reverse">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;flex-shrink:0">NE</div>
+          <div style="text-align:right">
+            <div style="background:var(--lime-soft);border:1px solid var(--lime);border-radius:12px;border-top-right-radius:4px;padding:12px 16px">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;justify-content:flex-end">
+                <span style="font-size:11px;color:var(--muted)">via WhatsApp</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <p style="font-size:13px;color:var(--ink);margin:0;line-height:1.5;text-align:left">Good afternoon! The vessel ETA is July 25th. I will send the arrival notice once confirmed by the shipping line. 🚢</p>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;margin-right:4px">11:15 AM • Ngozi Eze</div>
+          </div>
+        </div>
+
+        <!-- Incoming Message (Customer via WhatsApp) -->
+        <div style="display:flex;gap:10px;max-width:70%">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;flex-shrink:0">JB</div>
+          <div>
+            <div style="background:#fff;border:1px solid var(--line);border-radius:12px;border-top-left-radius:4px;padding:12px 16px;box-shadow:var(--sh-card)">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span style="font-size:11px;color:var(--muted)">via WhatsApp • John (BUA Foods)</span>
+              </div>
+              <p style="font-size:13px;color:var(--ink);margin:0;line-height:1.5">Perfect, thank you! The warehouse team will be ready. Can you also confirm the container numbers? 📦</p>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-top:4px;margin-left:4px">11:42 AM</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div style="padding:16px 20px;border-top:1px solid var(--line);background:#fff">
+        <div style="display:flex;gap:12px;align-items:flex-end">
+          <!-- Channel Selector -->
+          <div style="position:relative">
+            <button class="btn btn-ghost" style="padding:10px;display:flex;align-items:center;gap:6px" id="channelSelector" onclick="toggleChannelDropdown()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Text Input -->
+          <div style="flex:1;background:var(--page);border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <input type="text" placeholder="Type a message..." style="border:none;background:transparent;flex:1;font-size:14px;outline:none;color:var(--ink)">
+            <button style="background:none;border:none;cursor:pointer;color:var(--muted)" title="Attach file">
+              <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+            <button style="background:none;border:none;cursor:pointer;color:var(--muted)" title="Emoji">
+              <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </button>
+          </div>
+
+          <!-- Send Button -->
+          <button class="btn btn-lime" style="padding:12px 20px">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send
+          </button>
+        </div>
+
+        <!-- Quick Replies -->
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--muted);padding:6px 0">Quick replies:</span>
+          <button style="background:var(--page);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--muted-2);cursor:pointer">Thanks for the update!</button>
+          <button style="background:var(--page);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--muted-2);cursor:pointer">I'll get back to you shortly</button>
+          <button style="background:var(--page);border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:11px;color:var(--muted-2);cursor:pointer">Documents attached</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  return html;
+}
+
+// Shipping navigation functions
+function viewShipment(id){
+  selectedShipment=id;
+  shippingView='detail';
+  shipmentTab='progress';
+  renderShipping();
+}
+
+function backToShipments(){
+  shippingView='list';
+  selectedShipment=null;
+  renderShipping();
+}
+
+function setShipmentTab(tab){
+  shipmentTab=tab;
+  renderShipping();
+}
+
+// Messages tab functions
+let msgChannelFilter='all';
+let selectedConversation=0;
+
+function filterMessages(channel,btn){
+  msgChannelFilter=channel;
+  // Update active tab
+  document.querySelectorAll('.msg-channel-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  // Filter message items
+  document.querySelectorAll('.msg-item').forEach(item=>{
+    const itemChannel=item.dataset.channel;
+    if(channel==='all'||itemChannel===channel){
+      item.style.display='flex';
+    }else{
+      item.style.display='none';
+    }
+  });
+}
+
+function selectMessage(msgId){
+  // Find the clicked element
+  const el=document.querySelector(`.msg-item[data-msgid="${msgId}"]`);
+  // Update active message item
+  document.querySelectorAll('.msg-item').forEach(m=>m.classList.remove('active'));
+  if(el) el.classList.add('active');
+
+  // Message data lookup
+  const messagesData={
+    m1:{channel:'outlook',sender:'BUA Foods',email:'procurement@buafoods.com',subject:'RE: SHP-001 - Shipping Documents'},
+    m2:{channel:'whatsapp',sender:'John (BUA Foods)',phone:'+234 803 555 1234'},
+    m3:{channel:'outlook',sender:'James Mitchell',email:'james@oneport365.com',subject:'RE: SHP-001 - Shipping Documents'},
+    m4:{channel:'whatsapp',sender:'Ngozi Eze',phone:'+234 809 123 4567'},
+    m5:{channel:'outlook',sender:'BUA Foods',email:'logistics@buafoods.com',subject:'SHP-001 - Initial Inquiry'}
+  };
+
+  const msg=messagesData[msgId];
+  if(msg){
+    const convHeader=document.getElementById('msgConvHeader');
+    if(convHeader){
+      const isOutlook=msg.channel==='outlook';
+      const initials=msg.sender.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      const channelIcon=isOutlook
+        ?'<svg width="14" height="14" viewBox="0 0 24 24" fill="#0078D4"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>'
+        :'<svg width="14" height="14" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+      const contactInfo=isOutlook?msg.email:msg.phone;
+
+      convHeader.innerHTML=`
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">${initials}</div>
+        <div style="flex:1">
+          <div style="font-weight:600;color:var(--ink)">${msg.sender}</div>
+          <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px">${channelIcon} ${contactInfo}</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost" style="padding:8px" title="Call">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </button>
+          <button class="btn btn-ghost" style="padding:8px" title="More">
+            <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </div>`;
+    }
+  }
+}
+
+// Shipping modal functions
+function openCreateShipment(){
+  modal(`<div class="modal wide">
+    <div class="modal-head">
+      <div>
+        <h3>Create Shipment</h3>
+        <div class="mh-sub">Step <span id="wizardStepNum">1</span> of 3</div>
+      </div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="wizard-progress">
+        <div class="wizard-dot active" id="wdot1"></div>
+        <div class="wizard-dot" id="wdot2"></div>
+        <div class="wizard-dot" id="wdot3"></div>
+      </div>
+
+      <div class="wizard-step active" id="wstep1">
+        <div class="field">
+          <label>Customer</label>
+          <select class="form-select" id="shipCustomer">
+            <option value="">Select customer…</option>
+            ${companies.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="wstep2">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Port of Loading (POL)</label>
+            <input type="text" class="form-input" placeholder="e.g. NGAPP" id="shipPol">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Port of Discharge (POD)</label>
+            <input type="text" class="form-input" placeholder="e.g. NLRTM" id="shipPod">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Carrier</label>
+            <select class="form-select" id="shipCarrier">
+              <option value="">Select carrier…</option>
+              <option>MSC</option><option>Maersk</option><option>CMA CGM</option><option>Hapag-Lloyd</option><option>COSCO</option><option>Evergreen</option><option>ONE</option><option>PIL</option><option>ZIM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Vessel / Voyage</label>
+            <input type="text" class="form-input" placeholder="e.g. MSC AURORA / 26W" id="shipVessel">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">ETD</label>
+            <input type="date" class="form-input" id="shipEtd">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ETA</label>
+            <input type="date" class="form-input" id="shipEta">
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="wstep3">
+        <div class="form-group">
+          <label class="form-label">Assign Team Members</label>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Roles are tied to SLA stages. Each role is responsible for specific shipment phases.</p>
+          <div style="display:flex;gap:10px;margin-bottom:12px">
+            <select class="form-select" style="flex:1" id="teamUser">
+              <option value="">Select team member…</option>
+              ${users.map(u=>`<option value="${u.id}">${u.name} (${u.role})</option>`).join('')}
+            </select>
+            <select class="form-select" style="flex:1" id="teamRole">
+              <option value="">Select SLA role…</option>
+              ${SHIPMENT_ROLES.map(r=>`<option value="${r.role}">${r.role} (${r.stage})</option>`).join('')}
+            </select>
+          </div>
+          <button class="btn btn-ghost" style="margin-bottom:16px" onclick="return false;"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add to Team</button>
+        </div>
+        <div class="tbl-wrap" style="max-height:200px;overflow:auto">
+          <table><thead><tr><th>Name</th><th>Role</th><th>SLA Stage</th><th></th></tr></thead>
+          <tbody id="teamPreview">
+            <tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px">No team members added yet</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="wizardBack" onclick="wizardStep(-1)" style="display:none">Back</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-lime" id="wizardNext" onclick="wizardStep(1)">Next</button>
+    </div>
+  </div>`);
+}
+
+let currentWizardStep=1;
+function wizardStep(dir){
+  const newStep=currentWizardStep+dir;
+  if(newStep<1||newStep>3)return;
+  document.getElementById('wstep'+currentWizardStep).classList.remove('active');
+  document.getElementById('wdot'+currentWizardStep).classList.remove('active');
+  if(dir>0)document.getElementById('wdot'+currentWizardStep).classList.add('done');
+  currentWizardStep=newStep;
+  document.getElementById('wstep'+currentWizardStep).classList.add('active');
+  document.getElementById('wdot'+currentWizardStep).classList.add('active');
+  document.getElementById('wizardStepNum').textContent=currentWizardStep;
+  document.getElementById('wizardBack').style.display=currentWizardStep>1?'inline-flex':'none';
+  document.getElementById('wizardNext').textContent=currentWizardStep===3?'Create Shipment':'Next';
+  if(currentWizardStep===3){
+    document.getElementById('wizardNext').onclick=function(){closeModal();};
+  }
+}
+
+function openAddJob(shipId){
+  modal(`<div class="modal">
+    <div class="modal-head">
+      <div><h3>Add Job</h3><div class="mh-sub">Create a new task for this shipment</div></div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Task</label>
+        <select class="form-select">
+          <option value="">Select task…</option>
+          ${JOB_TASKS.map(t=>`<option>${t}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label>Assignee</label>
+        <select class="form-select">
+          <option value="">Select team member…</option>
+          ${users.map(u=>`<option value="${u.id}">${u.name}</option>`).join('')}
+        </select>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>Start Date</label><input type="date" class="form-input"></div>
+        <div class="field"><label>Due Date</label><input type="date" class="form-input"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-lime" onclick="closeModal()">Add Job</button>
+    </div>
+  </div>`);
+}
+
+function openAddTeamMember(shipId){
+  modal(`<div class="modal">
+    <div class="modal-head">
+      <div><h3>Add Team Member</h3><div class="mh-sub">Assign a team member to this shipment</div></div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Team Member</label>
+        <select class="form-select">
+          <option value="">Select team member…</option>
+          ${users.map(u=>`<option value="${u.id}">${u.name} (${u.role})</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label>SLA Role</label>
+        <select class="form-select">
+          <option value="">Select SLA role…</option>
+          ${SHIPMENT_ROLES.map(r=>`<option value="${r.role}">${r.role}</option>`).join('')}
+        </select>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted)">
+          <strong>Role Responsibilities:</strong>
+          <ul style="margin:6px 0 0 16px;padding:0">
+            ${SHIPMENT_ROLES.map(r=>`<li style="margin-bottom:2px"><strong>${r.role}</strong> — ${r.desc} (${r.stage})</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-lime" onclick="closeModal()">Add Member</button>
+    </div>
+  </div>`);
+}
+
+function openJobComments(shipId,jobId){
+  const s=shipments.find(x=>x.id===shipId);
+  const job=s?s.jobs.find(j=>j.id===jobId):null;
+  const comments=job?job.comments:[];
+  let commentHtml=comments.length?comments.map(c=>{
+    const u=user(c.user);
+    return `<div style="padding:12px;border-bottom:1px solid var(--line)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        ${ava(u)}<span style="font-weight:600;font-size:13px">${u.name||'User'}</span>
+        <span style="color:var(--muted);font-size:12px;margin-left:auto">${c.date}</span>
+      </div>
+      <p style="font-size:13px;color:var(--ink);margin:0">${esc(c.text)}</p>
+    </div>`;
+  }).join(''):`<div style="padding:20px;text-align:center;color:var(--muted)">No comments yet</div>`;
+
+  modal(`<div class="modal">
+    <div class="modal-head">
+      <div><h3>Job Comments</h3><div class="mh-sub">${job?job.task:'Task'}</div></div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" style="padding:0;max-height:300px;overflow:auto">
+      ${commentHtml}
+    </div>
+    <div style="padding:16px;border-top:1px solid var(--line)">
+      <div style="display:flex;gap:10px">
+        <input type="text" class="form-input" placeholder="Add a comment…" style="flex:1">
+        <button class="btn btn-lime">Post</button>
+      </div>
+    </div>
+  </div>`);
 }
 
 // Rates helper functions
@@ -961,6 +1852,181 @@ function filterCarrier(val){
 function filterRateType(val){
   rateRateType=val;
   renderRates();
+}
+
+function filterDirection(val){
+  rateDirection=val;
+  renderRates();
+}
+
+// Air Rate Detail Modal (Stub for Phase 1)
+function openAirRateModal(id){
+  const rate=rates.find(r=>r.id===id);
+  if(!rate)return;
+
+  const carrierName=rate.carrier?.name||'Unnamed';
+  const carrierCode=rate.carrier?.code||'';
+  const routingDisplay=rate.routing&&rate.routing.length>0?rate.routing.join(' → '):'';
+
+  const rateUnit=rate.rateUnit==='cw'?'/CW':'/kg';
+
+  // Weight breaks ladder (for published/contract rates)
+  let breaksHtml='';
+  if(rate.breaks&&rate.breaks.length>0){
+    breaksHtml=`<div style="margin-top:12px;padding:12px;background:#f9fafb;border-radius:8px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Weight Breaks</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${rate.breaks.map((b,i)=>{
+          const label=b.minKg===0?'Min':`${b.minKg}+ kg`;
+          const isActive=b.rate===rate.headlineRate;
+          return `<div style="padding:6px 10px;border-radius:6px;font-size:12px;${isActive?'background:var(--lime);color:var(--green);font-weight:600':'background:#fff;border:1px solid var(--line)'}">
+            <div style="font-size:10px;color:${isActive?'var(--green)':'var(--muted)'};margin-bottom:2px">${label}</div>
+            <div>$${b.rate.toFixed(2)}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Charge lines table
+  let chargesHtml='';
+  if(rate.chargeLines&&rate.chargeLines.length>0){
+    const basisLabels={per_kg:'/kg',per_cw:'/CW',flat:'Flat',per_awb:'/AWB',per_hawb:'/HAWB',per_mawb:'/MAWB',percentage:'%'};
+    chargesHtml=`<div style="margin-top:16px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Charge Lines</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="background:#f3f7ea">
+          <th style="text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--muted-2)">Charge</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--muted-2)">Category</th>
+          <th style="text-align:right;padding:8px 10px;font-size:11px;font-weight:600;color:var(--muted-2)">Rate</th>
+          <th style="text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--muted-2)">Basis</th>
+        </tr></thead>
+        <tbody>
+          ${rate.chargeLines.map(c=>{
+            const minNote=c.min?` <span style="color:var(--muted);font-size:11px">(min ${c.currency}${c.min})</span>`:'';
+            const inclNote=c.includedInFreight?` <span style="color:var(--success);font-size:10px">✓ incl.</span>`:'';
+            return `<tr style="border-top:1px solid var(--line)">
+              <td style="padding:8px 10px">${c.name}${inclNote}</td>
+              <td style="padding:8px 10px;color:var(--muted-2);text-transform:capitalize">${c.category}</td>
+              <td style="padding:8px 10px;text-align:right;font-weight:600">${c.currency}${c.rate.toFixed(2)}${minNote}</td>
+              <td style="padding:8px 10px;color:var(--muted)">${basisLabels[c.basis]||c.basis}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  }
+
+  // Weight basis info
+  let basisHtml='';
+  const basisParts=[];
+  if(rate.weightBasis)basisParts.push(`<span style="font-weight:500">${rate.weightBasis==='chargeable'?'Chargeable Weight':'Actual Weight'}</span>`);
+  if(rate.volumeRatioKgPerCbm)basisParts.push(`<span style="color:var(--muted-2)">${rate.volumeRatioKgPerCbm} kg/cbm</span>`);
+  if(rate.commodityBasis)basisParts.push(`<span style="background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:11px;text-transform:uppercase">${rate.commodityBasis}</span>`);
+  if(basisParts.length>0){
+    basisHtml=`<div style="margin-top:16px;display:flex;align-items:center;gap:10px;font-size:13px">
+      <span style="font-size:11px;color:var(--muted);text-transform:uppercase">Basis:</span>
+      ${basisParts.join(' · ')}
+    </div>`;
+  }
+
+  // Terms as chips
+  let termsHtml='';
+  if(rate.terms&&rate.terms.length>0){
+    termsHtml=`<div style="margin-top:16px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Terms</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${rate.terms.map(t=>`<span style="background:var(--lime-soft);color:var(--green-2);padding:5px 10px;border-radius:6px;font-size:12px">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Extras key-value pairs
+  let extrasHtml='';
+  if(rate.extras&&rate.extras.length>0){
+    extrasHtml=`<div style="margin-top:16px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Additional Info</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px">
+        ${rate.extras.map(e=>`<div style="color:var(--muted-2)">${e.label}</div><div style="font-weight:500">${e.value}</div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Notes
+  let notesHtml='';
+  if(rate.notes){
+    notesHtml=`<div style="margin-top:16px">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Notes</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.5">${rate.notes}</div>
+    </div>`;
+  }
+
+  // Raw source (collapsible)
+  let rawHtml='';
+  if(rate.rawSource){
+    const rawId='raw-'+id;
+    rawHtml=`<div style="margin-top:16px;border-top:1px solid var(--line);padding-top:16px">
+      <button onclick="document.getElementById('${rawId}').style.display=document.getElementById('${rawId}').style.display==='none'?'block':'none'" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        View Original Quote
+      </button>
+      <div id="${rawId}" style="display:none;margin-top:10px;padding:12px;background:#f9fafb;border-radius:8px;font-size:12px;color:var(--muted-2);white-space:pre-wrap;font-family:monospace;line-height:1.5">${rate.rawSource}</div>
+    </div>`;
+  }
+
+  modal(`<div class="modal" style="max-width:600px">
+    <div class="modal-head">
+      <div>
+        <h3>${carrierName}${carrierCode?' ('+carrierCode+')':''}</h3>
+        ${routingDisplay?`<div class="mh-sub">${routingDisplay}</div>`:''}
+      </div>
+      <button class="x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" style="max-height:70vh;overflow-y:auto">
+      <div class="grid2" style="margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Rate</div>
+          <div style="font-size:26px;font-weight:700;color:var(--green);font-family:var(--f-head)">$${rate.headlineRate.toFixed(2)}<span style="font-size:14px;font-weight:500;color:var(--muted-2)">${rateUnit}</span></div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:6px">Type</div>
+          <div style="margin-top:8px">
+            <span class="rate-badge ${rate.rateType}">${rate.rateType}</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Origin</div>
+          <div style="font-weight:600">${rate.originPort||'<span style="color:var(--muted)">—</span>'}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Destination</div>
+          <div style="font-weight:600">${rate.destinationPort||'<span style="color:var(--muted)">—</span>'}</div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Class</div>
+          <div style="font-weight:600">${rate.cargoClass==='DG'?'<span style="background:#FFF3CC;color:#B8860B;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">DG</span>':'<span style="background:#EDEFE8;color:#5F5E5A;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">FAK</span>'}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Transit</div>
+          <div>${rate.transitTime||'<span style="color:var(--muted)">—</span>'}</div>
+        </div>
+      </div>
+      ${breaksHtml}
+      ${chargesHtml}
+      ${basisHtml}
+      ${termsHtml}
+      ${extrasHtml}
+      ${notesHtml}
+      ${rawHtml}
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+    </div>
+  </div>`);
 }
 
 function openRateDetails(id){
@@ -1013,10 +2079,14 @@ function openRateDetails(id){
           <div style="font-weight:700;font-size:18px;color:var(--green)">$${rate.rate40hc.toLocaleString()}</div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px">
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Rate Type</label>
           <div style="font-size:14px;color:var(--ink)">${rate.rateType}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Cargo Class</label>
+          <div style="font-size:14px;color:var(--ink)">${rate.cargoClass==='DG'?'<span style="background:#FFF3CC;color:#B8860B;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">DG</span>':'<span style="background:#EDEFE8;color:#5F5E5A;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">GEN</span>'}</div>
         </div>
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">Transit Time</label>
@@ -1036,9 +2106,8 @@ function openRateDetails(id){
     detailsHtml=`
       <div style="margin-bottom:20px">
         <h3 style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px">${isHaulageExport?'Export Haulage':'Import Haulage'}</h3>
-        <span style="font-size:13px;color:var(--muted)">${rate.terminal} - ${rate.port}</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">ORIGIN</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${isHaulageExport?rate.originCity:rate.port}</div>
@@ -1048,6 +2117,10 @@ function openRateDetails(id){
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">DESTINATION</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${isHaulageExport?rate.port:rate.destCity}</div>
           <div style="font-size:13px;color:var(--muted);margin-top:2px">${isHaulageExport?'':rate.state}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">TERMINAL</label>
+          <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.terminal}</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
@@ -1071,7 +2144,7 @@ function openRateDetails(id){
         <h3 style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px">${rate.item}</h3>
         <span style="font-size:13px;color:var(--muted)">Other Charges</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">CLASSIFICATION</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink)">${rate.category}</div>
@@ -1079,6 +2152,10 @@ function openRateDetails(id){
         <div>
           <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">TYPE</label>
           <div style="font-weight:600;font-size:15px;color:var(--ink);text-transform:capitalize">${rate.chargeType}</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-bottom:4px;display:block">CLASS</label>
+          <div style="font-size:14px">${rate.cargoClass==='DG'?'<span style="background:#FFF3CC;color:#B8860B;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">DG</span>':'<span style="background:#EDEFE8;color:#5F5E5A;padding:3px 8px;border-radius:6px;font-size:12px;font-weight:600">FAK</span>'}</div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
@@ -1349,23 +2426,44 @@ function renderRates(){
   ];
 
   let filtered=rates.filter(r=>r.type===rateType);
+  const isAirTab=rateType==='air';
 
+  // Air freight has different data structure
   if(rateSearch){
-    filtered=filtered.filter(r=>
-      r.carrier.toLowerCase().includes(rateSearch)||
-      r.pol.toLowerCase().includes(rateSearch)||
-      r.pod.toLowerCase().includes(rateSearch)||
-      r.origin.toLowerCase().includes(rateSearch)||
-      r.dest.toLowerCase().includes(rateSearch)
-    );
+    if(isAirTab){
+      filtered=filtered.filter(r=>{
+        const carrierName=(r.carrier?.name||'').toLowerCase();
+        const carrierCode=(r.carrier?.code||'').toLowerCase();
+        const origin=(r.originPort||'').toLowerCase();
+        const dest=(r.destinationPort||'').toLowerCase();
+        return carrierName.includes(rateSearch)||carrierCode.includes(rateSearch)||origin.includes(rateSearch)||dest.includes(rateSearch);
+      });
+    }else{
+      filtered=filtered.filter(r=>
+        r.carrier.toLowerCase().includes(rateSearch)||
+        r.pol.toLowerCase().includes(rateSearch)||
+        r.pod.toLowerCase().includes(rateSearch)||
+        r.origin.toLowerCase().includes(rateSearch)||
+        r.dest.toLowerCase().includes(rateSearch)
+      );
+    }
   }
 
-  if(rateCarrier)filtered=filtered.filter(r=>r.carrier===rateCarrier);
-  if(rateRateType)filtered=filtered.filter(r=>r.rateType===rateRateType);
+  if(isAirTab){
+    if(rateCarrier)filtered=filtered.filter(r=>r.carrier?.name===rateCarrier);
+    if(rateRateType)filtered=filtered.filter(r=>r.rateType===rateRateType);
+    if(rateDirection)filtered=filtered.filter(r=>r.direction===rateDirection);
+  }else{
+    if(rateCarrier)filtered=filtered.filter(r=>r.carrier===rateCarrier);
+    if(rateRateType)filtered=filtered.filter(r=>r.rateType===rateRateType);
+  }
 
   const typeRates=rates.filter(r=>r.type===rateType);
-  const carriers=[...new Set(typeRates.map(r=>r.carrier))].sort();
+  const carriers=isAirTab
+    ?[...new Set(typeRates.map(r=>r.carrier?.name).filter(Boolean))].sort()
+    :[...new Set(typeRates.map(r=>r.carrier))].sort();
   const rateTypes=[...new Set(typeRates.map(r=>r.rateType))].sort();
+  const directions=isAirTab?[...new Set(typeRates.map(r=>r.direction).filter(Boolean))].sort():[];
 
   let html=`
   <div class="rates-header">
@@ -1426,18 +2524,22 @@ function renderRates(){
   html+=`<div class="tbl-wrap"><table><thead><tr>`;
 
   if(isHaulageExport){
-    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
+    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>TERMINAL</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
   }else if(isHaulageImport){
-    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
+    html+=`<th>ORIGIN</th><th>DESTINATION</th><th>TERMINAL</th><th>20FT</th><th>40FT</th><th>2X20FT</th>`;
   }else if(isOther){
-    html+=`<th>CLASSIFICATION</th><th>PARAMETERS</th><th>20FT</th><th>40FT</th><th>40HC</th>`;
+    html+=`<th>CLASSIFICATION</th><th>PARAMETERS</th><th>CLASS</th><th>20FT</th><th>40FT</th><th>40HC</th>`;
+  }else if(isAir){
+    // Air Freight - new columns per spec (using consistent th styling from CSS)
+    html+=`<th>CARRIER</th><th>ORIGIN</th><th>DEST</th><th>TYPE</th><th>CLASS</th><th>RATE</th><th>BASIS</th><th>TRANSIT</th>`;
   }else{
-    html+=`<th>CARRIER</th><th>ORIGIN PORT</th><th>DESTINATION PORT</th><th>RATE TYPE</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>TRANSIT TIME</th>${isOcean?'<th>FREE DAYS</th>':''}<th>VALIDITY</th>`;
+    // Ocean Freight
+    html+=`<th>CARRIER</th><th>ORIGIN PORT</th><th>DESTINATION PORT</th><th>RATE TYPE</th><th>${col1Label}</th><th>${col2Label}</th><th>${col3Label}</th><th>TRANSIT TIME</th><th>FREE DAYS</th><th>VALIDITY</th>`;
   }
 
   html+=`</tr></thead><tbody>`;
 
-  const emptyColspan=isOther?5:(isHaulageExport||isHaulageImport)?5:(isOcean?10:9);
+  const emptyColspan=isOther?6:(isHaulageExport||isHaulageImport)?6:isAir?8:10;
 
   if(filtered.length===0){
     html+=`<tr><td colspan="${emptyColspan}" style="text-align:center;padding:40px;color:var(--muted)">
@@ -1455,6 +2557,7 @@ function renderRates(){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
           <td style="font-weight:600;color:var(--ink)">${r.originCity}, ${r.state}</td>
           <td>${r.port}</td>
+          <td style="font-size:12px;color:var(--muted-2)">${r.terminal}</td>
           <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
@@ -1463,19 +2566,65 @@ function renderRates(){
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
           <td style="font-weight:600;color:var(--ink)">${r.port}</td>
           <td>${r.destCity}, ${r.state}</td>
+          <td style="font-size:12px;color:var(--muted-2)">${r.terminal}</td>
           <td class="rate-amount">₦${r.price20.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price40.toLocaleString()}</td>
           <td class="rate-amount">₦${r.price2x20.toLocaleString()}</td>
         </tr>`;
       }else if(isOther){
+        const classBg=r.cargoClass==='DG'?'#FFF3CC':'#EDEFE8';
+        const classColor=r.cargoClass==='DG'?'#B8860B':'#5F5E5A';
         html+=`<tr class="rate-row${expiredClass}" onclick="openRateDetails('${r.id}')">
           <td style="font-weight:600;color:var(--ink)">${r.category}</td>
           <td>${r.item}</td>
+          <td>${r.cargoClass?`<span style="background:${classBg};color:${classColor};padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600">${r.cargoClass}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price20.toLocaleString()}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40.toLocaleString()}</td>
           <td class="rate-amount">${r.currency==='NGN'?'₦':'$'}${r.price40hc.toLocaleString()}</td>
         </tr>`;
+      }else if(isAir){
+        // Air Freight - new rendering per spec
+        const carrierName=r.carrier?.name||null;
+        const carrierCode=r.carrier?.code||null;
+        const carrierInitials=carrierCode||(carrierName?carrierName.split(' ').map(w=>w[0]).join('').slice(0,3):'—');
+        const carrierDisplay=carrierName?`<span style="font-weight:600;color:var(--green)">${carrierName}</span>`:'<span style="color:var(--muted);font-style:italic">Unnamed</span>';
+
+        // Type badge with abbreviation (spot or contract only)
+        const typeLabel=r.rateType==='contract'?'Contr.':'Spot';
+        const rateClass=r.rateType.replace(' ','-');
+
+        // Class badge (DG or FAK)
+        const classBg=r.cargoClass==='DG'?'#FFF3CC':'#EDEFE8';
+        const classColor=r.cargoClass==='DG'?'#B8860B':'#5F5E5A';
+
+        // Rate display
+        const rateUnit=r.rateUnit==='cw'?'/CW':'/kg';
+        const hasBreaks=r.breaks&&r.breaks.length>0;
+        const ratePrefix=hasBreaks?'from ':'';
+        const tierIcon=hasBreaks?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" style="margin-left:4px;vertical-align:middle"><path d="M4 20V10M10 20V4M16 20v-7"/></svg>':'';
+
+        // Basis display
+        let basisDisplay='Actual';
+        if(r.weightBasis==='chargeable'){
+          basisDisplay='CW';
+          if(r.volumeRatioKgPerCbm){
+            const ratio=Math.round(r.volumeRatioKgPerCbm);
+            if(ratio===167||ratio===166)basisDisplay+=' · 1:6';
+          }
+        }
+
+        html+=`<tr class="rate-row" onclick="openAirRateModal('${r.id}')">
+          <td><span class="carrier-logo">${carrierInitials}</span>${carrierDisplay}</td>
+          <td style="font-size:12px">${r.originPort?`<span style="font-weight:600;color:var(--ink)">${r.originPort}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
+          <td style="font-size:12px">${r.destinationPort?`<span style="font-weight:600;color:var(--ink)">${r.destinationPort}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
+          <td><span class="rate-badge ${rateClass}">${typeLabel}</span></td>
+          <td>${r.cargoClass?`<span style="background:${classBg};color:${classColor};padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600">${r.cargoClass}</span>`:'<span style="color:var(--muted)">—</span>'}</td>
+          <td class="rate-amount">${ratePrefix}$${r.headlineRate.toFixed(2)}${rateUnit}${tierIcon}</td>
+          <td style="color:var(--muted-2);font-size:12px">${basisDisplay}</td>
+          <td style="color:var(--muted-2)">${r.transitTime||'—'}</td>
+        </tr>`;
       }else{
+        // Ocean Freight
         const rateClass=r.rateType.replace(' ','-');
         const carrierInitials=r.carrier.split(' ').map(w=>w[0]).join('').slice(0,3);
         const logoClass=carrierClass(r.carrier);
@@ -1491,7 +2640,7 @@ function renderRates(){
           <td class="rate-amount">${formatAmount(r.rate40,r.type)}</td>
           <td class="rate-amount">${formatAmount(r.rate40hc,r.type)}</td>
           <td style="color:var(--muted-2)">${r.transit}d</td>
-          ${isOcean?`<td style="color:var(--muted-2)">${r.freeDays||'—'}d</td>`:''}
+          <td style="color:var(--muted-2)">${r.freeDays||'—'}d</td>
           <td>${formatExpiry(r.expiry)}</td>
         </tr>`;
       }
